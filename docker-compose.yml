@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  sakugwej-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sakugwej-frontend:latest
+    container_name: sakugwej-frontend
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 5173:5173
+    environment:
+      - CHOKIDAR_USEPOLLING=true
