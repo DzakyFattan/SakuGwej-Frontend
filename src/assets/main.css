@@ -1,18 +1,13 @@
 @import './base.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --ryo: #3D64A8;
   --bocchi: #F7ABB2;
   --white: #FFFFFF;
-}
-
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
 }
 
 
@@ -44,21 +39,6 @@ a {
 body {
   display: flex;
   place-items: center;
-  background-color: var(--bocchi);
-}
-
-.flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-row {
-  flex-direction: row;
 }
 
 .input-field {
@@ -87,6 +67,10 @@ body {
   margin: auto;
 }
 
+.form-bg {
+  background: var(--bocchi);
+}
+
 .form-container {
   background: var(--white);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -103,4 +87,38 @@ button {
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.navigation-bar {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  height: 100vh;
+  width: 200px;
+  padding-top: 24px;
+  background-color: var(--bocchi);
+}
+
+.navigation-bar-items {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bocchi);
+  margin-top: 48px;
+}
+
+.navigation-bar-item {
+  margin-top: 24px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
 }
