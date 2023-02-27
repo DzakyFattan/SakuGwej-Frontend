@@ -18,6 +18,11 @@ const router = createRouter({
       component: () => import("../views/LoginView.vue"),
     },
     {
+      path: "/profile",
+      name: "profile",
+      component: () => import("../views/ProfileView.vue"),
+    },
+    {
       // cuma template
       // elemen home, rekening, catatan, dan hutang tambah lagi di bawah
       path: "/dashboard",

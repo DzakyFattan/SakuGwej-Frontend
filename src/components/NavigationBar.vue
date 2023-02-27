@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
@@ -12,11 +11,13 @@
         <a href="/catatan" class="navigation-bar-item">Catatan</a>
         <a href="/hutang" class="navigation-bar-item">Hutang</a>
       </div>
-      <a href="/pengaturan" class="mb-8">Pengaturan</a>
+      <a href="/profile" class="mb-8">Pengaturan</a>
     </div>
   </div>
 </template>
 
 <style scoped>
-
+a {
+  color: #000;
+}
 </style>

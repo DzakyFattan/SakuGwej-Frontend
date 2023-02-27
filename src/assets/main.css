@@ -14,6 +14,27 @@
   --ryo-light: #A2BEDD;
 }
 
+.bg-color-main-bocchi {
+  background-color: var(--bocchi);
+}
+
+.bg-color-secondary-bocchi {
+  background-color: var(--bocchi-light);
+}
+
+.text-color-main-bocchi {
+  color: var(--bocchi);
+}
+
+.text-color-secondary-bocchi {
+  color: var(--bocchi-light);
+}
+
+.text-color-kita-main {
+  color: var(--kita);
+}
+
+
 
 .green {
   text-decoration: none;
@@ -81,7 +102,7 @@ body {
   border-radius: 16px;
 }
 
-button {
+.form-container button {
   width: 120px;
   height: 50px;
   background: var(--ryo);
