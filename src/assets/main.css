@@ -5,9 +5,13 @@
 @tailwind utilities;
 
 :root {
+  --white: #FFFFFF;
   --ryo: #3D64A8;
   --bocchi: #F7ABB2;
-  --white: #FFFFFF;
+  --nijika: #EBB549;
+  --kita: #C5404E;
+  --bocchi-light: #FEDFE6;
+  --ryo-light: #A2BEDD;
 }
 
 
