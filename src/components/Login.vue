@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="form-bg w-full h-screen flex">
+  <div class="form-bg h-screen flex">
     <div class="form-container flex flex-col place-items-center m-auto">
       <h1 class="blue text-center mb-title-form">Login</h1>
       <div class="flex flex-col place-items-center">
