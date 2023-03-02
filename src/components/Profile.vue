@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import General from "./profile/General.vue";
+import ExportImport from "./profile/ExportImport.vue";
 </script>
 
 <template>
-  <div class="w-full h-screen flex">
+  <div class="h-screen flex flex-col grow">
     <General />
+    <ExportImport />
   </div>
 </template>
 

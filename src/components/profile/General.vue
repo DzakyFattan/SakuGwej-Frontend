@@ -1,15 +1,11 @@
 <template>
   <div
-    class="flex flex-row rounded-3xl bg-color-secondary-bocchi my-4 p-4 w-full h-fit mx-8"
+    class="flex flex-row rounded-3xl bg-color-secondary-bocchi my-4 p-4 h-fit mx-8"
   >
     <div class="flex flex-col mx-16 mb-2 items-center">
       <img src="/src/assets/icons/user.png" alt="user" class="w-24 m-4" />
-      <button class="bg-color-main-bocchi rounded-md p-2 text-black mb-3">
-        Ubah Foto Profil
-      </button>
-      <button class="bg-color-main-bocchi rounded-md p-2 text-black">
-        Ubah Kata Sandi
-      </button>
+      <button class="bg-color-main-bocchi button mb-3">Ubah Foto Profil</button>
+      <button class="bg-color-main-bocchi button">Ubah Kata Sandi</button>
     </div>
     <div class="my-3 flex flex-col">
       <div>
