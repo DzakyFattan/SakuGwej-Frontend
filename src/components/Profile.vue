@@ -1,5 +1,4 @@
-<script setup la
-  components: { general },ng="ts">
+<script setup lang="ts">
 import General from "./profile/General.vue";
 </script>
 
@@ -9,5 +8,4 @@ import General from "./profile/General.vue";
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
