@@ -12,8 +12,9 @@
   </v-container>
   <v-container class="mt-8">
     <v-text-field
-      label="Jumlah Pemasukan"
-      class="text-color-main-bocchi mx-36"
+      v-model="jumlahPengeluaran"
+      label="Jumlah Pengeluaran"
+      class="text-color-main-bocchi mx-32"
       variant="outlined"
     >
       <template v-slot:prepend-inner>
@@ -21,7 +22,8 @@
       </template>
     </v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="jenisPengeluaran"
+      class="text-color-main-bocchi mx-32"
       variant="outlined"
       label="Jenis Pengeluaran"
       readonly
@@ -35,13 +37,15 @@
       </template>
       <template v-slot:append-inner>
         <img
+          @click="chooseOptionPengeluaran"
           class="mr-6"
           src="/src/assets/icons/sort.png"
           alt="sort"
         /> </template
     ></v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="sumberDana"
+      class="text-color-main-bocchi mx-32"
       variant="outlined"
       label="Sumber Dana"
       readonly
@@ -49,12 +53,17 @@
       <template v-slot:prepend-inner>
         <img
           class="mr-6"
-          src="/src/assets/icons/wallet_alt_fill.png"
-          alt="setting"
+          src="/src/assets/icons/wallet_alt_fill_black.png"
+          alt="wallet"
         />
       </template>
       <template v-slot:append-inner>
-        <img class="mr-6" src="/src/assets/icons/sort.png" alt="sort" />
+        <img
+          @click="chooseOptionRekening"
+          class="mr-6"
+          src="/src/assets/icons/sort.png"
+          alt="sort"
+        />
       </template>
     </v-text-field>
   </v-container>
@@ -69,12 +78,22 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      jumlahPengeluaran: "",
+      jenisPengeluaran: "",
+      sumberDana: "",
+    };
+  },
   methods: {
     pilihPemasukan() {
       this.$emit("pilihan-tambah", true);
     },
-    chooseWallet() {
-      console.log("choose wallet");
+    chooseOptionPengeluaran() {
+      console.log("choose option pengeluaran");
+    },
+    chooseOptionRekening() {
+      console.log("choose option rekening");
     },
   },
 });
