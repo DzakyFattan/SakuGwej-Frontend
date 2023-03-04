@@ -9,7 +9,7 @@
     </div>
     <div class="my-3 flex flex-col">
       <div>
-        <p class="font-bold text-2xl">Biodata Diri</p>
+        <p class="font-bold text-xl">Biodata Diri</p>
         <div class="mt-1 mb-4">
           <div class="flex flex-row">
             <p class="text-base w-40">Nama</p>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div>
-        <p class="font-bold text-2xl">Akun</p>
+        <p class="font-bold text-xl">Akun</p>
         <div class="mt-1 mb-4">
           <div class="flex flex-row">
             <p class="text-base w-40">Email</p>
