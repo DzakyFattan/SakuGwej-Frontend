@@ -15,6 +15,7 @@
       label="Jumlah Hutang"
       class="text-color-main-bocchi mx-32"
       variant="outlined"
+      v-model="jumlahHutang"
     >
       <template v-slot:prepend-inner>
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" alt="book" />
@@ -24,6 +25,7 @@
       class="text-color-main-bocchi mx-32"
       variant="outlined"
       label="Nama Pelanggan"
+      v-model="namaPelanggan"
     >
       <template v-slot:prepend-inner>
         <img
@@ -38,6 +40,7 @@
       class="text-color-main-bocchi mx-32"
       auto-grow
       variant="outlined"
+      v-model="deskripsi"
     >
       <template v-slot:prepend-inner>
         <img
@@ -51,6 +54,7 @@
       class="text-color-main-bocchi mx-32"
       variant="outlined"
       label="Tanggal Jatuh Tempo"
+      v-model="calendar"
       readonly
     >
       <template v-slot:prepend-inner>
@@ -74,6 +78,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      jumlahHutang: "",
+      namaPelanggan: "",
+      deskripsi: "",
+      calendar: "",
+    };
+  },
   methods: {
     pilihHutang() {
       this.$emit("pilihan-tambah", false);
