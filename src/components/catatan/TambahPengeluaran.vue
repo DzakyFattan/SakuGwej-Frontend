@@ -14,7 +14,7 @@
     <v-text-field
       v-model="jumlahPengeluaran"
       label="Jumlah Pengeluaran"
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
     >
       <template v-slot:prepend-inner>
@@ -23,7 +23,7 @@
     </v-text-field>
     <v-text-field
       v-model="jenisPengeluaran"
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Jenis Pengeluaran"
       readonly
@@ -45,7 +45,7 @@
     ></v-text-field>
     <v-text-field
       v-model="sumberDana"
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Sumber Dana"
       readonly

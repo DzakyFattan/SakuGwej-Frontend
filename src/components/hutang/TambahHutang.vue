@@ -13,7 +13,7 @@
   <v-container class="mt-8 color-icon">
     <v-text-field
       label="Jumlah Hutang"
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       v-model="jumlahHutang"
     >
@@ -22,7 +22,7 @@
       </template>
     </v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Nama Pelanggan"
       v-model="namaPelanggan"
@@ -37,7 +37,7 @@
     </v-text-field>
     <v-textarea
       label="Deskripsi"
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       auto-grow
       variant="outlined"
       v-model="deskripsi"
@@ -51,7 +51,7 @@
       </template>
     </v-textarea>
     <v-text-field
-      class="text-color-main-bocchi mx-32"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Tanggal Jatuh Tempo"
       v-model="calendar"
