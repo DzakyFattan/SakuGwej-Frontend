@@ -1,5 +1,5 @@
 <template>
-  <HeaderMobile @clicked-menu="toogleDrawer">
+  <HeaderMobile :isMenuPage="false" @clicked-menu="toogleDrawer">
     Pemasukan/Pengeluaran
   </HeaderMobile>
   <main :hidden="isHidden">

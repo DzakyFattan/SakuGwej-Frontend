@@ -1,5 +1,7 @@
 <template>
-  <HeaderMobile @clicked-menu="toogleDrawer"> Buat Rekening Baru </HeaderMobile>
+  <HeaderMobile :isMenuPage="false" @clicked-menu="toogleDrawer">
+    Buat Rekening Baru
+  </HeaderMobile>
   <main :hidden="isHidden">
     <TambahRekening />
   </main>

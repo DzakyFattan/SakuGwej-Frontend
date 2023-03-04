@@ -5,10 +5,16 @@
         <slot>Tidak ada slot yang di definisikan </slot>
       </h3></v-toolbar-title
     >
-
-    <v-btn @click="toggleDrawer" icon>
-      <img src="/src/assets/icons/menu.png" alt="menu" />
-    </v-btn>
+    <div v-if="isMenuPage">
+      <v-btn @click="toggleDrawer" icon>
+        <img src="/src/assets/icons/menu.png" alt="menu" />
+      </v-btn>
+    </div>
+    <div v-else>
+      <v-btn @click="$router.go(-1)" icon>
+        <img src="/src/assets/icons/Dell_fill.png" alt="back" />
+      </v-btn>
+    </div>
   </v-toolbar>
   <div :hidden="!drawer">
     <navigation-bar />
@@ -20,6 +26,7 @@ import NavigationBar from "../NavigationBar.vue";
 
 export default defineComponent({
   components: { NavigationBar },
+  props: ["isMenuPage"],
   data() {
     return {
       drawer: false,

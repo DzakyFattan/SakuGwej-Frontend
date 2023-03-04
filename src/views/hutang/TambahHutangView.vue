@@ -1,5 +1,7 @@
 <template>
-  <HeaderMobile @clicked-menu="toogleDrawer"> Hutang/Piutang </HeaderMobile>
+  <HeaderMobile :isMenuPage="false" @clicked-menu="toogleDrawer">
+    Hutang/Piutang
+  </HeaderMobile>
   <main :hidden="isHidden">
     <div v-if="isTambahHutang">
       <TambahHutang @pilihan-tambah="changePage" />

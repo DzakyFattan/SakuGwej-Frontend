@@ -1,5 +1,7 @@
 <template>
-  <HeaderMobile @clicked-menu="toogleDrawer"> Catatan </HeaderMobile>
+  <HeaderMobile :isMenuPage="true" @clicked-menu="toogleDrawer">
+    Catatan
+  </HeaderMobile>
   <main :hidden="isHidden">
     <Catatan />
   </main>
