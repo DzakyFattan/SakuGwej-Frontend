@@ -83,8 +83,4 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.color-icon .v-icon {
-  color: black;
-}
-</style>
+<style scoped></style>
