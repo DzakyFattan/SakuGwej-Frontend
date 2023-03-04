@@ -17,15 +17,14 @@ onMounted(() => {
     window.addEventListener("resize", () => {
       windowWidth.value = window.innerWidth;
     });
-  })
+  });
 });
-
 </script>
 
 <template>
   <main>
     <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer" > Profile </HeaderMobile>
+      <HeaderMobile @clicked-menu="toggleDrawer"> Profile </HeaderMobile>
       <ProfileMobile :hidden="isHidden" />
     </div>
     <div v-else class="app-container">
