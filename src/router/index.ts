@@ -33,6 +33,51 @@ const router = createRouter({
       name: "dashboard",
       component: () => import("../views/DashboardView.vue"),
     },
+    {
+      path: "/home",
+      name: "home",
+      component: () => import("../views/HomeView.vue"),
+    },
+    {
+      path: "/rekening",
+      name: "rekening",
+      component: () => import("../views/RekeningView.vue"),
+    },
+    {
+      path: "/rekening/tambah-rekening",
+      name: "tambah-rekening",
+      component: () => import("../views/RekeningView.vue"),
+    },
+    {
+      path: "/rekening/:id/detail-rekening",
+      name: "detail-rekening",
+      component: () => import("../views/RekeningView.vue"),
+    },
+    {
+      path: "/rekening/:id/edit-rekening",
+      name: "edit-rekening",
+      component: () => import("../views/RekeningView.vue"),
+    },
+    {
+      path: "/catatan",
+      name: "catatan",
+      component: () => import("../views/CatatanView.vue"),
+    },
+    {
+      path: "/hutang",
+      name: "hutang",
+      component: () => import("../views/HutangView.vue"),
+    },
+    {
+      path: "/catatan/tambah-catatan",
+      name: "tambah-catatan",
+      component: () => import("../views/TambahCatatanView.vue"),
+    },
+    {
+      path: "/hutang/tambah-hutang",
+      name: "tambah-hutang",
+      component: () => import("../views/TambahHutangView.vue"),
+    },
   ],
 });
 
