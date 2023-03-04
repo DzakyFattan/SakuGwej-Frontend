@@ -19,10 +19,28 @@
         </template>
         <template v-slot:append>
           <div class="bg-color-secondary-bocchi rounded-md h-8">
-            <v-btn icon variant="flat" size="x-small" @click="onSortClick"
-              ><img src="/src/assets/icons/sort_list.png" alt="sort_list"
-            /></v-btn></div
-        ></template>
+            <v-btn
+              id="sort-menu"
+              icon
+              variant="flat"
+              size="x-small"
+              @click="onSortClick"
+              ><img
+                src="/src/assets/icons/sort_list.png"
+                alt="sort_list" /></v-btn
+            ><v-menu activator="#sort-menu">
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in listSort"
+                  :key="index"
+                  :value="index"
+                >
+                  <v-list-item-title>{{ item }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div></template
+        >
       </v-text-field>
     </v-row>
   </v-container>
@@ -60,6 +78,7 @@ export default defineComponent({
           harga: "IDR 10.000",
         },
       ],
+      listSort: ["A-Z", "Z-A", "Lowest Balance", "Highest Balance"],
     };
   },
   methods: {
