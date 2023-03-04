@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row rounded-3xl bg-color-secondary-bocchi my-4 p-4 h-fit mx-8"
+    class="flex flex-row rounded-3xl bg-color-secondary-bocchi my-2 p-4 h-fit mx-8"
   >
     <div class="flex flex-col mx-16 mb-2 items-center">
       <img src="/src/assets/icons/user.png" alt="user" class="w-24 m-4" />
