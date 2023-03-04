@@ -8,8 +8,9 @@ import { onMounted, ref, nextTick } from "vue";
 const windowWidth = ref(window.innerWidth);
 const isHidden = ref(false);
 
-const toggleDrawer = (isToggleOn: boolean) => {
-  isHidden.value = isToggleOn;
+const toggleDrawer = () => {
+  console.log(isHidden.value);
+  isHidden.value = !isHidden.value;
 };
 
 onMounted(() => {
@@ -25,7 +26,7 @@ onMounted(() => {
   <main>
     <div v-if="windowWidth < 1024">
       <HeaderMobile @clicked-menu="toggleDrawer"> Profile </HeaderMobile>
-      <ProfileMobile :hidden="isHidden" />
+      <ProfileMobile v-if="!isHidden" />
     </div>
     <div v-else class="app-container">
       <NavigationBar />
