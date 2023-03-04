@@ -1,8 +1,6 @@
 <template>
-  <HeaderMobile :isMenuPage="false" @clicked-menu="toogleDrawer">
-    Hutang/Piutang
-  </HeaderMobile>
-  <main :hidden="isHidden">
+  <HeaderMobile :isMenuPage="false"> Catat Hutang/Piutang </HeaderMobile>
+  <main>
     <div v-if="isTambahHutang">
       <TambahHutang @pilihan-tambah="changePage" />
     </div>
@@ -25,14 +23,10 @@ export default defineComponent({
   },
   data() {
     return {
-      isHidden: false,
       isTambahHutang: true,
     };
   },
   methods: {
-    toogleDrawer(isToggleOn: boolean) {
-      this.isHidden = isToggleOn;
-    },
     changePage(isTambahHutang: boolean) {
       this.isTambahHutang = isTambahHutang;
     },
