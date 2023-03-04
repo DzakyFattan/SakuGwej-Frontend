@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-8">
     <v-row class="mx-16 align-center">
-      <v-btn icon variant="outlined" size="x-large">
+      <v-btn icon variant="outlined" size="x-large" @click="onImageClick">
         <img class="h-12 mt-1" src="/src/assets/icons/cart_big.png" alt="cart"
       /></v-btn>
       <v-column class="ml-auto">
@@ -19,7 +19,7 @@
     </v-row>
     <v-textarea
       v-model="textDeskripsi"
-      class="mx-32 mt-8"
+      class="mx-24 mt-8"
       auto-grow
       variant="outlined"
     >
@@ -27,7 +27,7 @@
   </v-container>
   <v-container>
     <v-row class="justify-center mt-2"
-      ><a href="/hutang"
+      ><a href="/rekening/{{id}}/detail-rekening"
         ><v-btn class="bg-color-main-bocchi text-xs">Simpan</v-btn></a
       ></v-row
     >
@@ -41,15 +41,12 @@ export default defineComponent({
       textDeskripsi:
         "Deskripsi yang ditulis lorem ipsum dolor sit amet kurang tahu lanjutannya apa",
       textNama: "Unpay",
-      textUang: "40.000",
+      textUang: "IDR 40.000",
     };
   },
   methods: {
-    pilihHutang() {
-      this.$emit("pilihan-tambah", false);
-    },
-    chooseWallet() {
-      console.log("choose wallet");
+    onImageClick() {
+      console.log("image clicked");
     },
   },
 });
