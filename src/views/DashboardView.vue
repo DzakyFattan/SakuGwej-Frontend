@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NavigationBar from "../components/NavigationBar.vue";
+import NavigationBar from "../components/item/navigation/NavigationBar.vue";
 </script>
 
 <!-- Template buat dashboard -->
@@ -11,3 +11,4 @@ import NavigationBar from "../components/NavigationBar.vue";
     </div>
   </main>
 </template>
+
