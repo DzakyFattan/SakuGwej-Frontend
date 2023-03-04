@@ -1,18 +1,18 @@
 <template>
-  <header-mobile @clicked-menu="toogleDrawer"> Nama Rekening </header-mobile>
+  <HeaderMobile @clicked-menu="toogleDrawer"> Buat Rekening Baru </HeaderMobile>
   <main :hidden="isHidden">
-    <edit-rekening />
+    <TambahRekening />
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/HeaderMobile.vue";
-import EditRekening from "@/components/EditRekening.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
+import TambahRekening from "@/components/rekening/TambahRekening.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
     HeaderMobile,
-    EditRekening,
+    TambahRekening,
   },
   data() {
     return {

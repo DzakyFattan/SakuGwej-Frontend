@@ -1,18 +1,18 @@
 <template>
-  <header-mobile @clicked-menu="toogleDrawer"> Hutang/Piutang </header-mobile>
+  <HeaderMobile @clicked-menu="toogleDrawer"> Hutang/Piutang </HeaderMobile>
   <main :hidden="isHidden">
     <div v-if="isTambahHutang">
-      <tambah-hutang @pilihan-tambah="changePage" />
+      <TambahHutang @pilihan-tambah="changePage" />
     </div>
     <div v-else>
-      <tambah-piutang @pilihan-tambah="changePage" />
+      <TambahPiutang @pilihan-tambah="changePage" />
     </div>
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/HeaderMobile.vue";
-import TambahHutang from "@/components/TambahHutang.vue";
-import TambahPiutang from "@/components/TambahPiutang.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
+import TambahHutang from "@/components/hutang/TambahHutang.vue";
+import TambahPiutang from "@/components/hutang/TambahPiutang.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

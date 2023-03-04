@@ -1,20 +1,20 @@
 <template>
-  <header-mobile @clicked-menu="toogleDrawer">
+  <HeaderMobile @clicked-menu="toogleDrawer">
     Pemasukan/Pengeluaran
-  </header-mobile>
+  </HeaderMobile>
   <main :hidden="isHidden">
     <div v-if="isTambahPemasukan">
-      <tambah-pemasukan @pilihan-tambah="changePage" />
+      <TambahPemasukan @pilihan-tambah="changePage" />
     </div>
     <div v-else>
-      <tambah-pengeluaran @pilihan-tambah="changePage" />
+      <TambahPengeluaran @pilihan-tambah="changePage" />
     </div>
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/HeaderMobile.vue";
-import TambahPemasukan from "@/components/TambahPemasukan.vue";
-import TambahPengeluaran from "@/components/TambahPengeluaran.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
+import TambahPemasukan from "@/components/catatan/TambahPemasukan.vue";
+import TambahPengeluaran from "@/components/catatan/TambahPengeluaran.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

@@ -2,7 +2,7 @@
 import ProfileDesktop from "../components/ProfileDesktop.vue";
 import ProfileMobile from "../components/ProfileMobile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
-import HeaderMobile from "@/components/HeaderMobile.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);

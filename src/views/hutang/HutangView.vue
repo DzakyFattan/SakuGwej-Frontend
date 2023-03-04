@@ -1,18 +1,18 @@
 <template>
-  <header-mobile @clicked-menu="toogleDrawer"> Home </header-mobile>
+  <HeaderMobile @clicked-menu="toogleDrawer"> Hutang </HeaderMobile>
   <main :hidden="isHidden">
-    <home />
+    <Hutang />
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/HeaderMobile.vue";
-import Home from "@/components/Home.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
+import Hutang from "@/components/hutang/Hutang.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
     HeaderMobile,
-    Home,
+    Hutang,
   },
   data() {
     return {
