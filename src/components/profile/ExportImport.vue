@@ -2,7 +2,7 @@
 import SettingCard from "./SettingCard.vue";
 </script>
 <template>
-    <SettingCard :title="`Export dan Import data`">
+    <SettingCard :title="`Export/Import`">
       <div class="flex flex-row space-x-4">
         <div class="flex-1 border-r pr-2 border-gray-400">
             <p>Export transaksi dalam file csv</p>
