@@ -45,10 +45,8 @@
   </div>
   <v-container>
     <v-row class="justify-center mt-2 mb-4"
-      ><v-btn
-        @click="$router.push('/hutang/tambah-hutang')"
-        class="bg-color-main-bocchi text-xs"
-        >Tambahkan</v-btn
+      ><a href="/hutang/tambah-hutang"
+        ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
       ></v-row
     >
   </v-container>

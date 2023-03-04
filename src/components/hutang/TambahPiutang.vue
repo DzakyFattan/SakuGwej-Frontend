@@ -68,8 +68,8 @@
     </v-text-field>
   </v-container>
   <v-container>
-    <v-row class="justify-center mt-2"
-      ><a href="/hutang"
+    <v-row class="justify-center mt-2">
+      <a href="/hutang"
         ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
       ></v-row
     >

@@ -46,17 +46,17 @@ const router = createRouter({
     {
       path: "/rekening/tambah-rekening",
       name: "tambah-rekening",
-      component: () => import("../views/rekening/RekeningView.vue"),
+      component: () => import("../views/rekening/TambahRekeningView.vue"),
     },
     {
       path: "/rekening/:id/detail-rekening",
       name: "detail-rekening",
-      component: () => import("../views/rekening/RekeningView.vue"),
+      component: () => import("../views/rekening/DetailRekeningView.vue"),
     },
     {
       path: "/rekening/:id/edit-rekening",
       name: "edit-rekening",
-      component: () => import("../views/rekening/RekeningView.vue"),
+      component: () => import("../views/rekening/EditRekeningView.vue"),
     },
     {
       path: "/catatan",
