@@ -9,12 +9,11 @@
 
     onMounted(() => {
         makeChart()
+        window.addEventListener("resize", () => {
+            chartElmt.resize(getWidth(), getHeight())        
+        })
     })
 
-    window.addEventListener("resize", () => {
-        chartElmt.resize(getWidth(), getHeight())        
-    })
-    
     function getHeight() {
         return 0.295 * window.screen.height
     }

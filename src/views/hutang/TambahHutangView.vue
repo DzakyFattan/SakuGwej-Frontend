@@ -10,9 +10,9 @@
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/header/HeaderMobile.vue";
-import TambahHutang from "@/components/hutang/TambahHutang.vue";
-import TambahPiutang from "@/components/hutang/TambahPiutang.vue";
+import HeaderMobile from "@/components/item/header/HeaderMobile.vue";
+import TambahHutang from "@/components/item/hutang/TambahHutang.vue";
+import TambahPiutang from "@/components/item/hutang/TambahPiutang.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

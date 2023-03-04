@@ -12,9 +12,9 @@
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/header/HeaderMobile.vue";
-import TambahPemasukan from "@/components/catatan/TambahPemasukan.vue";
-import TambahPengeluaran from "@/components/catatan/TambahPengeluaran.vue";
+import HeaderMobile from "@/components/item/header/HeaderMobile.vue";
+import TambahPemasukan from "@/components/item/catatan/TambahPemasukan.vue";
+import TambahPengeluaran from "@/components/item/catatan/TambahPengeluaran.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

@@ -7,8 +7,8 @@
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/header/HeaderMobile.vue";
-import EditRekening from "@/components/rekening/EditRekening.vue";
+import HeaderMobile from "@/components/item/header/HeaderMobile.vue";
+import EditRekening from "@/components/item/rekening/EditRekening.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
