@@ -19,20 +19,20 @@
           </v-column>
         </v-row>
       </v-sheet>
-      <a href="/rekening/tambah-rekening"
-        ><v-btn
-          class="text-color-secondary-bocchi text-left p-2 v-btn__content"
-          variant="outlined"
-        >
-          <v-row class="align-center h-20">
-            <img class="m-4" src="/src/assets/icons/add.png" />
-            <v-column>
-              <p class="p-0">Tambah</p>
-              <p class="p-0">Rekening</p>
-            </v-column>
-          </v-row>
-        </v-btn></a
+
+      <v-btn
+        class="text-color-secondary-bocchi text-left p-2 v-btn__content"
+        variant="outlined"
+        @click="$router.push('/rekening/tambah-rekening')"
       >
+        <v-row class="align-center h-20">
+          <img class="m-4" src="/src/assets/icons/add.png" />
+          <v-column>
+            <p class="p-0">Tambah</p>
+            <p class="p-0">Rekening</p>
+          </v-column>
+        </v-row>
+      </v-btn>
     </div>
   </v-container>
   <div
