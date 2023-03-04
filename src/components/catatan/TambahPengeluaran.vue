@@ -1,19 +1,20 @@
 <template>
   <v-container>
     <v-row class="justify-center mt-4">
-      <v-btn class="bg-color-main-bocchi text-xs">Pemasukan</v-btn>
       <v-btn
         variant="outlined"
-        @click="pilihPengeluaran"
+        @click="pilihPemasukan"
         class="text-color-main-bocchi text-xs"
-        >Pengeluaran</v-btn
+        >Pemasukan</v-btn
       >
+      <v-btn class="bg-color-main-bocchi text-xs">Pengeluaran</v-btn>
     </v-row>
   </v-container>
   <v-container class="mt-8">
     <v-text-field
-      label="Jumlah Pemasukan"
-      class="text-color-main-bocchi mx-36"
+      v-model="jumlahPengeluaran"
+      label="Jumlah Pengeluaran"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
     >
       <template v-slot:prepend-inner>
@@ -21,9 +22,10 @@
       </template>
     </v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="jenisPengeluaran"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
-      label="Jenis Pemasukan"
+      label="Jenis Pengeluaran"
       readonly
     >
       <template v-slot:prepend-inner>
@@ -35,26 +37,33 @@
       </template>
       <template v-slot:append-inner>
         <img
+          @click="chooseOptionPengeluaran"
           class="mr-6"
           src="/src/assets/icons/sort.png"
           alt="sort"
         /> </template
     ></v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="sumberDana"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
-      label="Rekening"
+      label="Sumber Dana"
       readonly
     >
       <template v-slot:prepend-inner>
         <img
           class="mr-6"
-          src="/src/assets/icons/wallet_alt_fill.png"
-          alt="setting"
+          src="/src/assets/icons/wallet_alt_fill_black.png"
+          alt="wallet"
         />
       </template>
       <template v-slot:append-inner>
-        <img class="mr-6" src="/src/assets/icons/sort.png" alt="sort" />
+        <img
+          @click="chooseOptionRekening"
+          class="mr-6"
+          src="/src/assets/icons/sort.png"
+          alt="sort"
+        />
       </template>
     </v-text-field>
   </v-container>
@@ -69,14 +78,28 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      jumlahPengeluaran: "",
+      jenisPengeluaran: "",
+      sumberDana: "",
+    };
+  },
   methods: {
-    pilihPengeluaran() {
-      this.$emit("pilihan-tambah", false);
+    pilihPemasukan() {
+      this.$emit("pilihan-tambah", true);
     },
-    chooseOption() {
-      console.log("choose option");
+    chooseOptionPengeluaran() {
+      console.log("choose option pengeluaran");
+    },
+    chooseOptionRekening() {
+      console.log("choose option rekening");
     },
   },
 });
 </script>
-<style scoped></style>
+<style scoped>
+.color-icon .v-icon {
+  color: black;
+}
+</style>

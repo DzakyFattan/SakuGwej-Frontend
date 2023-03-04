@@ -2,7 +2,7 @@
 import ProfileDesktop from "../components/ProfileDesktop.vue";
 import ProfileMobile from "../components/ProfileMobile.vue";
 import NavigationBar from "../components/NavigationBar.vue";
-import HeaderMobile from "@/components/HeaderMobile.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
@@ -25,7 +25,9 @@ onMounted(() => {
 <template>
   <main>
     <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer"> Profile </HeaderMobile>
+      <HeaderMobile :isMenuPage="true" @clicked-menu="toggleDrawer">
+        Profile
+      </HeaderMobile>
       <ProfileMobile v-if="!isHidden" />
     </div>
     <div v-else class="app-container">

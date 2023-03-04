@@ -36,47 +36,47 @@ const router = createRouter({
     {
       path: "/home",
       name: "home",
-      component: () => import("../views/HomeView.vue"),
+      component: () => import("../views/home/HomeView.vue"),
     },
     {
       path: "/rekening",
       name: "rekening",
-      component: () => import("../views/RekeningView.vue"),
+      component: () => import("../views/rekening/RekeningView.vue"),
     },
     {
       path: "/rekening/tambah-rekening",
       name: "tambah-rekening",
-      component: () => import("../views/RekeningView.vue"),
+      component: () => import("../views/rekening/TambahRekeningView.vue"),
     },
     {
       path: "/rekening/:id/detail-rekening",
       name: "detail-rekening",
-      component: () => import("../views/RekeningView.vue"),
+      component: () => import("../views/rekening/DetailRekeningView.vue"),
     },
     {
       path: "/rekening/:id/edit-rekening",
       name: "edit-rekening",
-      component: () => import("../views/RekeningView.vue"),
+      component: () => import("../views/rekening/EditRekeningView.vue"),
     },
     {
       path: "/catatan",
       name: "catatan",
-      component: () => import("../views/CatatanView.vue"),
+      component: () => import("../views/catatan/CatatanView.vue"),
     },
     {
       path: "/hutang",
       name: "hutang",
-      component: () => import("../views/HutangView.vue"),
+      component: () => import("../views/hutang/HutangView.vue"),
     },
     {
       path: "/catatan/tambah-catatan",
       name: "tambah-catatan",
-      component: () => import("../views/TambahCatatanView.vue"),
+      component: () => import("../views/catatan/TambahCatatanView.vue"),
     },
     {
       path: "/hutang/tambah-hutang",
       name: "tambah-hutang",
-      component: () => import("../views/TambahHutangView.vue"),
+      component: () => import("../views/hutang/TambahHutangView.vue"),
     },
   ],
 });

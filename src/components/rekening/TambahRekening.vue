@@ -1,8 +1,9 @@
 <template>
   <v-container class="mt-8 color-icon">
     <v-text-field
+      v-model="namaRekening"
       label="Nama Rekening"
-      class="text-color-main-bocchi mx-36"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
     >
       <template v-slot:prepend-inner>
@@ -10,7 +11,8 @@
       </template>
     </v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="nominalAwal"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Nominal Awal"
     >
@@ -20,7 +22,8 @@
     </v-text-field>
 
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      v-model="gambar"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Gambar"
       readonly
@@ -29,12 +32,17 @@
         <img class="mr-6" src="/src/assets/icons/image.png" />
       </template>
       <template v-slot:append-inner>
-        <img class="mr-6" src="/src/assets/icons/rectangle.png" />
+        <img
+          @click="onChooseImage"
+          class="mr-6"
+          src="/src/assets/icons/rectangle.png"
+        />
       </template>
     </v-text-field>
     <v-textarea
+      v-model="deskripsi"
       label="Deskripsi"
-      class="text-color-main-bocchi mx-36"
+      class="text-color-main-bocchi mx-24"
       auto-grow
       variant="outlined"
     >
@@ -54,12 +62,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      namaRekening: "",
+      nominalAwal: "",
+      gambar: "",
+      deskripsi: "",
+    };
+  },
   methods: {
-    pilihHutang() {
-      this.$emit("pilihan-tambah", false);
-    },
-    chooseWallet() {
-      console.log("choose wallet");
+    onChooseImage() {
+      console.log("onChooseImage");
     },
   },
 });

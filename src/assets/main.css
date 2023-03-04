@@ -38,6 +38,20 @@
 .text-color-kita-main {
   color: var(--kita);
 }
+.bg-color-main-ryo {
+  background-color: var(--ryo);
+}
+
+.text-color-ryo-main {
+  color: var(--ryo);
+}
+.bg-color-main-nijika {
+  background-color: var(--nijika);
+}
+
+.text-color-nijika-main {
+  color: var(--nijika);
+}
 
 .green {
   text-decoration: none;

@@ -8,7 +8,7 @@
         label="Search"
       >
         <template v-slot:prepend
-          ><div class="justify-end bg-color-secondary-bocchi rounded-md h-8">
+          ><div class="bg-color-secondary-bocchi rounded-md h-8">
             <a href="/rekening/tambah-rekening"
               ><v-btn icon variant="flat" size="x-small"
                 ><img
@@ -18,16 +18,34 @@
           </div>
         </template>
         <template v-slot:append>
-          <div class="justify-end bg-color-secondary-bocchi rounded-md h-8">
-            <v-btn icon variant="flat" size="x-small"
-              ><img src="/src/assets/icons/sort_list.png" alt="sort_list"
-            /></v-btn></div
-        ></template>
+          <div class="bg-color-secondary-bocchi rounded-md h-8">
+            <v-btn
+              id="sort-menu"
+              icon
+              variant="flat"
+              size="x-small"
+              @click="onSortClick"
+              ><img
+                src="/src/assets/icons/sort_list.png"
+                alt="sort_list" /></v-btn
+            ><v-menu activator="#sort-menu">
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in listSort"
+                  :key="index"
+                  :value="index"
+                >
+                  <v-list-item-title>{{ item }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div></template
+        >
       </v-text-field>
     </v-row>
   </v-container>
   <div v-for="bayaran in listItem" class="m-8" :key="bayaran.id">
-    <a href="/rekening/detail-rekening/"
+    <a href="/rekening/{{ bayaran.id }}/detail-rekening/"
       ><v-card class="mx-auto" width="300" height="60">
         <v-row class="mt-1 ml-px">
           <img class="m-3" src="/src/assets/icons/cart.png" alt="cart" />
@@ -60,7 +78,13 @@ export default defineComponent({
           harga: "IDR 10.000",
         },
       ],
+      listSort: ["A-Z", "Z-A", "Lowest Balance", "Highest Balance"],
     };
+  },
+  methods: {
+    onSortClick() {
+      console.log("sort");
+    },
   },
 });
 </script>

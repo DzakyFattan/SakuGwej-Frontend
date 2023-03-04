@@ -12,18 +12,20 @@
   </v-container>
   <v-container class="mt-8 color-icon">
     <v-text-field
-      label="Jumlah Hutang"
-      class="text-color-main-bocchi mx-36"
+      label="Jumlah Piutang"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
+      v-model="jumlahPiutang"
     >
       <template v-slot:prepend-inner>
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" alt="book" />
       </template>
     </v-text-field>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Nama Pelanggan"
+      v-model="namaPelanggan"
     >
       <template v-slot:prepend-inner>
         <img
@@ -35,9 +37,10 @@
     </v-text-field>
     <v-textarea
       label="Deskripsi"
-      class="text-color-main-bocchi mx-36"
+      class="text-color-main-bocchi mx-24"
       auto-grow
       variant="outlined"
+      v-model="deskripsi"
     >
       <template v-slot:prepend-inner>
         <img
@@ -48,13 +51,15 @@
       </template>
     </v-textarea>
     <v-text-field
-      class="text-color-main-bocchi mx-36"
+      class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Tanggal Jatuh Tempo"
       readonly
+      v-model="calendar"
     >
       <template v-slot:prepend-inner>
         <img
+          @click="onCalendarClick"
           class="mr-6"
           src="/src/assets/icons/date_range_fill.png"
           alt="book"
@@ -63,8 +68,8 @@
     </v-text-field>
   </v-container>
   <v-container>
-    <v-row class="justify-center mt-2"
-      ><a href="/hutang"
+    <v-row class="justify-center mt-2">
+      <a href="/hutang"
         ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
       ></v-row
     >
@@ -73,12 +78,20 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
+  data() {
+    return {
+      jumlahPiutang: "",
+      namaPelanggan: "",
+      deskripsi: "",
+      calendar: "",
+    };
+  },
   methods: {
     pilihHutang() {
       this.$emit("pilihan-tambah", true);
     },
-    chooseWallet() {
-      console.log("choose wallet");
+    onCalendarClick() {
+      console.log("calendar clicked");
     },
   },
 });

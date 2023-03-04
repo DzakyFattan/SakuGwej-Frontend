@@ -1,12 +1,14 @@
 <template>
-  <header-mobile @clicked-menu="toogleDrawer"> Rekening </header-mobile>
+  <HeaderMobile :isMenuPage="true" @clicked-menu="toogleDrawer">
+    Rekening
+  </HeaderMobile>
   <main :hidden="isHidden">
-    <rekening />
+    <Rekening />
   </main>
 </template>
 <script lang="ts">
-import HeaderMobile from "@/components/HeaderMobile.vue";
-import Rekening from "@/components/Rekening.vue";
+import HeaderMobile from "@/components/header/HeaderMobile.vue";
+import Rekening from "@/components/rekening/Rekening.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

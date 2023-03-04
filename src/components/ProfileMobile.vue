@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import GeneralMobile from "./profile/GeneralMobile.vue";
 import ExportImport from "./profile/ExportImport.vue";
-import Notification from "./profile/Notification.vue";
-import Theme from "./profile/Theme.vue";
+import Notification from "./profile/NotificationComponent.vue";
+import Theme from "./profile/ThemeComponent.vue";
 </script>
 
 <template>
