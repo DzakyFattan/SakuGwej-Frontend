@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import GeneralDesktop from "./profile/GeneralDesktop.vue";
-import ExportImport from "./profile/ExportImport.vue";
-import Notification from "./profile/NotificationComponent.vue";
-import Theme from "./profile/ThemeComponent.vue";
+import GeneralDesktop from "../profile/GeneralDesktop.vue";
+import ExportImport from "../profile/ExportImport.vue";
+import Notification from "../profile/NotificationComponent.vue";
+import Theme from "../profile/ThemeComponent.vue";
 </script>
 
 <template>

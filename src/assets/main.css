@@ -13,8 +13,11 @@
   --kita: #c5404e;
   --bocchi-light: #fedfe6;
   --ryo-light: #a2bedd;
+  --iris-80: #7879F1;
+  --lighter-gray: #EEEEEE;
 }
 
+/* Background Color Class */
 .bg-color-main-bocchi {
   background-color: var(--bocchi);
 }
@@ -23,6 +26,31 @@
   background-color: var(--bocchi-light);
 }
 
+.bg-color-iris-80 {
+  background-color: var(--iris-80);
+}
+
+.bg-color-main-ryo {
+  background-color: var(--ryo);
+}
+
+.bg-color-secondary-ryo {
+  background-color: var(--ryo-light);
+}
+
+.bg-color-main-nijika {
+  background-color: var(--nijika);
+}
+
+.bg-color-main-kita {
+  background-color: var(--kita);
+}
+
+.bg-color-white {
+  background-color: var(--white);
+}
+
+/* Text Color Class */
 .text-color-main-bocchi {
   color: var(--bocchi);
 }
@@ -31,26 +59,25 @@
   color: var(--bocchi-light);
 }
 
-.bg-color-main-kita {
-  background-color: var(--kita);
-}
-
-.text-color-kita-main {
-  color: var(--kita);
-}
-.bg-color-main-ryo {
-  background-color: var(--ryo);
+.text-color-tertiary-gray {
+  color: var(--lighter-gray);
 }
 
 .text-color-ryo-main {
   color: var(--ryo);
 }
-.bg-color-main-nijika {
-  background-color: var(--nijika);
-}
 
 .text-color-nijika-main {
   color: var(--nijika);
+}
+
+.text-color-kita-main {
+  color: var(--kita);
+}
+
+/* Border Class */
+.border-secondary-bocchi {
+  border: solid 1px var(--bocchi-light);
 }
 
 .green {

@@ -22,7 +22,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import NavigationBar from "../NavigationBar.vue";
+import NavigationBar from "../navigation/NavigationBar.vue";
 
 export default defineComponent({
   components: { NavigationBar },

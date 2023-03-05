@@ -36,12 +36,12 @@ const router = createRouter({
     {
       path: "/home",
       name: "home",
-      component: () => import("../views/home/HomeView.vue"),
+      component: () => import("../views/HomeView.vue"),
     },
     {
       path: "/rekening",
       name: "rekening",
-      component: () => import("../views/rekening/RekeningView.vue"),
+      component: () => import("../views/RekeningView.vue"),
     },
     {
       path: "/rekening/tambah-rekening",
@@ -61,12 +61,12 @@ const router = createRouter({
     {
       path: "/catatan",
       name: "catatan",
-      component: () => import("../views/catatan/CatatanView.vue"),
+      component: () => import("../views/CatatanView.vue"),
     },
     {
       path: "/hutang",
       name: "hutang",
-      component: () => import("../views/hutang/HutangView.vue"),
+      component: () => import("../views/HutangView.vue"),
     },
     {
       path: "/catatan/tambah-catatan",

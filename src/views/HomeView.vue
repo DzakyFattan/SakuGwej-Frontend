@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import HeaderMobile from "../components/item/header/HeaderMobile.vue";
 import NavigationBar from "../components/item/navigation/NavigationBar.vue";
-import ProfileDesktop from "../components/desktop/ProfileDesktop.vue";
-import ProfileMobile from "../components/mobile/ProfileMobile.vue";
+import Home from "../components/item/home/Home.vue";
+import HomeDesktop from "../components/desktop/HomeDesktop.vue";
 
 import { onMounted, ref, nextTick } from "vue";
 
@@ -25,14 +25,16 @@ onMounted(() => {
 
 <template>
   <main>
-    <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer"> Profile </HeaderMobile>
-      <ProfileMobile v-if="!isHidden" />
-    </div>
-    <div v-else class="app-container">
-      <NavigationBar />
-      <ProfileDesktop />
-    </div>
+  <div v-if="windowWidth < 1024">
+    <HeaderMobile @clicked-menu="toggleDrawer"> Home </HeaderMobile>
+      <Home v-if="!isHidden" />
+  </div>
+  <div v-else class="app-container">
+      <NavigationBar/>
+      <HomeDesktop/>
+  </div>
   </main>
 </template>
+
+<style scoped></style>
 
