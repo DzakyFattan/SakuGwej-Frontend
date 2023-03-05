@@ -6,7 +6,7 @@ const password = ref("");
 const confirmPassword = ref("");
 const emptyInput = ref("");
 
-const api = "http://be-sakugwejdev.ddns.net";
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
 const checkEmail = () => {
   const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -34,11 +34,15 @@ const checkEmpty = () => {
   }
 };
 
+const login = () => {
+  window.location.href = "/login";
+};
+
 const register = async () => {
   try {
     checkEmpty();
     checkPassword();
-    const response = await fetch(`${api}/register`, {
+    const response = await fetch(`${api}/user/register`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -51,13 +55,12 @@ const register = async () => {
         confirmPassword: confirmPassword.value,
       }),
     });
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       throw new Error("Username atau Password salah");
+    } else {
+      clearInput();
+      login();
     }
-    const data = await response.json();
-    console.log(data);
-    clearInput();
-    login();
   } catch (error: any) {
     if (error.message === "Password tidak sama") {
       alert(error.message);
@@ -72,10 +75,6 @@ const clearInput = () => {
   email.value = "";
   password.value = "";
   confirmPassword.value = "";
-};
-
-const login = () => {
-  window.location.href = "/login";
 };
 </script>
 

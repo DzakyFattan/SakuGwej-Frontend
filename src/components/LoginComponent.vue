@@ -1,37 +1,40 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const username = ref("");
+const email = ref("");
 const password = ref("");
 
-const api = "http://be-sakugwejdev.ddns.net";
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
 // const localapitest = "http://localhost:3001";
 
 const login = async () => {
   try {
-    const response = await fetch(`${api}/login`, {
+    const response = await fetch(`${api}/user/login`, {
       method: "POST",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username.value,
+        email: email.value,
         password: password.value,
       }),
     });
     if (response.status !== 200) {
-      throw new Error("Username atau Password salah");
+      throw new Error("Email atau Password salah");
     }
-    const data = await response.json();
-    clearInput();
-    console.log(data);
+    if (response.status === 200) {
+      const data = await response.json();
+      clearInput();
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      window.location.href = "/home";
+    }
   } catch (error: any) {
     console.error(error.message);
   }
 };
 
 const clearInput = () => {
-  username.value = "";
+  email.value = "";
   password.value = "";
 };
 </script>
@@ -42,8 +45,8 @@ const clearInput = () => {
       <h1 class="blue text-center mb-title-form">Login</h1>
       <input
         class="input-field mb-field-form"
-        v-model="username"
-        placeholder="Username"
+        v-model="email"
+        placeholder="Email"
       />
       <input
         class="input-field mb-field-form"
