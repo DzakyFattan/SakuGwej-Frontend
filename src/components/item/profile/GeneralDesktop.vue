@@ -157,7 +157,7 @@ const handleSaveButton = async (field: String) => {
             <p class="text-base" v-if="!isEditingBirthdate">
               : {{ profileData.birthDate }}
             </p>
-            <input type="text" v-model="newBirthDate" v-else />
+            <input type="date" v-model="newBirthDate" v-else />
             <button
               class="ml-2 text-color-kita-main"
               v-if="!isEditing && !isEditingBirthdate"
@@ -207,7 +207,7 @@ const handleSaveButton = async (field: String) => {
             <p class="text-base" v-if="!isEditingEmail">
               : {{ profileData.email }}
             </p>
-            <input type="text" v-model="newEmail" v-else />
+            <input type="email" v-model="newEmail" v-else />
             <button
               class="ml-2 text-color-kita-main"
               v-if="!isEditing && !isEditingEmail"
