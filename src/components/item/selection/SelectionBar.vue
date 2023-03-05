@@ -1,4 +1,4 @@
-<script setup lang="ts">   
+<script setup lang="ts">  
     const selected  = "30 Hari Teakhir"
     const intervals = [
         "30 Hari Teakhir",
@@ -6,18 +6,25 @@
         "14 Hari Teakhir",
         " 7 Hari Teakhir"
     ]
+    const sort      = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"]
 
     const props     = defineProps(["type"])
     const type      = props.type
+
+    let checkbox    = false
 </script>
 
 <template>
-    <div class="flex flex-col w-[75vh] h-fit items-center self-center mt-2 mb-3 px-4" >
-        <div class="flex flex-row mb-6 items-center">
-            <a :href="'/'+type+'/tambah-'+type">
-                <img src="/src/assets/icons/add-ring.png" class="w-12 h-12">
-            </a>
-            <img src="/src/assets/icons/arrow-left.png" class="w-16 h-16 ml-[14vh]">
+    <v-container class="h-fit w-[74vh]">
+        <v-row class="justify-center items-center">
+        <a :href="'/'+type+'/tambah-'+type">
+            <v-btn icon variant="flat" size="x-small">
+                <img src="/src/assets/icons/add-ring.png" alt="add"/>
+            </v-btn>
+        </a>
+        <v-btn icon variant="flat" size="x-small" class="arrow ml-[10vh]">
+            <img src="/src/assets/icons/arrow-left.png"  />
+        </v-btn>
             <v-select
                 :items="intervals"
                 :label="selected"
@@ -25,15 +32,31 @@
                 hide-details
                 variant="filled"
                 bg-color="white"
-                class="interval w-[22vh] h-12 rounded-md"
-            ></v-select>
-            <img src="/src/assets/icons/arrow-right.png" class="w-16 h-16 mr-[14vh]">
-            <img src="/src/assets/icons/sort-gotoh.png" class="w-12 h-12">
-        </div>
-        <div class="flex flex-row items-center w-[75vh] my-2 px-7">
+                class="interval w-[22vh] h-12 rounded-md">
+            </v-select>
+        <v-btn icon variant="flat" size="x-small" class="arrow mr-[10vh]">
+            <img src="/src/assets/icons/arrow-right.png"  />
+        </v-btn>
+        <v-btn id="sort-menu"
+                icon
+                variant="flat"
+                size="x-small">
+                <img src="/src/assets/icons/sort-gotoh.png" alt="sort" />
+        </v-btn>
+        <v-menu activator="#sort-menu">
+            <v-list>
+            <v-list-item
+                v-for="item in sort"
+                :value="item">
+                <v-list-item-title>{{ item }}</v-list-item-title>
+            </v-list-item>
+            </v-list>
+        </v-menu>
+        <div class="flex flex-row items-center w-[75vh] mt-4 mb-2 px-5">
             <input type="checkbox" class="select-all mr-4 w-6 h-6"><label>Pilih Semua</label>
         </div>
-    </div>
+        </v-row>
+    </v-container>
 </template>
 
 <style scoped>
@@ -49,4 +72,12 @@
         border-radius: 2px;
     }
 
+    .v-btn {
+        width: 3rem;
+        height: 3rem;
+    }
+    .arrow {
+        width: 4rem;
+        height: 4rem;
+    }
 </style>

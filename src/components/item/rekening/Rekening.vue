@@ -78,7 +78,7 @@ export default defineComponent({
           harga: "IDR 10.000",
         },
       ],
-      listSort: ["A-Z", "Z-A", "Lowest Balance", "Highest Balance"],
+      listSort: ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"],
     };
   },
   methods: {

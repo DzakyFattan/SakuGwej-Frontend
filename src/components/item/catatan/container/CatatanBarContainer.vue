@@ -45,7 +45,7 @@
   const type      = ref()
   const count     = countData()
 
-  notes.value = data.slice(0, count-1)
+  notes.value     = data.slice(0, count-1)
   type.value      = "catatan"
 
   function countData() {

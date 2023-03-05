@@ -5,92 +5,110 @@
 
   const data      = [
       {
-        name: "Cash",
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-iris-80"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-ryo"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-bocchi"
       },
       {
-        name: "Cash",
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-secondary-ryo"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-nijika"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-kita"
       },
-            {
-        name: "Cash",
+      {
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-iris-80"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-ryo"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-bocchi"
       },
       {
-        name: "Cash",
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-secondary-ryo"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-nijika"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-kita"
       },
-            {
-        name: "Cash",
+      {
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-iris-80"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-ryo"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-bocchi"
       },
       {
-        name: "Cash",
+        id: 1,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-secondary-ryo"
       },
       {
-        name: "Cash",
+        id: 2,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-nijika"
       },
       {
-        name: "Cash",
+        id: 3,
+        name: "Unpay",
         nominal: 10000,
         bg_color: "bg-color-main-kita"
       },
