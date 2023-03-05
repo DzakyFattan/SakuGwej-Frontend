@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
-
+<script setup lang="ts">
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/login";
+};
+</script>
 <template>
   <div class="navigation-bar">
     <p class="font-bold text-center text-xl">SakuGwej</p>
@@ -10,7 +14,15 @@
         <a href="/catatan" class="navigation-bar-item">Catatan</a>
         <a href="/hutang" class="navigation-bar-item">Hutang</a>
       </div>
-      <a href="/profile" class="mb-8">Pengaturan</a>
+      <div class="navigation-bar-items flex flex-col">
+        <a href="/profile" class="navigation-bar-item">Pengaturan</a>
+        <button
+          @click="handleLogout"
+          class="navigation-bar-item text-left mb-8"
+        >
+          Log Out
+        </button>
+      </div>
     </div>
   </div>
 </template>
