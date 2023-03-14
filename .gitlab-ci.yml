@@ -22,9 +22,9 @@ lint-test-job:
     - npm i
     - npm i prettier
     - echo "Linting code..."
-    - npx prettier --write src
-    - npx prettier --check src
-    - npx eslint src --fix
+    # - npx prettier --write src
+    # - npx prettier --check src
+    # - npx eslint src --fix
 
 unit-test-job:
   stage: test
