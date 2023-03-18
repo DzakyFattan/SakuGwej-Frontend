@@ -7,7 +7,6 @@ import CatatanDesktop from "../components/desktop/CatatanDesktop.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
-const isHidden = ref(false);
 
 
 onMounted(() => {

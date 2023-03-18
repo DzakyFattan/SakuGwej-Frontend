@@ -7,7 +7,6 @@ import ProfileMobile from "../components/mobile/ProfileMobile.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
-const isHidden = ref(false);
 
 
 onMounted(() => {

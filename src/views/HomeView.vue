@@ -7,7 +7,6 @@ import HomeDesktop from "../components/desktop/HomeDesktop.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
-const isHidden = ref(false);
 
 
 onMounted(() => {

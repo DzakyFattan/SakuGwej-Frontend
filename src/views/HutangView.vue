@@ -7,7 +7,6 @@ import HutangDesktop from "../components/desktop/HutangDesktop.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
-const isHidden = ref(false);
 
 
 onMounted(() => {

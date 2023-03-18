@@ -6,7 +6,6 @@ import RekeningDesktop from "@/components/desktop/RekeningDesktop.vue";
 import { onMounted, ref, nextTick } from "vue";
 
 const windowWidth = ref(window.innerWidth);
-const isHidden = ref(false);
 
 
 onMounted(() => {
