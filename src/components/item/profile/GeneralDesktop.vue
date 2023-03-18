@@ -83,7 +83,7 @@ const handleSaveButton = async (field: String) => {
       break;
     case "birthdate":
       isEditingBirthdate.value = false;
-      payload = { newBirthdate: newBirthDate.value };
+      payload = { newBirthDate: newBirthDate.value };
       // profileData.value.birthDate = newBirthDate.value;
       break;
     case "gender":
@@ -132,7 +132,7 @@ const handleSaveButton = async (field: String) => {
         <p class="font-bold text-xl">Biodata Diri</p>
         <div class="mt-1 mb-4">
           <div class="flex flex-row">
-            <p class="text-base w-40">Nama</p>
+            <p class="text-base w-40">Username</p>
             <p class="text-base" v-if="!isEditingName">
               : {{ profileData.username }}
             </p>
@@ -155,7 +155,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Tanggal lahir</p>
             <p class="text-base" v-if="!isEditingBirthdate">
-              : {{ profileData.birthDate }}
+              : {{ profileData.birthDate.slice(0, 10) }}
             </p>
             <input type="date" v-model="newBirthDate" v-else />
             <button

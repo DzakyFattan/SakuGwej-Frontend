@@ -26,8 +26,8 @@ onMounted(() => {
 <template>
   <main>
     <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer"> Profile </HeaderMobile>
-      <ProfileMobile v-if="!isHidden" />
+      <HeaderMobile> Profil </HeaderMobile>
+      <ProfileMobile />
     </div>
     <div v-else class="app-container">
       <NavigationBar />

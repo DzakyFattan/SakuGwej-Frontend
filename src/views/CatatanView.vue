@@ -26,8 +26,8 @@ onMounted(() => {
 <template>
   <main>
     <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer"> Catatan </HeaderMobile>
-      <Catatan v-if="!isHidden" />
+      <HeaderMobile> Catatan </HeaderMobile>
+      <Catatan />
     </div>
     <div v-else class="app-container">
       <NavigationBar />

@@ -103,6 +103,7 @@ h2 {
   font-size: 28px;
   line-height: 48px;
 }
+
 h3 {
   font-style: normal;
   font-weight: 1000;
@@ -189,6 +190,34 @@ body {
   padding-top: 24px;
   background-color: var(--bocchi);
 }
+
+.mobile-navigation-bar {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  height: max-content;
+  width: 100vh;
+  height: 100vh;
+  background-color: white;
+  z-index: 101;
+}
+
+.mobile-navigation-bar-item {
+  padding: 12px 16px;
+  background-color: var(--bocchi-light);
+  border-bottom: 1px solid var(--bocchi);
+}
+
+.mobile-navigation-bar-item:hover {
+  background-color: var(--bocchi);
+}
+
+.mobile-navigation-bar-item:active {
+  background-color: var(--bocchi);
+}
+
+
+
 
 .navigation-bar-items {
   display: flex;

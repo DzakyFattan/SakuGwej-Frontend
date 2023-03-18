@@ -5,7 +5,7 @@
         <slot>Tidak ada slot yang di definisikan </slot>
       </h3></v-toolbar-title
     >
-    <div v-if="isMenuPage">
+    <div v-if="!isMenuPage">
       <v-btn @click="toggleDrawer" icon>
         <img src="/src/assets/icons/menu.png" alt="menu" />
       </v-btn>
@@ -17,15 +17,15 @@
     </div>
   </v-toolbar>
   <div :hidden="!drawer">
-    <navigation-bar />
+    <MobileNavigationBar />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import NavigationBar from "../navigation/NavigationBar.vue";
+import MobileNavigationBar from "../navigation/MobileNavigationBar.vue";
 
 export default defineComponent({
-  components: { NavigationBar },
+  components: { MobileNavigationBar },
   props: ["isMenuPage"],
   data() {
     return {

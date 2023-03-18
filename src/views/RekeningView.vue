@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <main>
     <div v-if="windowWidth < 1024">
-      <HeaderMobile @clicked-menu="toggleDrawer"> Rekening </HeaderMobile>
+      <HeaderMobile> Rekening </HeaderMobile>
       <Rekening v-if="!isHidden"/>
     </div>
     <div v-else class="app-container">
