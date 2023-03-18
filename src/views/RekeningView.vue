@@ -8,10 +8,6 @@ import { onMounted, ref, nextTick } from "vue";
 const windowWidth = ref(window.innerWidth);
 const isHidden = ref(false);
 
-const toggleDrawer = () => {
-  console.log(isHidden.value);
-  isHidden.value = !isHidden.value;
-};
 
 onMounted(() => {
   nextTick(() => {
