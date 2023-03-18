@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch, getCurrentInstance } from "vue";
+import type { ProfileData } from "../../../types.vue";
+
+const props = defineProps<{
+  profileData: ProfileData;
+  fetchData: () => void;
+}>();
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const instance = getCurrentInstance();
 
 const isEditingName = ref(false);
 const isEditingBirthdate = ref(false);
 const isEditingGender = ref(false);
 const isEditingEmail = ref(false);
 const isEditingPhone = ref(false);
-const profileData = ref({
-  username: "",
-  birthDate: "",
-  email: "",
-  gender: "",
-  phoneNumber: "",
-});
 
 const newUsername = ref("");
 const newBirthDate = ref("");
@@ -20,26 +23,13 @@ const newGender = ref("");
 const newEmail = ref("");
 const newPhoneNumber = ref("");
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
-
-const fetchData = async () => {
-  console.log(localStorage.getItem("token"));
-  const res = await fetch(`${api}/user/profile`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-  const data = await res.json();
-  profileData.value = data.data;
-  newUsername.value = data.data.username;
-  newBirthDate.value = data.data.birthDate;
-  newGender.value = data.data.gender;
-  newEmail.value = data.data.email;
-  newPhoneNumber.value = data.data.phoneNumber;
-  console.log(data.data.username);
-};
-
-fetchData();
+watch(props, () => {
+  newUsername.value = props.profileData.username;
+  newBirthDate.value = props.profileData.birthDate;
+  newGender.value = props.profileData.gender;
+  newEmail.value = props.profileData.email;
+  newPhoneNumber.value = props.profileData.phoneNumber;
+});
 
 const isEditing = computed(() => {
   return (
@@ -79,27 +69,27 @@ const handleSaveButton = async (field: String) => {
     case "name":
       isEditingName.value = false;
       payload = { newUsername: newUsername.value };
-      // profileData.value.username = newUsername.value;
+      // props.profileData.value.username = newProfileData.value.newUsername;
       break;
     case "birthdate":
       isEditingBirthdate.value = false;
       payload = { newBirthDate: newBirthDate.value };
-      // profileData.value.birthDate = newBirthDate.value;
+      // props.profileData.value.birthDate = newBirthDate.value;
       break;
     case "gender":
       isEditingGender.value = false;
       payload = { newGender: newGender.value };
-      // profileData.value.gender = newGender.value;
+      // props.profileData.value.gender = newProfileData.value.newGender;
       break;
     case "email":
       isEditingEmail.value = false;
       payload = { newEmail: newEmail.value };
-      // profileData.value.email = newEmail.value;
+      // props.profileData.value.email = newProfileData.value.newEmail;
       break;
     case "phone":
       isEditingPhone.value = false;
       payload = { newPhoneNumber: newPhoneNumber.value };
-      // profileData.value.phoneNumber = newPhoneNumber.value;
+      // props.profileData.value.phoneNumber = newProfileData.value.newPhoneNumber;
       break;
     default:
       break;
@@ -113,8 +103,7 @@ const handleSaveButton = async (field: String) => {
     body: JSON.stringify(payload),
   });
   const data = await res.json();
-  console.log(data);
-  fetchData();
+  props.fetchData();
 };
 </script>
 
@@ -134,7 +123,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Username</p>
             <p class="text-base" v-if="!isEditingName">
-              : {{ profileData.username }}
+              : {{ props.profileData.username }}
             </p>
             <input type="text" v-model="newUsername" v-else />
             <button
@@ -155,7 +144,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Tanggal lahir</p>
             <p class="text-base" v-if="!isEditingBirthdate">
-              : {{ profileData.birthDate.slice(0, 10) }}
+              : {{ props.profileData.birthDate.slice(0, 10) }}
             </p>
             <input type="date" v-model="newBirthDate" v-else />
             <button
@@ -176,7 +165,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Jenis kelamin</p>
             <p class="text-base" v-if="!isEditingGender">
-              : {{ profileData.gender }}
+              : {{ props.profileData.gender }}
             </p>
             <select v-model="newGender" v-else>
               <option value="Laki-Laki">Laki-Laki</option>
@@ -205,7 +194,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Email</p>
             <p class="text-base" v-if="!isEditingEmail">
-              : {{ profileData.email }}
+              : {{ props.profileData.email }}
             </p>
             <input type="email" v-model="newEmail" v-else />
             <button
@@ -226,7 +215,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">No. HP</p>
             <p class="text-base" v-if="!isEditingPhone">
-              : {{ profileData.phoneNumber }}
+              : {{ props.profileData.phoneNumber }}
             </p>
             <input type="text" v-model="newPhoneNumber" v-else />
             <button

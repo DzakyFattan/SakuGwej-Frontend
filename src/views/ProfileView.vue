@@ -4,10 +4,10 @@ import NavigationBar from "../components/item/navigation/NavigationBar.vue";
 import ProfileDesktop from "../components/desktop/ProfileDesktop.vue";
 import ProfileMobile from "../components/mobile/ProfileMobile.vue";
 
-import { onMounted, ref, nextTick } from "vue";
+import { onMounted, ref, nextTick, watch } from "vue";
+import type { ProfileData } from "../types.vue";
 
 const windowWidth = ref(window.innerWidth);
-
 
 onMounted(() => {
   nextTick(() => {
@@ -16,6 +16,32 @@ onMounted(() => {
     });
   });
 });
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const profileData = ref<ProfileData>({
+  username: "",
+  birthDate: "",
+  email: "",
+  gender: "",
+  phoneNumber: "",
+});
+
+
+const fetchData = async () => {
+  console.log(localStorage.getItem("token"));
+  const res = await fetch(`${api}/user/profile`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const data = await res.json();
+  profileData.value = data.data;
+};
+
+fetchData();
+
+
 </script>
 
 <template>
@@ -26,7 +52,7 @@ onMounted(() => {
     </div>
     <div v-else class="app-container">
       <NavigationBar />
-      <ProfileDesktop />
+      <ProfileDesktop v-bind:profile-data="profileData" :fetchData="fetchData" />
     </div>
   </main>
 </template>
