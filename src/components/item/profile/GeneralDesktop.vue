@@ -9,23 +9,21 @@ const props = defineProps<{
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
-const instance = getCurrentInstance();
-
 const isEditingName = ref(false);
 const isEditingBirthdate = ref(false);
 const isEditingGender = ref(false);
 const isEditingEmail = ref(false);
 const isEditingPhone = ref(false);
 
-const newUsername = ref("");
-const newBirthDate = ref("");
-const newGender = ref("");
-const newEmail = ref("");
-const newPhoneNumber = ref("");
+const newUsername = ref(props.profileData.username);
+const newBirthDate = ref(props.profileData.birthDate.slice(0, 10));
+const newGender = ref(props.profileData.gender);
+const newEmail = ref(props.profileData.email);
+const newPhoneNumber = ref(props.profileData.phoneNumber);
 
 watch(props, () => {
   newUsername.value = props.profileData.username;
-  newBirthDate.value = props.profileData.birthDate;
+  newBirthDate.value = props.profileData.birthDate.slice(0, 10);
   newGender.value = props.profileData.gender;
   newEmail.value = props.profileData.email;
   newPhoneNumber.value = props.profileData.phoneNumber;
@@ -68,6 +66,9 @@ const handleSaveButton = async (field: String) => {
   switch (field) {
     case "name":
       isEditingName.value = false;
+      if (newUsername.value === props.profileData.username) {
+        return;
+      }
       payload = { newUsername: newUsername.value };
       // props.profileData.value.username = newProfileData.value.newUsername;
       break;
@@ -83,6 +84,9 @@ const handleSaveButton = async (field: String) => {
       break;
     case "email":
       isEditingEmail.value = false;
+      if (newEmail.value === props.profileData.email) {
+        return;
+      }
       payload = { newEmail: newEmail.value };
       // props.profileData.value.email = newProfileData.value.newEmail;
       break;

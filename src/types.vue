@@ -9,11 +9,11 @@ export type ProfileData = {
 }
 
 export type NewProfileData = {
-  newUsername: string
-  newBirthDate: string
-  newGender: string
-  newEmail: string
-  newPhoneNumber: string
+  newUsername?: string
+  newBirthDate?: string
+  newGender?: string
+  newEmail?: string
+  newPhoneNumber?: string
 }
 
 </script>

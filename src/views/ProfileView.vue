@@ -2,7 +2,7 @@
 import HeaderMobile from "../components/item/header/HeaderMobile.vue";
 import NavigationBar from "../components/item/navigation/NavigationBar.vue";
 import ProfileDesktop from "../components/desktop/ProfileDesktop.vue";
-import ProfileMobile from "../components/mobile/ProfileMobile.vue";
+import ProfileMobile from "../components/item/profile/mobile/ProfileMobile.vue";
 
 import { onMounted, ref, nextTick, watch } from "vue";
 import type { ProfileData } from "../types.vue";
@@ -48,7 +48,7 @@ fetchData();
   <main>
     <div v-if="windowWidth < 1024">
       <HeaderMobile> Profil </HeaderMobile>
-      <ProfileMobile />
+      <ProfileMobile v-bind:profile-data="profileData" :fetch-data="fetchData" />
     </div>
     <div v-else class="app-container">
       <NavigationBar />
