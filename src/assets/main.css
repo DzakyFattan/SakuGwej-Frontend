@@ -7,12 +7,18 @@
 
 :root {
   --white: #ffffff;
-  --ryo: #3d64a8;
+  --ryo: #85a5dd;
   --bocchi: #f7abb2;
-  --nijika: #ebb549;
-  --kita: #c5404e;
+  --nijika: #ffb400;
+  --kita: #f86255;
   --bocchi-light: #fedfe6;
   --ryo-light: #a2bedd;
+  --kita-light: #ff949d;
+  --nijika-light: #ffe39b;
+  --bocchi-dark: #ff4a6a;
+  --ryo-dark: #1c4180;
+  --kita-dark: #bd1e19;
+  --nijika-dark: #cf8414;
   --iris-80: #7879F1;
   --lighter-gray: #EEEEEE;
 }
@@ -42,8 +48,32 @@
   background-color: var(--nijika);
 }
 
+.bg-color-secondary-nijika {
+  background-color: var(--nijika-light);
+}
+
 .bg-color-main-kita {
   background-color: var(--kita);
+}
+
+.bg-color-secondary-kita {
+  background-color: var(--kita-light);
+}
+
+.bg-color-dark-bocchi {
+  background-color: var(--bocchi-dark);
+}
+
+.bg-color-dark-ryo {
+  background-color: var(--ryo-dark);
+}
+
+.bg-color-dark-nijika {
+  background-color: var(--nijika-dark);
+}
+
+.bg-color-dark-kita {
+  background-color: var(--kita-dark);
 }
 
 .bg-color-white {
@@ -63,16 +93,44 @@
   color: var(--lighter-gray);
 }
 
-.text-color-ryo-main {
+.text-color-main-ryo {
   color: var(--ryo);
 }
 
-.text-color-nijika-main {
+.text-color-secondary-ryo {
+  color: var(--ryo-light);
+}
+
+.text-color-main-nijika {
   color: var(--nijika);
 }
 
-.text-color-kita-main {
+.text-color-main-kita {
   color: var(--kita);
+}
+
+.text-color-secondary-nijika {
+  color: var(--nijika-light);
+}
+
+.text-color-secondary-kita {
+  color: var(--kita-light);
+}
+
+.text-color-dark-bocchi {
+  color: var(--bocchi-dark);
+}
+
+.text-color-dark-ryo {
+  color: var(--ryo-dark);
+}
+
+.text-color-dark-nijika {
+  color: var(--nijika-dark);
+}
+
+.text-color-dark-kita {
+  color: var(--kita-dark);
 }
 
 /* Border Class */
@@ -188,7 +246,6 @@ body {
   height: 100vh;
   width: 200px;
   padding-top: 24px;
-  background-color: var(--bocchi);
 }
 
 .mobile-navigation-bar {
@@ -222,7 +279,6 @@ body {
 .navigation-bar-items {
   display: flex;
   flex-direction: column;
-  background-color: var(--bocchi);
   margin-top: 48px;
 }
 

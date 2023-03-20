@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch, getCurrentInstance } from "vue";
-import type { ProfileData, NewProfileData } from "../../../types.vue";
+import { useThemeStore } from "@/stores/theme"
+import { ref, computed } from "vue";
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
@@ -38,34 +38,36 @@ const handleSaveButton = async () => {
   confirmNewPassword.value = "";
 }
 
+const { theme, themeClasses } = useThemeStore();
+
 </script>
 
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="dialog" persistent width="1024">
+    <v-dialog v-model="dialog" persistent width="512">
       <template v-slot:activator="{ props }">
-        <button class="bg-color-main-bocchi button" v-bind="props">Edit Password</button>
+        <button :class="themeClasses.bgMain" class="button" v-bind="props">Edit Password</button>
       </template>
-      <v-card class="bg-color-secondary-bocchi">
+      <v-card :class="themeClasses.bgSecondary" class="rounded-lg">
         <v-card-text>
           <h3 class="text-center">Edit Password</h3>
+          <div class="bg-color-white p-4 rounded-lg flex flex-row align-center justify-between">
           <v-col>
-            <v-text-field type="password" label="Password Baru*" required v-model="newPassword" ></v-text-field>
-            <v-text-field type="password" label="Konfirmasi Password Baru*" required v-model="confirmNewPassword"></v-text-field>
-            <p v-if="error" class="text-rose-500"> {{ error }}</p>
-          </v-col>
+              <v-text-field type="password" label="Password Baru*" required v-model="newPassword" ></v-text-field>
+              <v-text-field type="password" label="Konfirmasi Password Baru*" required v-model="confirmNewPassword"></v-text-field>
+              <p v-if="error" class="text-rose-500"> {{ error }}</p>
+            </v-col>
+          </div>
           <!-- <small>*indicates required field</small> -->
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <button class="bg-color-main-bocchi button mb-4" @click="dialog = false">
+          <button :class="themeClasses.bgMain" class="button mb-4" @click="dialog = false">
             Close
           </button>
-          <button class="bg-color-main-bocchi button mx-4 mb-4" @click="handleSaveButton()">
+          <button :class="themeClasses.bgMain" class="button mx-4 mb-4" @click="handleSaveButton()">
             Save
           </button>
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch, getCurrentInstance } from "vue";
+import { useThemeStore } from "@/stores/theme"
+import { ref, watch } from "vue";
 import type { ProfileData, NewProfileData } from "../../../../types.vue";
 
 const props = defineProps<{
@@ -54,6 +55,7 @@ const handleSaveButton = async () => {
   props.fetchData();
 };
 
+const { themeClasses } = useThemeStore();
 
 </script>
 
@@ -61,26 +63,28 @@ const handleSaveButton = async () => {
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent width="1024">
       <template v-slot:activator="{ props }">
-        <button class="bg-color-main-bocchi button" v-bind="props">Edit Profil</button>
+        <button :class="themeClasses.bgMain" class="button" v-bind="props">Edit Profil</button>
       </template>
-      <v-card class="bg-color-secondary-bocchi">
+      <v-card :class="themeClasses.bgSecondary" class="rounded-lg">
         <v-card-text>
           <h3 class="text-center">Edit Profil</h3>
-          <v-col>
-            <v-text-field label="Username*" v-model="newUsername" required></v-text-field>
-            <v-text-field type="date" label="Tanggal Lahir" v-model="newBirthDate" ></v-text-field>
-            <v-select :items="['Laki-laki', 'Perempuan']" label="Jenis Kelamin" v-model="newGender" ></v-select>
-            <v-text-field label="Email*" required v-model="newEmail" ></v-text-field>
-            <v-text-field label="No. HP" v-model="newPhoneNumber"></v-text-field>
-          </v-col>
+          <div class="bg-color-white p-4 rounded-lg flex flex-row align-center justify-between">
+            <v-col>
+              <v-text-field label="Username*" v-model="newUsername" required></v-text-field>
+              <v-text-field type="date" label="Tanggal Lahir" v-model="newBirthDate" ></v-text-field>
+              <v-select :items="['Laki-laki', 'Perempuan']" label="Jenis Kelamin" v-model="newGender" ></v-select>
+              <v-text-field label="Email*" required v-model="newEmail" ></v-text-field>
+              <v-text-field label="No. HP" v-model="newPhoneNumber"></v-text-field>
+            </v-col>
+          </div>
           <!-- <small>*indicates required field</small> -->
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <button class="bg-color-main-bocchi button mb-4" @click="dialog = false">
+          <button :class="themeClasses.bgMain" class="button mb-4" @click="dialog = false">
             Batal
           </button>
-          <button class="bg-color-main-bocchi button mx-4 mb-4" @click="{ dialog = false; handleSaveButton() }">
+          <button :class="themeClasses.bgMain" class="button mx-4 mb-4" @click="{ dialog = false; handleSaveButton() }">
             Simpan
           </button>
         </v-card-actions>

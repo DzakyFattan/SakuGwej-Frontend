@@ -1,8 +1,8 @@
 
 <script setup lang="ts">
 import type { ProfileData } from '@/types.vue';
-import EditPasswordForm from '../EditPasswordForm.vue';
-import ProfileMobileForm from './ProfileMobileForm.vue';
+import EditPasswordForm from '../EditPasswordDialog.vue';
+import ProfileMobileForm from './ProfileMobileDialog.vue';
 
 const props = defineProps<{
   profileData: ProfileData;
@@ -23,7 +23,7 @@ const props = defineProps<{
         <p>{{ props.profileData.email }}</p>
       </div>
       <ProfileMobileForm v-bind:profile-data="props.profileData" :fetch-data="props.fetchData" class="my-1"/>
-      <EditPasswordForm class="my-1"/>
+      <EditPasswordForm class="my-2"/>
     </div>
   </div>
 </template>

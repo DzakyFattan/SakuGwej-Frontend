@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { useThemeStore } from '@/stores/theme'
+
 const handleLogout = () => {
   localStorage.removeItem("token");
   window.location.href = "/login";
 };
+
+const { theme, themeClasses } = useThemeStore();
+
 </script>
 <template>
-  <div class="navigation-bar">
+  <div class="navigation-bar" :class="themeClasses.bgMain">
     <p class="font-bold text-center text-xl">SakuGwej</p>
     <div class="flex flex-col justify-between h-full">
       <div class="navigation-bar-items flex flex-col">

@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { useThemeStore } from "@/stores/theme"
 import { ref, computed, watch, getCurrentInstance } from "vue";
 import type { ProfileData } from "../../../types.vue";
+import EditPasswordForm from "./EditPasswordDialog.vue";
+
+const { theme, themeClasses } = useThemeStore();
 
 const props = defineProps<{
   profileData: ProfileData;
@@ -113,12 +117,13 @@ const handleSaveButton = async (field: String) => {
 
 <template>
   <div
-    class="flex flex-row rounded-3xl bg-color-secondary-bocchi my-2 p-4 h-fit mx-8"
+    class="flex flex-row rounded-3xl my-2 p-4 h-fit mx-8"
+    :class="themeClasses.bgSecondary"
   >
     <div class="flex flex-col mx-16 mb-2 items-center">
       <img src="/src/assets/icons/user.png" alt="user" class="w-24 m-4" />
-      <button class="bg-color-main-bocchi button mb-3">Ubah Foto Profil</button>
-      <button class="bg-color-main-bocchi button">Ubah Kata Sandi</button>
+      <button :class="themeClasses.bgMain" class="button mb-3">Ubah Foto Profil</button>
+      <EditPasswordForm class="my-2"/>
     </div>
     <div class="my-3 flex flex-col">
       <div>
@@ -131,14 +136,16 @@ const handleSaveButton = async (field: String) => {
             </p>
             <input type="text" v-model="newUsername" v-else />
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               v-if="!isEditing && !isEditingName"
               @click="handleEditButton('name')"
             >
               Ubah
             </button>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               @click="handleSaveButton('name')"
               v-if="isEditingName"
             >
@@ -152,14 +159,16 @@ const handleSaveButton = async (field: String) => {
             </p>
             <input type="date" v-model="newBirthDate" v-else />
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               v-if="!isEditing && !isEditingBirthdate"
               @click="handleEditButton('birthdate')"
             >
               Ubah
             </button>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               @click="handleSaveButton('birthdate')"
               v-if="isEditingBirthdate"
             >
@@ -176,14 +185,16 @@ const handleSaveButton = async (field: String) => {
               <option value="Perempuan">Perempuan</option>
             </select>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               v-if="!isEditing && !isEditingGender"
               @click="handleEditButton('gender')"
             >
               Ubah
             </button>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               @click="handleSaveButton('gender')"
               v-if="isEditingGender"
             >
@@ -202,14 +213,15 @@ const handleSaveButton = async (field: String) => {
             </p>
             <input type="email" v-model="newEmail" v-else />
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               v-if="!isEditing && !isEditingEmail"
               @click="handleEditButton('email')"
             >
               Ubah
             </button>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2 text-color-dark-bocchi"
               @click="handleSaveButton('email')"
               v-if="isEditingEmail"
             >
@@ -223,14 +235,16 @@ const handleSaveButton = async (field: String) => {
             </p>
             <input type="text" v-model="newPhoneNumber" v-else />
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               v-if="!isEditing && !isEditingPhone"
               @click="handleEditButton('phone')"
             >
               Ubah
             </button>
             <button
-              class="ml-2 text-color-kita-main"
+              class="ml-2"
+              :class="themeClasses.textDark"
               @click="handleSaveButton('phone')"
               v-if="isEditingPhone"
             >
