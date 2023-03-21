@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar fixed class="bg-color-main-bocchi" dark>
+  <v-toolbar :class="themeStore.themeClasses.bgMain" fixed dark>
     <v-toolbar-title>
       <h3>
         <slot>Tidak ada slot yang di definisikan </slot>
@@ -21,8 +21,10 @@
   </div>
 </template>
 <script lang="ts">
+import { useThemeStore } from "@/stores/theme";
 import { defineComponent } from "vue";
 import MobileNavigationBar from "../navigation/MobileNavigationBar.vue";
+import { mapStores } from "pinia";
 
 export default defineComponent({
   components: { MobileNavigationBar },
@@ -37,6 +39,9 @@ export default defineComponent({
       this.drawer = !this.drawer;
       this.$emit("clicked-menu", this.drawer);
     },
+  },
+  computed: {
+    ...mapStores(useThemeStore)
   },
 });
 </script>

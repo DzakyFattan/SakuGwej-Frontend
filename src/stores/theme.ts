@@ -10,7 +10,7 @@ type ThemeClasses = {
   textDark: string;
 }
 
-export const useThemeStore = defineStore("counter", () => {
+export const useThemeStore = defineStore("theme", () => {
   const theme = ref(localStorage.getItem("theme") || "bocchi");
 
   const themeClasses = computed<ThemeClasses>(() => {

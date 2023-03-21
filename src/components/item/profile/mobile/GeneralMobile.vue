@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+import { useThemeStore } from '@/stores/theme';
 import type { ProfileData } from '@/types.vue';
 import EditPasswordForm from '../EditPasswordDialog.vue';
 import ProfileMobileForm from './ProfileMobileDialog.vue';
@@ -9,12 +10,14 @@ const props = defineProps<{
   fetchData: () => void;
 }>();
 
+const { themeClasses } = useThemeStore();
 
 </script>
 
 <template>
   <div
-    class="flex flex-col rounded-3xl bg-color-secondary-bocchi my-2 py-4 px-8 h-fit mx-8"
+    :class="themeClasses.bgSecondary"
+    class="flex flex-col rounded-3xl my-2 py-4 px-8 h-fit mx-8"
   >
     <div class="flex flex-col mx-16 items-center">
       <img src="/src/assets/icons/user.png" alt="user" class="w-24 m-4" />

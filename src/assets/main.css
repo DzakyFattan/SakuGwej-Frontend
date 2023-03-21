@@ -10,7 +10,7 @@
   --ryo: #85a5dd;
   --bocchi: #f7abb2;
   --nijika: #ffb400;
-  --kita: #f86255;
+  --kita: #f05e48;
   --bocchi-light: #fedfe6;
   --ryo-light: #a2bedd;
   --kita-light: #ff949d;
@@ -244,7 +244,7 @@ body {
   flex-direction: column;
   padding: 0 2rem;
   height: 100vh;
-  width: 200px;
+  min-width: 200px;
   padding-top: 24px;
 }
 
