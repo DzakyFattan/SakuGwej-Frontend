@@ -134,8 +134,36 @@
 }
 
 /* Border Class */
-.border-secondary-bocchi {
-  border: solid 1px var(--bocchi-light);
+.border-color-main-bocchi {
+  border: solid 1px var(--bocchi);
+}
+
+.border-color-main-ryo {
+  border: solid 1px var(--ryo);
+}
+
+.border-color-main-nijika {
+  border: solid 1px var(--nijika);
+}
+
+.border-color-main-kita {
+  border: solid 1px var(--kita);
+}
+
+.border-color-dark-bocchi {
+  border: solid 1px var(--bocchi);
+}
+
+.border-color-dark-ryo {
+  border: solid 1px var(--ryo-dark);
+}
+
+.border-color-dark-nijika {
+  border: solid 1px var(--nijika-dark);
+}
+
+.border-color-dark-kita {
+  border: solid 1px var(--kita-dark);
 }
 
 .green {
@@ -304,4 +332,8 @@ body {
   padding: 0.5rem;
   border-radius: 0.375rem;
   color: black;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }

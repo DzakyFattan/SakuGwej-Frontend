@@ -115,7 +115,7 @@
 </script>
 
 <template>
-    <div class="flex flex-wrap mt-28 mx-3 px-6">
+    <div class="flex flex-wrap mt-4 mx-3 px-6">
         <AccountCard v-for="account in accounts" v-bind:account="account"/>
         <AddAccountCard />
     </div>

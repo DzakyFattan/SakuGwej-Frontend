@@ -1,5 +1,6 @@
 <script setup lang="ts">
-    import Chart, { type ChartConfiguration } from "chart.js/auto"
+    import { useThemeStore } from "@/stores/theme";
+import Chart, { type ChartConfiguration } from "chart.js/auto"
     import { onMounted } from "vue";
 
     const prop      = defineProps(["chart"])
@@ -48,12 +49,15 @@
             chartElmt.render()
         }
     }
+
+    const { themeClasses } = useThemeStore();
 </script>
 
 <template>
     <div id="canvas-container">
         <canvas 
-        class="rounded-md mx-4 my-5 px-2 border-secondary-bocchi" 
+        :class="themeClasses.borderMain"
+        class="rounded-md mx-4 my-5 px-2" 
         :id="chart.id"
         :width="getWidth()"
         :height="getHeight()"
