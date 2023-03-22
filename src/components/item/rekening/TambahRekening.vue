@@ -52,11 +52,15 @@
     </v-textarea>
   </v-container>
   <v-container>
-    <v-row class="justify-center mt-2"
-      ><a href="/rekening"
-        ><v-btn class="bg-color-main-bocchi text-xs">Buat</v-btn></a
-      ></v-row
-    >
+    <v-row class="justify-center mt-2">
+      <v-spacer></v-spacer
+      ><v-btn @click="cancelClick" class="bg-color-main-bocchi text-xs mr-2"
+        >Kembali</v-btn
+      >
+      <v-btn @click="tambahkanRekening" class="bg-color-main-bocchi text-xs"
+        >Tambahkan</v-btn
+      ><v-spacer></v-spacer
+    ></v-row>
   </v-container>
 </template>
 <script lang="ts">
@@ -73,6 +77,17 @@ export default defineComponent({
   methods: {
     onChooseImage() {
       console.log("onChooseImage");
+    },
+    cancelClick() {
+      this.$emit("cancel", false);
+    },
+    tambahkanRekening() {
+      this.$emit("tambahkan-rekening", {
+        namaRekening: this.namaRekening,
+        nominalAwal: this.nominalAwal,
+        gambar: this.gambar,
+        deskripsi: this.deskripsi,
+      });
     },
   },
 });

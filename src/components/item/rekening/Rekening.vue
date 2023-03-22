@@ -9,12 +9,9 @@
       >
         <template v-slot:prepend
           ><div class="bg-color-secondary-bocchi rounded-md h-8">
-            <a href="/rekening/tambah-rekening"
-              ><v-btn icon variant="flat" size="x-small"
-                ><img
-                  src="/src/assets/icons/add_ring_fill.png"
-                  alt="sort_list" /></v-btn
-            ></a>
+            <v-btn icon variant="flat" size="x-small" @click="onButtonClicked"
+              ><img src="/src/assets/icons/add_ring_fill.png" alt="sort_list"
+            /></v-btn>
           </div>
         </template>
         <template v-slot:append>
@@ -84,6 +81,9 @@ export default defineComponent({
   methods: {
     onSortClick() {
       console.log("sort");
+    },
+    onButtonClicked() {
+      this.$emit("trigger-tambahkan", true);
     },
   },
 });
