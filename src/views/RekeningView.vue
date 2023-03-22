@@ -6,6 +6,8 @@ import RekeningDesktop from "@/components/desktop/RekeningDesktop.vue";
 import TambahRekening from "@/components/item/rekening/TambahRekening.vue";
 
 import { defineComponent } from "vue";
+import { useThemeStore } from "@/stores/theme";
+const { theme, themeClasses } = useThemeStore();
 export default defineComponent({
   components: {
     HeaderMobile,
@@ -21,6 +23,7 @@ export default defineComponent({
     return {
       windowWidth: window.innerWidth,
       dialog: false,
+      themeClass: themeClasses,
     };
   },
   methods: {
@@ -47,8 +50,8 @@ export default defineComponent({
 
 <template>
   <main>
-    <v-dialog v-model="dialog" persistent width="480">
-      <v-card>
+    <v-dialog v-model="dialog" persistent width="512">
+      <v-card :class="themeClass.bgSecondary" class="rounded-lg">
         <div class="mb-4">
           <TambahRekening
             @cancel="cancelTambahkan"

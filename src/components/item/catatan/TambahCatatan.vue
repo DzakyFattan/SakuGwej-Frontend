@@ -1,6 +1,6 @@
 <template>
-  <v-dialog v-model="dialog" persistent width="480">
-    <v-card>
+  <v-dialog v-model="dialog" persistent width="512">
+    <v-card :class="themeClass.bgSecondary" class="rounded-lg">
       <div class="mb-4" v-if="isTambahPemasukan">
         <TambahPemasukan
           @cancel="cancelTambahkan"
@@ -22,7 +22,9 @@
 <script lang="ts">
 import TambahPemasukan from "@/components/item/catatan/TambahPemasukan.vue";
 import TambahPengeluaran from "@/components/item/catatan/TambahPengeluaran.vue";
+import { useThemeStore } from "@/stores/theme";
 import { defineComponent } from "vue";
+const { theme, themeClasses } = useThemeStore();
 
 export default defineComponent({
   components: {
@@ -33,6 +35,7 @@ export default defineComponent({
     return {
       isTambahPemasukan: true,
       dialog: false,
+      themeClass: themeClasses,
     };
   },
 
