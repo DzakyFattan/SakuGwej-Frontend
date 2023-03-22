@@ -21,12 +21,12 @@
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" alt="rp" />
       </template>
     </v-text-field>
-    <v-text-field
-      v-model="jenisPengeluaran"
-      class="text-color-main-bocchi mx-24"
+    <v-select
       variant="outlined"
+      class="text-color-main-bocchi mx-24"
+      :items="['Makanan', 'Barang']"
       label="Jenis Pengeluaran"
-      readonly
+      v-model="jenisPengeluaran"
     >
       <template v-slot:prepend-inner>
         <img
@@ -35,20 +35,13 @@
           alt="setting"
         />
       </template>
-      <template v-slot:append-inner>
-        <img
-          @click="chooseOptionPengeluaran"
-          class="mr-6"
-          src="/src/assets/icons/sort.png"
-          alt="sort"
-        /> </template
-    ></v-text-field>
-    <v-text-field
-      v-model="sumberDana"
-      class="text-color-main-bocchi mx-24"
+    </v-select>
+    <v-select
       variant="outlined"
+      class="text-color-main-bocchi mx-24"
+      :items="listRekening"
       label="Sumber Dana"
-      readonly
+      v-model="sumberDana"
     >
       <template v-slot:prepend-inner>
         <img
@@ -57,15 +50,7 @@
           alt="wallet"
         />
       </template>
-      <template v-slot:append-inner>
-        <img
-          @click="chooseOptionRekening"
-          class="mr-6"
-          src="/src/assets/icons/sort.png"
-          alt="sort"
-        />
-      </template>
-    </v-text-field>
+    </v-select>
   </v-container>
   <v-container>
     <v-row class="justify-center mt-2">
@@ -88,6 +73,7 @@ export default defineComponent({
       jumlahPengeluaran: "",
       jenisPengeluaran: "",
       sumberDana: "",
+      listRekening: ["BCA", "BNI", "BRI", "Mandiri"],
     };
   },
   methods: {

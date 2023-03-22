@@ -15,30 +15,23 @@
       class="text-color-main-bocchi mx-24"
       variant="outlined"
       label="Nominal Awal"
+      type="number"
     >
       <template v-slot:prepend-inner>
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" />
       </template>
     </v-text-field>
-
-    <v-text-field
+    <v-file-input
       v-model="gambar"
-      class="text-color-main-bocchi mx-24"
+      accept="image/*"
+      class="text-color-main-bocchi ml-14 mr-24"
       variant="outlined"
       label="Gambar"
-      readonly
     >
       <template v-slot:prepend-inner>
         <img class="mr-6" src="/src/assets/icons/image.png" />
       </template>
-      <template v-slot:append-inner>
-        <img
-          @click="onChooseImage"
-          class="mr-6"
-          src="/src/assets/icons/rectangle.png"
-        />
-      </template>
-    </v-text-field>
+    </v-file-input>
     <v-textarea
       v-model="deskripsi"
       label="Deskripsi"
@@ -70,15 +63,13 @@ export default defineComponent({
     return {
       namaRekening: "",
       nominalAwal: "",
-      gambar: "",
+      gambar: undefined,
       deskripsi: "",
     };
   },
   methods: {
-    onChooseImage() {
-      console.log("onChooseImage");
-    },
     cancelClick() {
+      console.log(this.gambar);
       this.$emit("cancel", false);
     },
     tambahkanRekening() {

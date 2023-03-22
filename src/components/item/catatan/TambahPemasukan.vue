@@ -21,12 +21,12 @@
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" alt="rp" />
       </template>
     </v-text-field>
-    <v-text-field
-      v-model="jenisPemasukan"
-      class="text-color-main-bocchi mx-24"
+    <v-select
       variant="outlined"
+      class="text-color-main-bocchi mx-24"
+      :items="['Makanan', 'Barang']"
       label="Jenis Pemasukan"
-      readonly
+      v-model="jenisPemasukan"
     >
       <template v-slot:prepend-inner>
         <img
@@ -35,20 +35,13 @@
           alt="setting"
         />
       </template>
-      <template v-slot:append-inner>
-        <img
-          @click="chooseOptionPemasukan"
-          class="mr-6"
-          src="/src/assets/icons/sort.png"
-          alt="sort"
-        /> </template
-    ></v-text-field>
-    <v-text-field
-      v-model="rekening"
-      class="text-color-main-bocchi mx-24"
+    </v-select>
+    <v-select
       variant="outlined"
+      class="text-color-main-bocchi mx-24"
+      :items="listRekening"
       label="Rekening"
-      readonly
+      v-model="rekening"
     >
       <template v-slot:prepend-inner>
         <img
@@ -57,15 +50,7 @@
           alt="wallet"
         />
       </template>
-      <template v-slot:append-inner>
-        <img
-          @click="chooseOptionRekening"
-          class="mr-6"
-          src="/src/assets/icons/sort.png"
-          alt="sort"
-        />
-      </template>
-    </v-text-field>
+    </v-select>
   </v-container>
   <v-container>
     <v-row class="justify-center mt-2">
@@ -87,6 +72,7 @@ export default defineComponent({
       jumlahPemasukan: "",
       jenisPemasukan: "",
       rekening: "",
+      listRekening: ["BCA", "BNI", "BRI", "Mandiri"],
     };
   },
   methods: {
@@ -99,12 +85,6 @@ export default defineComponent({
     },
     pilihPengeluaran() {
       this.$emit("pilihan-tambah", false);
-    },
-    chooseOptionPemasukan() {
-      console.log("choose option Pemasukan");
-    },
-    chooseOptionRekening() {
-      console.log("choose option Rekening");
     },
     cancelClick() {
       this.$emit("cancel", false);

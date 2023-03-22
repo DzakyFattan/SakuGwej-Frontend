@@ -16,6 +16,7 @@
       class="text-color-main-bocchi mx-24"
       variant="outlined"
       v-model="jumlahPiutang"
+      type="number"
     >
       <template v-slot:prepend-inner>
         <img class="mr-6 mt-1" src="/src/assets/icons/rp.png" alt="book" />
@@ -51,21 +52,18 @@
       </template>
     </v-textarea>
     <v-text-field
-      class="text-color-main-bocchi mx-24"
       variant="outlined"
+      class="text-color-main-bocchi mx-24"
+      type="date"
       label="Tanggal Jatuh Tempo"
-      readonly
       v-model="calendar"
-    >
-      <template v-slot:prepend-inner>
+      ><template v-slot:prepend-inner>
         <img
-          @click="onCalendarClick"
           class="mr-6"
           src="/src/assets/icons/date_range_fill.png"
-          alt="book"
-        />
-      </template>
-    </v-text-field>
+          alt="date"
+        /> </template
+    ></v-text-field>
   </v-container>
   <v-container>
     <v-row class="justify-center mt-2">
