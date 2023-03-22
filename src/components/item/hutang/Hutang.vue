@@ -45,8 +45,8 @@
   </div>
   <v-container>
     <v-row class="justify-center mt-2 mb-4"
-      ><a href="/hutang/tambah-hutang"
-        ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
+      ><v-btn @click="onButtonClicked" class="bg-color-main-bocchi text-xs"
+        >Tambahkan</v-btn
       ></v-row
     >
   </v-container>
@@ -105,6 +105,9 @@ export default defineComponent({
     };
   },
   methods: {
+    onButtonClicked() {
+      this.$emit("trigger-tambahkan", true);
+    },
     onRightArrowClick() {
       console.log("right arrow clicked");
     },

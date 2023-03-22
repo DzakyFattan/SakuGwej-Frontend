@@ -68,11 +68,15 @@
     </v-text-field>
   </v-container>
   <v-container>
-    <v-row class="justify-center mt-2"
-      ><a href="/hutang"
-        ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
-      ></v-row
-    >
+    <v-row class="justify-center mt-2">
+      <v-spacer></v-spacer
+      ><v-btn @click="cancelClick" class="bg-color-main-bocchi text-xs mr-2"
+        >Kembali</v-btn
+      >
+      <v-btn @click="tambahkanHutang" class="bg-color-main-bocchi text-xs"
+        >Tambahkan</v-btn
+      ><v-spacer></v-spacer
+    ></v-row>
   </v-container>
 </template>
 <script lang="ts">
@@ -92,6 +96,12 @@ export default defineComponent({
     },
     onCalendarClick() {
       console.log("calendar clicked");
+    },
+    cancelClick() {
+      this.$emit("cancel", false);
+    },
+    tambahkanHutang() {
+      this.$emit("tambahkan-hutang", true);
     },
   },
 });

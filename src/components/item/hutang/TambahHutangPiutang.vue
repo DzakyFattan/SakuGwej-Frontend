@@ -1,18 +1,18 @@
 <template>
   <v-dialog v-model="dialog" persistent width="480">
     <v-card>
-      <div class="mb-4" v-if="isTambahPemasukan">
-        <TambahPemasukan
+      <div class="mb-4" v-if="isTambahHutang">
+        <TambahHutang
           @cancel="cancelTambahkan"
           @pilihan-tambah="changePage"
-          @tambahkan-pemasukan="tambahkanPemasukan"
+          @tambahkan-hutang="tambahkanHutang"
         />
       </div>
       <div class="mb-4" v-else>
-        <TambahPengeluaran
+        <TambahPiutang
           @cancel="cancelTambahkan"
           @pilihan-tambah="changePage"
-          @tambahkan-pengeluaran="tambahkanPengeluaran"
+          @tambahkan-piutang="tambahkanPiutang"
         />
       </div>
     </v-card>
@@ -20,31 +20,30 @@
 </template>
 
 <script lang="ts">
-import TambahPemasukan from "@/components/item/catatan/TambahPemasukan.vue";
-import TambahPengeluaran from "@/components/item/catatan/TambahPengeluaran.vue";
+import TambahHutang from "@/components/item/hutang/TambahHutang.vue";
+import TambahPiutang from "@/components/item/hutang/TambahPiutang.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
-    TambahPemasukan,
-    TambahPengeluaran,
+    TambahHutang,
+    TambahPiutang,
   },
   data() {
     return {
-      isTambahPemasukan: true,
+      isTambahHutang: true,
       dialog: false,
     };
   },
-
   methods: {
-    changePage(isTambahPemasukan: boolean) {
-      this.isTambahPemasukan = isTambahPemasukan;
+    changePage(isTambahHutang: boolean) {
+      this.isTambahHutang = isTambahHutang;
     },
-    tambahkanPemasukan(pemasukan: object) {
+    tambahkanHutang(hutang: object) {
       // kirim ke database
       this.dialog = false;
     },
-    tambahkanPengeluaran(pengeluaran: object) {
+    tambahkanPiutang(piutang: object) {
       // kirim ke database
       this.dialog = false;
     },

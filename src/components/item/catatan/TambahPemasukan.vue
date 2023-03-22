@@ -73,7 +73,6 @@
       ><v-btn @click="cancelClick" class="bg-color-main-bocchi text-xs mr-2"
         >Kembali</v-btn
       >
-
       <v-btn @click="tambahkanPemasukan" class="bg-color-main-bocchi text-xs"
         >Tambahkan</v-btn
       ><v-spacer></v-spacer

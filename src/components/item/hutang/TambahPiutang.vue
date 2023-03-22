@@ -69,10 +69,15 @@
   </v-container>
   <v-container>
     <v-row class="justify-center mt-2">
-      <a href="/hutang"
-        ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
-      ></v-row
-    >
+      <v-spacer></v-spacer
+      ><v-btn @click="cancelClick" class="bg-color-main-bocchi text-xs mr-2"
+        >Kembali</v-btn
+      >
+
+      <v-btn @click="tambahkanPiutang" class="bg-color-main-bocchi text-xs"
+        >Tambahkan</v-btn
+      ><v-spacer></v-spacer
+    ></v-row>
   </v-container>
 </template>
 <script lang="ts">
@@ -87,17 +92,24 @@ export default defineComponent({
     };
   },
   methods: {
+    tambahkanPiutang() {
+      this.$emit("tambahkan-piutang", {
+        jumlahPiutang: this.jumlahPiutang,
+        namaPelanggan: this.namaPelanggan,
+        deskripsi: this.deskripsi,
+        calendar: this.calendar,
+      });
+    },
     pilihHutang() {
       this.$emit("pilihan-tambah", true);
     },
     onCalendarClick() {
       console.log("calendar clicked");
     },
+    cancelClick() {
+      this.$emit("cancel", false);
+    },
   },
 });
 </script>
-<style scoped>
-.color-icon .v-icon {
-  color: black;
-}
-</style>
+<style scoped></style>
