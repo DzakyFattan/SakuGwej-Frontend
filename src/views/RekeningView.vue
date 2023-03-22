@@ -1,19 +1,32 @@
-<script setup lang="ts">
+<script lang="ts">
 import HeaderMobile from "@/components/item/header/HeaderMobile.vue";
 import NavigationBar from "@/components/item/navigation/NavigationBar.vue";
 import Rekening from "@/components/item/rekening/Rekening.vue";
 import RekeningDesktop from "@/components/desktop/RekeningDesktop.vue";
-import { onMounted, ref, nextTick } from "vue";
 
-const windowWidth = ref(window.innerWidth);
-
-
-onMounted(() => {
-  nextTick(() => {
-    window.addEventListener("resize", () => {
-      windowWidth.value = window.innerWidth;
+import { defineComponent } from "vue";
+export default defineComponent({
+  components: {
+    HeaderMobile,
+    NavigationBar,
+    Rekening,
+    RekeningDesktop,
+  },
+  props: {
+    isTambahCatatan: Boolean,
+  },
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", () => {
+        this.windowWidth = window.innerWidth;
+      });
     });
-  });
+  },
 });
 </script>
 
@@ -21,7 +34,7 @@ onMounted(() => {
   <main>
     <div v-if="windowWidth < 1024">
       <HeaderMobile> Rekening </HeaderMobile>
-      <Rekening v-if="!isHidden"/>
+      <Rekening />
     </div>
     <div v-else class="app-container">
       <NavigationBar />

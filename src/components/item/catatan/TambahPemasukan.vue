@@ -68,11 +68,16 @@
     </v-text-field>
   </v-container>
   <v-container>
-    <v-row class="justify-center mt-2"
-      ><a href="/catatan"
-        ><v-btn class="bg-color-main-bocchi text-xs">Tambahkan</v-btn></a
-      ></v-row
-    >
+    <v-row class="justify-center mt-2">
+      <v-spacer></v-spacer
+      ><v-btn @click="cancelClick" class="bg-color-main-bocchi text-xs mr-2"
+        >Kembali</v-btn
+      >
+
+      <v-btn @click="tambahkanPemasukan" class="bg-color-main-bocchi text-xs"
+        >Tambahkan</v-btn
+      ><v-spacer></v-spacer
+    ></v-row>
   </v-container>
 </template>
 <script lang="ts">
@@ -86,6 +91,13 @@ export default defineComponent({
     };
   },
   methods: {
+    tambahkanPemasukan() {
+      this.$emit("tambahkan-pemasukan", {
+        jumlahPemasukan: this.jumlahPemasukan,
+        jenisPemasukan: this.jenisPemasukan,
+        rekening: this.rekening,
+      });
+    },
     pilihPengeluaran() {
       this.$emit("pilihan-tambah", false);
     },
@@ -94,6 +106,9 @@ export default defineComponent({
     },
     chooseOptionRekening() {
       console.log("choose option Rekening");
+    },
+    cancelClick() {
+      this.$emit("cancel", false);
     },
   },
 });

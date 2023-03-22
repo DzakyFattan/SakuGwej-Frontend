@@ -10,12 +10,14 @@ const props = defineProps<{
   profileData: ProfileData;
   fetchData: () => void;
 }>();
-
 </script>
 
 <template>
   <div class="h-[98vh] flex flex-col grow my-2 overflow-y-auto">
-    <GeneralDesktop v-bind:profile-data="props.profileData" :fetch-data="props.fetchData" />
+    <GeneralDesktop
+      v-bind:profile-data="props.profileData"
+      :fetch-data="props.fetchData"
+    />
     <ExportImport />
     <Notification />
     <Theme />

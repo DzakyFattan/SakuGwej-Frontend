@@ -27,7 +27,6 @@ const profileData = ref<ProfileData>({
   phoneNumber: "",
 });
 
-
 const fetchData = async () => {
   console.log(localStorage.getItem("token"));
   const res = await fetch(`${api}/user/profile`, {
@@ -40,8 +39,6 @@ const fetchData = async () => {
 };
 
 fetchData();
-
-
 </script>
 
 <template>
@@ -52,8 +49,10 @@ fetchData();
     </div>
     <div v-else class="app-container">
       <NavigationBar />
-      <ProfileDesktop v-bind:profile-data="profileData" :fetchData="fetchData" />
+      <ProfileDesktop
+        v-bind:profile-data="profileData"
+        :fetchData="fetchData"
+      />
     </div>
   </main>
 </template>
-

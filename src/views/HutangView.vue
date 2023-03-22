@@ -1,20 +1,29 @@
-<script setup lang="ts">
+<script lang="ts">
 import HeaderMobile from "../components/item/header/HeaderMobile.vue";
 import NavigationBar from "../components/item/navigation/NavigationBar.vue";
 import Hutang from "../components/item/hutang/Hutang.vue";
 import HutangDesktop from "../components/desktop/HutangDesktop.vue";
 
-import { onMounted, ref, nextTick } from "vue";
-
-const windowWidth = ref(window.innerWidth);
-
-
-onMounted(() => {
-  nextTick(() => {
-    window.addEventListener("resize", () => {
-      windowWidth.value = window.innerWidth;
+import { defineComponent } from "vue";
+export default defineComponent({
+  components: {
+    HeaderMobile,
+    NavigationBar,
+    Hutang,
+    HutangDesktop,
+  },
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", () => {
+        this.windowWidth = window.innerWidth;
+      });
     });
-  });
+  },
 });
 </script>
 
@@ -25,9 +34,8 @@ onMounted(() => {
       <Hutang />
     </div>
     <div v-else class="app-container">
-      <NavigationBar/>
-      <HutangDesktop/>
+      <NavigationBar />
+      <HutangDesktop />
     </div>
   </main>
 </template>
-

@@ -53,12 +53,6 @@ const router = createRouter({
       beforeEnter: guard,
     },
     {
-      path: "/rekening/tambah-rekening",
-      name: "tambah-rekening",
-      component: () => import("../views/rekening/TambahRekeningView.vue"),
-      beforeEnter: guard,
-    },
-    {
       path: "/rekening/:id/detail-rekening",
       name: "detail-rekening",
       component: () => import("../views/rekening/DetailRekeningView.vue"),
@@ -80,18 +74,6 @@ const router = createRouter({
       path: "/hutang",
       name: "hutang",
       component: () => import("../views/HutangView.vue"),
-      beforeEnter: guard,
-    },
-    {
-      path: "/catatan/tambah-catatan",
-      name: "tambah-catatan",
-      component: () => import("../views/catatan/TambahCatatanView.vue"),
-      beforeEnter: guard,
-    },
-    {
-      path: "/hutang/tambah-hutang",
-      name: "tambah-hutang",
-      component: () => import("../views/hutang/TambahHutangView.vue"),
       beforeEnter: guard,
     },
   ],

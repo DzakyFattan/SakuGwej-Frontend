@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import AccountBarContainer from "../item/rekening/container/AccountBarContainer.vue"
+import AccountBarContainer from "../item/rekening/container/AccountBarContainer.vue";
 </script>
 
 <template>
   <div class="w-full h-screen flex flex-col">
-    <h3 class="ml-24 mt-6 text-xl font-bold">
-      Rekening
-    </h3>
+    <h3 class="ml-24 mt-6 text-xl font-bold">Rekening</h3>
     <AccountBarContainer />
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
