@@ -13,7 +13,7 @@ const data = [
         nominal: 10000,
       },
       {
-        category: "Makanan",
+        category: "Makanan Ringan",
         description: "Cash",
         nominal: 10000,
       },

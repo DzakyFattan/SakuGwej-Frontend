@@ -13,7 +13,9 @@ import { parseNominal } from '@/utils/parse';
 <template>
     <div :class="themeClasses.borderMain" class="flex flex-row rounded-md w-fit h-20 items-center self-center mx-1 my-2 px-4" >
         <input type="checkbox" class="select mr-4 w-6 h-6">
-        <img src="/src/assets/icons/makanan.png" class="w-12 h-12 mr-6"> 
+        <img v-if="item.category === 'Makanan'" src="/src/assets/icons/food.png" class="w-12 h-12 mr-6"> 
+        <img v-if="item.category === 'Minuman'" src="/src/assets/icons/drink.png" class="w-12 h-12 mr-6"> 
+        <img v-if="item.category === 'Makanan Ringan'" src="/src/assets/icons/snack.png" class="w-12 h-12 mr-6"> 
         <p class="w-20">{{ item.category }}</p>
         <p class="w-20 ml-[14vh] mr-[15vh]">{{ item.description }}</p>
         <p class="w-20">{{ nominal }}</p> 
