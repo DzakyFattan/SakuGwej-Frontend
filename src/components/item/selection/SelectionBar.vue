@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useThemeStore } from "@/stores/theme";
 const emit = defineEmits(["trigger-tambahkan"]);
 
 const selected = "30 Hari Teakhir";
@@ -17,6 +18,8 @@ const onAddClicked = () => {
   emit("trigger-tambahkan", true);
 };
 
+const { themeClasses } = useThemeStore();
+
 let checkbox = false;
 </script>
 
@@ -24,11 +27,11 @@ let checkbox = false;
   <v-container class="h-fit w-[74vh]">
     <v-row class="justify-center items-center">
       <v-btn icon variant="flat" size="x-small" @click="onAddClicked">
-        <img src="/src/assets/icons/add-ring.png" alt="add" />
+        <img :class="themeClasses.icon" src="/src/assets/icons/add-ring.png" alt="add" />
       </v-btn>
 
       <v-btn icon variant="flat" size="x-small" class="arrow ml-[10vh]">
-        <img src="/src/assets/icons/arrow-left.png" />
+        <img :class="themeClasses.icon" src="/src/assets/icons/arrow-left.png" />
       </v-btn>
       <v-select
         :items="intervals"
@@ -41,10 +44,10 @@ let checkbox = false;
       >
       </v-select>
       <v-btn icon variant="flat" size="x-small" class="arrow mr-[10vh]">
-        <img src="/src/assets/icons/arrow-right.png" />
+        <img :class="themeClasses.icon" src="/src/assets/icons/arrow-right.png" />
       </v-btn>
       <v-btn id="sort-menu" icon variant="flat" size="x-small">
-        <img src="/src/assets/icons/sort-gotoh.png" alt="sort" />
+        <img :class="themeClasses.icon" src="/src/assets/icons/sort-gotoh.png" alt="sort" />
       </v-btn>
       <v-menu activator="#sort-menu">
         <v-list>

@@ -34,7 +34,7 @@ export default defineComponent({
       <Home />
     </div>
     <div v-else class="app-container">
-      <NavigationBar />
+      <NavigationBar currentPage="home" />
       <HomeDesktop />
     </div>
   </main>

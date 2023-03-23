@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { useThemeStore } from '@/stores/theme'
 
+type Page = "home" | "rekening" | "catatan" | "hutang" | "profile";
+
+const props = defineProps<{
+  currentPage: Page;
+}>();
+
 const handleLogout = () => {
   localStorage.removeItem("token");
   window.location.href = "/login";
 };
 
-const { theme, themeClasses } = useThemeStore();
+const { themeClasses } = useThemeStore();
 
 </script>
 <template>
@@ -14,13 +20,13 @@ const { theme, themeClasses } = useThemeStore();
     <p class="font-bold text-center text-xl">SakuGwej</p>
     <div class="flex flex-col justify-between h-full">
       <div class="navigation-bar-items flex flex-col">
-        <a href="/home" class="navigation-bar-item">Home</a>
-        <a href="/rekening" class="navigation-bar-item">Rekening</a>
-        <a href="/catatan" class="navigation-bar-item">Catatan</a>
-        <a href="/hutang" class="navigation-bar-item">Hutang</a>
+        <a href="/home" :class="{ 'font-bold' : currentPage === 'home'}" class="navigation-bar-item">Home</a>
+        <a href="/rekening" :class="{ 'font-bold' : currentPage === 'rekening'}" class="navigation-bar-item">Rekening</a>
+        <a href="/catatan" :class="{ 'font-bold' : currentPage === 'catatan'}" class="navigation-bar-item">Catatan</a>
+        <a href="/hutang" :class="{ 'font-bold' : currentPage === 'hutang'}" class="navigation-bar-item">Hutang</a>
       </div>
       <div class="navigation-bar-items flex flex-col">
-        <a href="/profile" class="navigation-bar-item">Pengaturan</a>
+        <a href="/profile" :class="{ 'font-bold' : currentPage === 'profile'}" class="navigation-bar-item">Pengaturan</a>
         <button
           @click="handleLogout"
           class="navigation-bar-item text-left mb-8"

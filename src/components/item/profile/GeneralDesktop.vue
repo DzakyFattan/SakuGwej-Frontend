@@ -253,6 +253,7 @@ const handleSaveButton = async (field: String) => {
           </div>
         </div>
       </div>
+      <p v-if="props.profileData.username === ''" :class="themeClasses.textDark">Loading...</p>
     </div>
   </div>
 </template>

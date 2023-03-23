@@ -48,7 +48,7 @@ fetchData();
       <ProfileMobile v-bind:profile-data="profileData" :fetch-data="fetchData" />
     </div>
     <div v-else class="app-container">
-      <NavigationBar />
+      <NavigationBar currentPage="profile" />
       <ProfileDesktop
         v-bind:profile-data="profileData"
         :fetchData="fetchData"

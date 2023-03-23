@@ -42,7 +42,7 @@ export default defineComponent({
       <Hutang @trigger-tambahkan="activateDialog" />
     </div>
     <div v-else class="app-container">
-      <NavigationBar />
+      <NavigationBar currentPage="hutang" />
       <HutangDesktop @trigger-tambahkan="activateDialog" />
     </div>
   </main>

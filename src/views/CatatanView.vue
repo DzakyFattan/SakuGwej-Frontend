@@ -42,7 +42,7 @@ export default defineComponent({
       <Catatan @trigger-tambahkan="activateDialog" />
     </div>
     <div v-else class="app-container">
-      <NavigationBar />
+      <NavigationBar currentPage="catatan" />
       <CatatanDesktop @trigger-tambahkan="activateDialog" />
     </div>
   </main>

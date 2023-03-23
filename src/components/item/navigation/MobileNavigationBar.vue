@@ -5,7 +5,7 @@ const handleLogout = () => {
   localStorage.removeItem("token");
   window.location.href = "/login";
 };
-const { themeClasses } = useThemeStore();
+
 </script>
 <template>
   <div class="mobile-navigation-bar">

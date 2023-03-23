@@ -65,7 +65,7 @@ export default defineComponent({
       <Rekening @trigger-tambahkan="activateDialog" />
     </div>
     <div v-else class="app-container">
-      <NavigationBar />
+      <NavigationBar currentPage="rekening" />
       <RekeningDesktop @trigger-tambahkan="activateDialog" />
     </div>
   </main>

@@ -166,6 +166,22 @@
   border: solid 1px var(--kita-dark);
 }
 
+.icon-bocchi {
+  filter: hue-rotate(0deg);
+}
+
+.icon-ryo {
+  filter: hue-rotate(248deg) saturate(1.9) brightness(1.0);
+}
+
+.icon-nijika {
+  filter: hue-rotate(53deg) saturate(1.9) brightness(1.1);
+}
+
+.icon-kita {
+  filter: saturate(6) brightness(1.1) hue-rotate(30deg);
+}
+
 .green {
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
