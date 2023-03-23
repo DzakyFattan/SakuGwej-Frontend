@@ -40,6 +40,7 @@ let checkbox = false;
         hide-details
         variant="filled"
         bg-color="white"
+        :class="themeClasses.borderMain"
         class="interval w-[22vh] h-12 rounded-md"
       >
       </v-select>
@@ -57,7 +58,7 @@ let checkbox = false;
         </v-list>
       </v-menu>
       <div class="flex flex-row items-center w-[75vh] mt-4 mb-2 px-5">
-        <input type="checkbox" class="select-all mr-4 w-6 h-6" /><label
+        <input type="checkbox" :class="themeClasses.borderMain" class="select-all mr-4 w-6 h-6" /><label
           >Pilih Semua</label
         >
       </div>
@@ -68,13 +69,11 @@ let checkbox = false;
 <style scoped>
 .interval {
   height: fit-content;
-  border: 1px solid var(--bocchi);
 }
 .select-all {
   -moz-appearance: none;
   -webkit-appearance: none;
   -o-appearance: none;
-  border: 1px solid var(--bocchi);
   border-radius: 2px;
 }
 

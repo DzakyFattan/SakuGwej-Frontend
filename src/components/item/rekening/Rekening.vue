@@ -3,19 +3,20 @@
   <v-container>
     <v-row class="justify-center mt-2">
       <v-text-field
-        class="text-color-main-bocchi mx-28"
+        :class="themeStore.themeClasses.textMain"
+        class="mx-28"
         variant="outlined"
         label="Search"
       >
         <template v-slot:prepend
-          ><div class="bg-color-secondary-bocchi rounded-md h-8">
+          ><div :class="themeStore.themeClasses.borderMain" class="rounded-md h-8">
             <v-btn icon variant="flat" size="x-small" @click="onButtonClicked"
               ><img src="/src/assets/icons/add_ring_fill.png" alt="sort_list"
             /></v-btn>
           </div>
         </template>
         <template v-slot:append>
-          <div class="bg-color-secondary-bocchi rounded-md h-8">
+          <div :class="themeStore.themeClasses.borderMain" class="rounded-md h-8">
             <v-btn
               id="sort-menu"
               icon
@@ -55,6 +56,9 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useThemeStore } from "@/stores/theme";
+import { mapStores } from "pinia";
+
 export default defineComponent({
   data() {
     return {
@@ -85,6 +89,9 @@ export default defineComponent({
     onButtonClicked() {
       this.$emit("trigger-tambahkan", true);
     },
+  },
+  computed: {
+    ...mapStores(useThemeStore),
   },
 });
 </script>

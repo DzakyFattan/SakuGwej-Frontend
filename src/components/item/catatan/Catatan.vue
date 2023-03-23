@@ -5,7 +5,7 @@
       <v-btn icon variant="flat" @click="onLeftArrowClick"
         ><img :class="themeStore.themeClasses.icon" src="/src/assets/icons/arrow_left.png" alt="arrow_left"
       /></v-btn>
-      <div class="text-xs mt-2 bg-color-secondary-bocchi h-8 w-32 rounded-md">
+      <div :class="themeStore.themeClasses.bgMain" class="text-xs mt-2 h-8 w-32 rounded-md">
         <v-row class="justify-center align-center mt-[-0.5rem]">
           <p class="ml-2 my-4">{{ filter }}</p>
           <v-btn icon variant="flat" size="x-small" @click="onDropDownClick"
@@ -19,7 +19,7 @@
       <v-btn icon variant="flat" @click="onRightArrowClick"
         ><img :class="themeStore.themeClasses.icon" src="/src/assets/icons/arrow_right.png" alt="arrow_right"
       /></v-btn>
-      <div class="justify-end bg-color-secondary-bocchi rounded-md h-8 mt-2">
+      <div :class="themeStore.themeClasses.bgMain" class="justify-end rounded-md h-8 mt-2">
         <v-btn icon variant="flat" size="x-small" @click="onSortClick"
           ><img :class="themeStore.themeClasses.icon" src="/src/assets/icons/sort_list.png" alt="sort_list"
         /></v-btn>
@@ -44,7 +44,7 @@
   </div>
   <v-container>
     <v-row class="justify-center mt-2 mb-4"
-      ><v-btn @click="onButtonClicked" class="bg-color-main-bocchi text-xs"
+      ><v-btn @click="onButtonClicked" :class="themeStore.themeClasses.bgMain" class="text-xs"
         >Tambahkan</v-btn
       ></v-row
     >
