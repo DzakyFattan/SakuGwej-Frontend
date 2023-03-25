@@ -1,3 +1,71 @@
+<script setup lang="ts">
+import { useThemeStore } from "@/stores/theme";
+import { ref } from "vue";
+
+const { themeClasses } = useThemeStore();
+const themeClass = themeClasses;
+
+const jumlahPemasukan = ref("");
+const jenisPemasukan = ref("");
+const rekening = ref("");
+const listRekening = ["BCA", "BNI", "BRI", "Mandiri"];
+
+const emit = defineEmits(["close", "pilihan-tambah"]);
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const account = "641f1f5014244df4be5c5f12"
+
+const pilihPengeluaran = () => {
+  emit("pilihan-tambah", false);
+};
+
+const cancelClick = () => {
+  emit("close");
+};
+
+const tambahkanPemasukan = async () => {
+  try {
+    if (
+      jumlahPemasukan.value === "" ||
+      jenisPemasukan.value === "" 
+      // rekening.value === ""
+    ) throw new Error("Semua field harus diisi");
+    
+    let utc = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      timeZone: "Asia/Jakarta",
+    }).split("/");
+    let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
+
+    const response = await fetch(`${api}/transactions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        type: "credit",
+        amount: parseInt(jumlahPemasukan.value),
+        category: jenisPemasukan.value,
+        accountId: account,
+        createdAt: today,
+      }),
+    });
+    const data = await response.json();
+
+    if (response.status !== 201) 
+      throw new Error(data.message);
+
+    emit("close");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+</script>
+
 <template>
   <v-container>
     <v-row class="justify-center mt-4">
@@ -79,36 +147,5 @@
     >
   </v-container>
 </template>
-<script lang="ts">
-import { useThemeStore } from "@/stores/theme";
-import { defineComponent } from "vue";
-const { theme, themeClasses } = useThemeStore();
 
-export default defineComponent({
-  data() {
-    return {
-      jumlahPemasukan: "",
-      jenisPemasukan: "",
-      rekening: "",
-      listRekening: ["BCA", "BNI", "BRI", "Mandiri"],
-      themeClass: themeClasses,
-    };
-  },
-  methods: {
-    tambahkanPemasukan() {
-      this.$emit("tambahkan-pemasukan", {
-        jumlahPemasukan: this.jumlahPemasukan,
-        jenisPemasukan: this.jenisPemasukan,
-        rekening: this.rekening,
-      });
-    },
-    pilihPengeluaran() {
-      this.$emit("pilihan-tambah", false);
-    },
-    cancelClick() {
-      this.$emit("cancel", false);
-    },
-  },
-});
-</script>
 <style scoped></style>

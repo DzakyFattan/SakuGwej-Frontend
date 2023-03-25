@@ -1,3 +1,59 @@
+<script setup lang="ts">
+import { useThemeStore } from "@/stores/theme";
+import { ref } from "vue";
+
+const { themeClasses } = useThemeStore();
+const themeClass = themeClasses;
+
+const namaRekening = ref("");
+const nominalAwal = ref("");
+const listGambar = ref(["gambar1", "gambar2", "gambar3"]);
+const gambar = ref("");
+const deskripsi = ref("");
+
+const emit = defineEmits(["close"]);
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const cancelClick = () => {
+  emit("close", false);
+};
+
+const tambahkanRekening = async () => {
+  try {
+    if (
+      namaRekening.value === "" ||
+      nominalAwal.value === "" ||
+      // gambar.value === "" ||
+      deskripsi.value === ""
+    ) throw new Error("Semua field harus diisi");
+
+    const response = await fetch(`${api}/accounts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        account_name: namaRekening.value,
+        account_number: parseInt(nominalAwal.value),
+        // gambar: gambar.value,
+        account_description: deskripsi.value,
+      }),
+    });
+    const data = await response.json();
+
+    if (response.status !== 201) 
+      throw new Error(data.message);
+
+    emit("close");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+  
+};
+</script>
+
 <template>
   <h3 class="text-center">Tambah Rekening</h3>
   <div
@@ -71,36 +127,7 @@
     >
   </v-container>
 </template>
-<script lang="ts">
-import { useThemeStore } from "@/stores/theme";
-import { defineComponent } from "vue";
-const { theme, themeClasses } = useThemeStore();
-export default defineComponent({
-  data() {
-    return {
-      namaRekening: "",
-      nominalAwal: "",
-      listGambar: ["gambar1", "gambar2", "gambar3"],
-      gambar: "",
-      deskripsi: "",
-      themeClass: themeClasses,
-    };
-  },
-  methods: {
-    cancelClick() {
-      this.$emit("cancel", false);
-    },
-    tambahkanRekening() {
-      this.$emit("tambahkan-rekening", {
-        namaRekening: this.namaRekening,
-        nominalAwal: this.nominalAwal,
-        gambar: this.gambar,
-        deskripsi: this.deskripsi,
-      });
-    },
-  },
-});
-</script>
+
 <style scoped>
 .color-icon .v-icon {
   color: black;

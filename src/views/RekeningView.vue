@@ -30,11 +30,7 @@ export default defineComponent({
     activateDialog(dialog: boolean) {
       this.dialog = dialog;
     },
-    cancelTambahkan() {
-      this.dialog = false;
-    },
-    tambahkanRekening() {
-      // kirim ke database
+    deactivateDialog() {
       this.dialog = false;
     },
   },
@@ -54,8 +50,7 @@ export default defineComponent({
       <v-card :class="themeClass.bgSecondary" class="rounded-lg">
         <div class="mb-4">
           <TambahRekening
-            @cancel="cancelTambahkan"
-            @tambahkan-rekening="tambahkanRekening"
+            @close="deactivateDialog"
           />
         </div>
       </v-card>
