@@ -3,16 +3,14 @@
     <v-card :class="themeClass.bgSecondary" class="rounded-lg">
       <div class="mb-4" v-if="isTambahPemasukan">
         <TambahPemasukan
-          @cancel="cancelTambahkan"
+          @close="deactivateDialog"
           @pilihan-tambah="changePage"
-          @tambahkan-pemasukan="tambahkanPemasukan"
         />
       </div>
       <div class="mb-4" v-else>
         <TambahPengeluaran
-          @cancel="cancelTambahkan"
+          @close="deactivateDialog"
           @pilihan-tambah="changePage"
-          @tambahkan-pengeluaran="tambahkanPengeluaran"
         />
       </div>
     </v-card>
@@ -43,16 +41,8 @@ export default defineComponent({
     changePage(isTambahPemasukan: boolean) {
       this.isTambahPemasukan = isTambahPemasukan;
     },
-    tambahkanPemasukan(pemasukan: object) {
-      // kirim ke database
+    deactivateDialog() {
       this.dialog = false;
-    },
-    tambahkanPengeluaran(pengeluaran: object) {
-      // kirim ke database
-      this.dialog = false;
-    },
-    cancelTambahkan(dialog: boolean) {
-      this.dialog = dialog;
     },
     activateDialog(dialog: boolean) {
       this.dialog = dialog;

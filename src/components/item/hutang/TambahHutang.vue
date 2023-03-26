@@ -1,3 +1,73 @@
+<script setup lang="ts">
+import { useThemeStore } from "@/stores/theme";
+import { ref } from "vue";
+
+const { themeClasses } = useThemeStore();
+const themeClass = themeClasses;
+
+const jumlahHutang = ref("");
+const namaPelanggan = ref("");
+const deskripsi = ref("");
+const calendar = ref("");
+
+const emit = defineEmits(["close", "pilihan-tambah"]);
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const pilihPiutang = () => {
+  emit("pilihan-tambah", false);
+};
+
+const cancelClick = () => {
+  emit("close", false);
+};
+
+const tambahkanHutang = async () => {
+  try {
+    if (
+      jumlahHutang.value === "" ||
+      namaPelanggan.value === "" ||
+      deskripsi.value === "" ||
+      calendar.value === ""
+    ) throw new Error("Semua field harus diisi");
+    
+    let utc = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      timeZone: "Asia/Jakarta",
+    }).split("/");
+    let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
+
+    if (calendar.value <= today) 
+      throw new Error("Tanggal harus lebih dari hari ini");
+
+    const response = await fetch(`${api}/debts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        type: "debit",
+        amount: parseInt(jumlahHutang.value),
+        name: namaPelanggan.value,
+        description: deskripsi.value,
+        dueDate: calendar.value,
+      }),
+    });
+    const data = await response.json();
+
+    if (response.status !== 201) 
+      throw new Error(data.message);
+
+    emit("close");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+</script>
+
 <template>
   <v-container>
     <v-row class="justify-center mt-4">
@@ -93,31 +163,5 @@
     >
   </v-container>
 </template>
-<script lang="ts">
-import { useThemeStore } from "@/stores/theme";
-import { defineComponent } from "vue";
-const { theme, themeClasses } = useThemeStore();
-export default defineComponent({
-  data() {
-    return {
-      jumlahHutang: "",
-      namaPelanggan: "",
-      deskripsi: "",
-      calendar: "",
-      themeClass: themeClasses,
-    };
-  },
-  methods: {
-    pilihPiutang() {
-      this.$emit("pilihan-tambah", false);
-    },
-    cancelClick() {
-      this.$emit("cancel", false);
-    },
-    tambahkanHutang() {
-      this.$emit("tambahkan-hutang", true);
-    },
-  },
-});
-</script>
+
 <style scoped></style>

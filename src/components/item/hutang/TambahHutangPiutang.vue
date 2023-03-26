@@ -3,16 +3,14 @@
     <v-card :class="themeClass.bgSecondary" class="rounded-lg">
       <div class="mb-4" v-if="isTambahHutang">
         <TambahHutang
-          @cancel="cancelTambahkan"
+          @close="deactivateDialog"
           @pilihan-tambah="changePage"
-          @tambahkan-hutang="tambahkanHutang"
         />
       </div>
       <div class="mb-4" v-else>
         <TambahPiutang
-          @cancel="cancelTambahkan"
+          @close="deactivateDialog"
           @pilihan-tambah="changePage"
-          @tambahkan-piutang="tambahkanPiutang"
         />
       </div>
     </v-card>
@@ -42,16 +40,8 @@ export default defineComponent({
     changePage(isTambahHutang: boolean) {
       this.isTambahHutang = isTambahHutang;
     },
-    tambahkanHutang(hutang: object) {
-      // kirim ke database
+    deactivateDialog() {
       this.dialog = false;
-    },
-    tambahkanPiutang(piutang: object) {
-      // kirim ke database
-      this.dialog = false;
-    },
-    cancelTambahkan(dialog: boolean) {
-      this.dialog = dialog;
     },
     activateDialog(dialog: boolean) {
       this.dialog = dialog;

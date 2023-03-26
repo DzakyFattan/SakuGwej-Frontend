@@ -1,3 +1,75 @@
+<script setup lang="ts">
+import { useThemeStore } from "@/stores/theme";
+import { ref } from "vue";
+
+const { themeClasses } = useThemeStore();
+const themeClass = themeClasses;
+
+const jumlahPengeluaran = ref("");
+const jenisPengeluaran = ref("");
+const sumberDana = ref("");
+const listRekening = ["BCA", "BNI", "BRI", "Mandiri"];
+
+const emit = defineEmits(["close", "pilihan-tambah"]);
+
+const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const pilihPemasukan = () => {
+  emit("pilihan-tambah", true);
+};
+
+const cancelClick = () => {
+  emit("close");
+};
+
+const account = "641f1f5014244df4be5c5f12"
+// const chooseOptionRekening = () => {
+//   console.log("choose option rekening");
+// };
+
+const tambahkanPengeluaran = async () => {
+  try {
+    if (
+      jumlahPengeluaran.value === "" ||
+      jenisPengeluaran.value === "" ||
+      sumberDana.value === ""
+    )
+      throw new Error("Semua field harus diisi");
+    
+    let utc = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      timeZone: "Asia/Jakarta",
+    }).split("/");
+    let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
+
+    const response = await fetch(`${api}/transactions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        type: "debit",
+        amount: parseInt(jumlahPengeluaran.value),
+        category: jenisPengeluaran.value,
+        accountId: account,
+        createdAt: today,
+      }),
+    });
+    const data = await response.json();
+
+    if (response.status !== 201) 
+      throw new Error(data.message);
+
+    emit("close");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+</script>
+
 <template>
   <v-container>
     <v-row class="justify-center mt-4">
@@ -80,42 +152,5 @@
     >
   </v-container>
 </template>
-<script lang="ts">
-import { useThemeStore } from "@/stores/theme";
-import { defineComponent } from "vue";
-const { theme, themeClasses } = useThemeStore();
 
-export default defineComponent({
-  data() {
-    return {
-      jumlahPengeluaran: "",
-      jenisPengeluaran: "",
-      sumberDana: "",
-      listRekening: ["BCA", "BNI", "BRI", "Mandiri"],
-      themeClass: themeClasses,
-    };
-  },
-  methods: {
-    tambahkanPengeluaran() {
-      this.$emit("tambahkan-pengeluaran", {
-        jumlahPengeluaran: this.jumlahPengeluaran,
-        jenisPengeluaran: this.jenisPengeluaran,
-        sumberDana: this.sumberDana,
-      });
-    },
-    pilihPemasukan() {
-      this.$emit("pilihan-tambah", true);
-    },
-    chooseOptionPengeluaran() {
-      console.log("choose option pengeluaran");
-    },
-    chooseOptionRekening() {
-      console.log("choose option rekening");
-    },
-    cancelClick() {
-      this.$emit("cancel", false);
-    },
-  },
-});
-</script>
 <style scoped></style>
