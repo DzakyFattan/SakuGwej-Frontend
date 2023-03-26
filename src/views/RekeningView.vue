@@ -49,9 +49,7 @@ export default defineComponent({
     <v-dialog v-model="dialog" persistent width="512">
       <v-card :class="themeClass.bgSecondary" class="rounded-lg">
         <div class="mb-4">
-          <TambahRekening
-            @close="deactivateDialog"
-          />
+          <TambahRekening @close="deactivateDialog" />
         </div>
       </v-card>
     </v-dialog>

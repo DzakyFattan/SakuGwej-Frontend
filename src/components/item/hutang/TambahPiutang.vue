@@ -32,12 +32,14 @@ const tambahkanPiutang = async () => {
     )
       throw new Error("Semua field harus diisi");
 
-    let utc = new Date().toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      timeZone: "Asia/Jakarta",
-    }).split("/");
+    let utc = new Date()
+      .toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        timeZone: "Asia/Jakarta",
+      })
+      .split("/");
     let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
 
     if (calendar.value <= today)
@@ -67,7 +69,6 @@ const tambahkanPiutang = async () => {
   }
 };
 </script>
-
 
 <template>
   <v-container>

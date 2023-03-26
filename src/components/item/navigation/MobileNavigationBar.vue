@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from '@/stores/theme';
+import { useThemeStore } from "@/stores/theme";
 
 const handleLogout = () => {
   localStorage.removeItem("token");
   window.location.href = "/login";
 };
-
 </script>
 <template>
   <div class="mobile-navigation-bar">

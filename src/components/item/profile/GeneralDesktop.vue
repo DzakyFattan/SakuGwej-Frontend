@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThemeStore } from "@/stores/theme"
+import { useThemeStore } from "@/stores/theme";
 import { ref, computed, watch, getCurrentInstance } from "vue";
 import type { ProfileData } from "../../../types.vue";
 import EditPasswordForm from "./EditPasswordDialog.vue";
@@ -25,12 +25,15 @@ const newGender = ref(props.profileData.gender);
 const newEmail = ref(props.profileData.email);
 const newPhoneNumber = ref(props.profileData.phoneNumber);
 
+const isSubmitting = ref(false);
+
 watch(props, () => {
   newUsername.value = props.profileData.username;
   newBirthDate.value = props.profileData.birthDate.slice(0, 10);
   newGender.value = props.profileData.gender;
   newEmail.value = props.profileData.email;
   newPhoneNumber.value = props.profileData.phoneNumber;
+  isSubmitting.value = false;
 });
 
 const isEditing = computed(() => {
@@ -42,6 +45,11 @@ const isEditing = computed(() => {
     isEditingPhone.value
   );
 });
+
+const isLoading = computed(() => {
+  return (props.profileData.username === '') || isSubmitting.value;
+});
+
 
 const handleEditButton = (field: String) => {
   switch (field) {
@@ -102,6 +110,7 @@ const handleSaveButton = async (field: String) => {
     default:
       break;
   }
+  isSubmitting.value = true;
   const res = await fetch(`${api}/user/change-profile`, {
     method: "POST",
     headers: {
@@ -122,8 +131,10 @@ const handleSaveButton = async (field: String) => {
   >
     <div class="flex flex-col mx-16 mb-2 items-center">
       <img src="/src/assets/icons/user.png" alt="user" class="w-24 m-4" />
-      <button :class="themeClasses.bgMain" class="button mb-3">Ubah Foto Profil</button>
-      <EditPasswordForm class="my-2"/>
+      <button :class="themeClasses.bgMain" class="button mb-3">
+        Ubah Foto Profil
+      </button>
+      <EditPasswordForm class="my-2" />
     </div>
     <div class="my-3 flex flex-col">
       <div>
@@ -253,7 +264,12 @@ const handleSaveButton = async (field: String) => {
           </div>
         </div>
       </div>
-      <p v-if="props.profileData.username === ''" :class="themeClasses.textDark">Loading...</p>
+      <p
+        v-if="isLoading"
+        :class="themeClasses.textDark"
+      >
+        Loading...
+      </p>
     </div>
   </div>
 </template>

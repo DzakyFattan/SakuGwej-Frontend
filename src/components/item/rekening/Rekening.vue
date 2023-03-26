@@ -9,14 +9,20 @@
         label="Search"
       >
         <template v-slot:prepend
-          ><div :class="themeStore.themeClasses.borderMain" class="rounded-md h-8">
+          ><div
+            :class="themeStore.themeClasses.borderMain"
+            class="rounded-md h-8"
+          >
             <v-btn icon variant="flat" size="x-small" @click="onButtonClicked"
               ><img src="/src/assets/icons/add_ring_fill.png" alt="sort_list"
             /></v-btn>
           </div>
         </template>
         <template v-slot:append>
-          <div :class="themeStore.themeClasses.borderMain" class="rounded-md h-8">
+          <div
+            :class="themeStore.themeClasses.borderMain"
+            class="rounded-md h-8"
+          >
             <v-btn
               id="sort-menu"
               icon

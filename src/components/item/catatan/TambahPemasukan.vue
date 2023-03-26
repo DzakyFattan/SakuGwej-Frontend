@@ -14,7 +14,7 @@ const emit = defineEmits(["close", "pilihan-tambah"]);
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
-const account = "641f1f5014244df4be5c5f12"
+const account = "641f1f5014244df4be5c5f12";
 
 const pilihPengeluaran = () => {
   emit("pilihan-tambah", false);
@@ -28,16 +28,19 @@ const tambahkanPemasukan = async () => {
   try {
     if (
       jumlahPemasukan.value === "" ||
-      jenisPemasukan.value === "" 
+      jenisPemasukan.value === ""
       // rekening.value === ""
-    ) throw new Error("Semua field harus diisi");
-    
-    let utc = new Date().toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      timeZone: "Asia/Jakarta",
-    }).split("/");
+    )
+      throw new Error("Semua field harus diisi");
+
+    let utc = new Date()
+      .toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        timeZone: "Asia/Jakarta",
+      })
+      .split("/");
     let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
 
     const response = await fetch(`${api}/transactions`, {
@@ -56,8 +59,7 @@ const tambahkanPemasukan = async () => {
     });
     const data = await response.json();
 
-    if (response.status !== 201) 
-      throw new Error(data.message);
+    if (response.status !== 201) throw new Error(data.message);
 
     emit("close");
   } catch (error: any) {

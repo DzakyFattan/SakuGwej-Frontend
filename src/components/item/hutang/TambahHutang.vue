@@ -29,17 +29,20 @@ const tambahkanHutang = async () => {
       namaPelanggan.value === "" ||
       deskripsi.value === "" ||
       calendar.value === ""
-    ) throw new Error("Semua field harus diisi");
-    
-    let utc = new Date().toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      timeZone: "Asia/Jakarta",
-    }).split("/");
+    )
+      throw new Error("Semua field harus diisi");
+
+    let utc = new Date()
+      .toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        timeZone: "Asia/Jakarta",
+      })
+      .split("/");
     let today = `${utc[2]}-${utc[0]}-${utc[1]}`;
 
-    if (calendar.value <= today) 
+    if (calendar.value <= today)
       throw new Error("Tanggal harus lebih dari hari ini");
 
     const response = await fetch(`${api}/debts`, {
@@ -58,8 +61,7 @@ const tambahkanHutang = async () => {
     });
     const data = await response.json();
 
-    if (response.status !== 201) 
-      throw new Error(data.message);
+    if (response.status !== 201) throw new Error(data.message);
 
     emit("close");
   } catch (error: any) {

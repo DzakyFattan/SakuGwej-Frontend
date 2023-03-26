@@ -11,4 +11,3 @@ import NavigationBar from "../components/item/navigation/NavigationBar.vue";
     </div>
   </main>
 </template>
-

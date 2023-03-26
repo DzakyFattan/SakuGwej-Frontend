@@ -24,7 +24,6 @@ const login = async () => {
     if (response.status === 200) {
       const data = await response.json();
       clearInput();
-      console.log(data);
       localStorage.setItem("token", data.token);
       window.location.href = "/home";
     }

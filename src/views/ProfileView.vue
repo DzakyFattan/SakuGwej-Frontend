@@ -45,7 +45,10 @@ fetchData();
   <main>
     <div v-if="windowWidth < 1024">
       <HeaderMobile> Profil </HeaderMobile>
-      <ProfileMobile v-bind:profile-data="profileData" :fetch-data="fetchData" />
+      <ProfileMobile
+        v-bind:profile-data="profileData"
+        :fetch-data="fetchData"
+      />
     </div>
     <div v-else class="app-container">
       <NavigationBar currentPage="profile" />

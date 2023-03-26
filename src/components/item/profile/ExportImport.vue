@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useThemeStore } from "@/stores/theme"
+import { useThemeStore } from "@/stores/theme";
 import SettingCard from "./SettingCard.vue";
 
 const { theme, themeClasses } = useThemeStore();
-
 </script>
 <template>
   <SettingCard :title="`Export/Import`">

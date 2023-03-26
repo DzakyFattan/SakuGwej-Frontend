@@ -11,7 +11,7 @@ type ThemeClasses = {
   borderMain: string;
   borderDark: string;
   icon: string;
-}
+};
 
 export const useThemeStore = defineStore("theme", () => {
   const theme = ref(localStorage.getItem("theme") || "bocchi");
@@ -29,7 +29,7 @@ export const useThemeStore = defineStore("theme", () => {
           borderMain: "border-color-main-ryo",
           borderDark: "border-color-dark-ryo",
           icon: "icon-ryo",
-        }
+        };
       case "nijika":
         return {
           bgMain: "bg-color-main-nijika",
@@ -41,7 +41,7 @@ export const useThemeStore = defineStore("theme", () => {
           borderMain: "border-color-main-nijika",
           borderDark: "border-color-dark-nijika",
           icon: "icon-nijika",
-        }
+        };
       case "kita":
         return {
           bgMain: "bg-color-main-kita",
@@ -53,7 +53,7 @@ export const useThemeStore = defineStore("theme", () => {
           borderMain: "border-color-main-kita",
           borderDark: "border-color-dark-kita",
           icon: "icon-kita",
-        }
+        };
       default: // bocchi
         return {
           bgMain: "bg-color-main-bocchi",
@@ -65,7 +65,7 @@ export const useThemeStore = defineStore("theme", () => {
           borderMain: "border-color-main-bocchi",
           borderDark: "border-color-dark-bocchi",
           icon: "icon-bocchi",
-        }
+        };
     }
   });
 

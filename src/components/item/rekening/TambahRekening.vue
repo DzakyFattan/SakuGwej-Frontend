@@ -26,7 +26,8 @@ const tambahkanRekening = async () => {
       nominalAwal.value === "" ||
       // gambar.value === "" ||
       deskripsi.value === ""
-    ) throw new Error("Semua field harus diisi");
+    )
+      throw new Error("Semua field harus diisi");
 
     const response = await fetch(`${api}/accounts`, {
       method: "POST",
@@ -43,14 +44,12 @@ const tambahkanRekening = async () => {
     });
     const data = await response.json();
 
-    if (response.status !== 201) 
-      throw new Error(data.message);
+    if (response.status !== 201) throw new Error(data.message);
 
     emit("close");
   } catch (error: any) {
     console.log(error.message);
   }
-  
 };
 </script>
 

@@ -27,11 +27,18 @@ let checkbox = false;
   <v-container class="h-fit w-[74vh]">
     <v-row class="justify-center items-center">
       <v-btn icon variant="flat" size="x-small" @click="onAddClicked">
-        <img :class="themeClasses.icon" src="/src/assets/icons/add-ring.png" alt="add" />
+        <img
+          :class="themeClasses.icon"
+          src="/src/assets/icons/add-ring.png"
+          alt="add"
+        />
       </v-btn>
 
       <v-btn icon variant="flat" size="x-small" class="arrow ml-[10vh]">
-        <img :class="themeClasses.icon" src="/src/assets/icons/arrow-left.png" />
+        <img
+          :class="themeClasses.icon"
+          src="/src/assets/icons/arrow-left.png"
+        />
       </v-btn>
       <v-select
         :items="intervals"
@@ -45,10 +52,17 @@ let checkbox = false;
       >
       </v-select>
       <v-btn icon variant="flat" size="x-small" class="arrow mr-[10vh]">
-        <img :class="themeClasses.icon" src="/src/assets/icons/arrow-right.png" />
+        <img
+          :class="themeClasses.icon"
+          src="/src/assets/icons/arrow-right.png"
+        />
       </v-btn>
       <v-btn id="sort-menu" icon variant="flat" size="x-small">
-        <img :class="themeClasses.icon" src="/src/assets/icons/sort-gotoh.png" alt="sort" />
+        <img
+          :class="themeClasses.icon"
+          src="/src/assets/icons/sort-gotoh.png"
+          alt="sort"
+        />
       </v-btn>
       <v-menu activator="#sort-menu">
         <v-list>
@@ -58,9 +72,11 @@ let checkbox = false;
         </v-list>
       </v-menu>
       <div class="flex flex-row items-center w-[75vh] mt-4 mb-2 px-5">
-        <input type="checkbox" :class="themeClasses.borderMain" class="select-all mr-4 w-6 h-6" /><label
-          >Pilih Semua</label
-        >
+        <input
+          type="checkbox"
+          :class="themeClasses.borderMain"
+          class="select-all mr-4 w-6 h-6"
+        /><label>Pilih Semua</label>
       </div>
     </v-row>
   </v-container>

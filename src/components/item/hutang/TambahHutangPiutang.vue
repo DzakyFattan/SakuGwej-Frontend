@@ -2,16 +2,10 @@
   <v-dialog v-model="dialog" persistent width="512">
     <v-card :class="themeClass.bgSecondary" class="rounded-lg">
       <div class="mb-4" v-if="isTambahHutang">
-        <TambahHutang
-          @close="deactivateDialog"
-          @pilihan-tambah="changePage"
-        />
+        <TambahHutang @close="deactivateDialog" @pilihan-tambah="changePage" />
       </div>
       <div class="mb-4" v-else>
-        <TambahPiutang
-          @close="deactivateDialog"
-          @pilihan-tambah="changePage"
-        />
+        <TambahPiutang @close="deactivateDialog" @pilihan-tambah="changePage" />
       </div>
     </v-card>
   </v-dialog>

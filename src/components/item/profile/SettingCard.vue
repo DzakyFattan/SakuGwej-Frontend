@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useThemeStore } from '@/stores/theme'
+import { useThemeStore } from "@/stores/theme";
 
 const props = defineProps({
   title: String,
@@ -7,7 +7,6 @@ const props = defineProps({
 });
 
 const { theme, themeClasses } = useThemeStore();
-
 </script>
 <template>
   <div
