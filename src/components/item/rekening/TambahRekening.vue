@@ -37,7 +37,7 @@ const tambahkanRekening = async () => {
       },
       body: JSON.stringify({
         account_name: namaRekening.value,
-        account_number: parseInt(nominalAwal.value),
+        nominal: parseInt(nominalAwal.value),
         // gambar: gambar.value,
         account_description: deskripsi.value,
       }),
@@ -46,7 +46,7 @@ const tambahkanRekening = async () => {
 
     if (response.status !== 201) throw new Error(data.message);
 
-    emit("close");
+    emit("close", true);
   } catch (error: any) {
     console.log(error.message);
   }

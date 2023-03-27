@@ -1,47 +1,27 @@
 <script setup lang="ts">
 import SelectionBar from "../../selection/SelectionBar.vue";
 import HutangBar from "../bar/HutangBar.vue";
-import { ref } from "vue";
 
-const data = [
-  {
-    category: "Hutang",
-    deadline: "1 hari",
-    nominal: 10000,
-  },
-  {
-    category: "Piutang",
-    deadline: "5 hari",
-    nominal: 10000,
-  },
-  {
-    category: "Hutang",
-    deadline: "1 minggu",
-    nominal: 10000,
-  },
-  {
-    category: "Hutang",
-    deadline: "3 minggu",
-    nominal: 10000,
-  },
-  {
-    category: "Piutang",
-    deadline: "2 bulan",
-    nominal: 10000,
-  },
-];
+import { ref, watch } from "vue";
 
-const debts = ref();
-const type = ref();
-const count = countData();
+import type { Debt, DebtData } from "@/types.vue";
+
+const props = defineProps<{
+  debtData: DebtData;
+  fetchData: () => void;
+}>();
+
+const debts = ref(
+  [] as Debt[]
+);
+
 const emit = defineEmits(["trigger-tambahkan"]);
 
-debts.value = data.slice(0, count - 1);
-type.value = "hutang";
+const type = ref();
 
-function countData() {
-  return Math.floor((window.screen.height - 200) / 80);
-}
+watch(props, () => {
+  debts.value = props.debtData;
+});
 
 function addHutangPiutang(arg: boolean) {
   emit("trigger-tambahkan", arg);
@@ -50,5 +30,5 @@ function addHutangPiutang(arg: boolean) {
 
 <template>
   <SelectionBar @trigger-tambahkan="addHutangPiutang" v-bind:type="type" />
-  <HutangBar v-for="debt in debts" v-bind:debt="debt" />
+  <HutangBar v-for="(debt, idx) in debts" v-bind:debt="debt" v-bind:key="idx" />
 </template>

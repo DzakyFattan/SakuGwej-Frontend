@@ -64,7 +64,7 @@ const tambahkanPengeluaran = async () => {
 
     if (response.status !== 201) throw new Error(data.message);
 
-    emit("close");
+    emit("close", true);
   } catch (error: any) {
     console.log(error.message);
   }

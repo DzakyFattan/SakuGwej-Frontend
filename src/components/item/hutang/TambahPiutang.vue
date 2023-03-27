@@ -10,7 +10,7 @@ const namaPelanggan = ref("");
 const deskripsi = ref("");
 const calendar = ref("");
 
-const emit = defineEmits(["close", "pilihan-tambah"]);
+const emit = defineEmits(["close", "pilihan-tambah", "trigger-tambahkan"]);
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
@@ -63,7 +63,7 @@ const tambahkanPiutang = async () => {
 
     if (response.status !== 201) throw new Error(data.message);
 
-    emit("close");
+    emit("close", true);
   } catch (error) {
     console.log(error);
   }

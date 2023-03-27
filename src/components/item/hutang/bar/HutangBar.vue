@@ -1,25 +1,35 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useThemeStore } from "@/stores/theme";
-import { parseNominal } from "@/utils/parse";
+import { parseNominal, parseToDueDate } from "@/utils/parse";
 
-const props = defineProps(["debt"]);
-const debt = props.debt;
-
-const nominal = parseNominal(debt.nominal);
+import type { Debt } from "@/types.vue";
 
 const { themeClasses } = useThemeStore();
+const themeClass = themeClasses;
+
+const props = defineProps<{
+  debt: Debt;
+}>();
+
+const debt = ref({} as Debt);
+
+debt.value = props.debt;
+
+const dueDate = debt.value.dueDate;
+
 </script>
 
 <template>
   <div
-    :class="themeClasses.borderMain"
+    :class="themeClass.borderMain"
     class="flex flex-row rounded-md w-fit h-20 items-center self-center mx-1 my-2 px-4"
   >
     <input type="checkbox" class="select mr-4 w-6 h-6" />
     <img src="/src/assets/icons/hutang.png" class="w-12 h-12 mr-3" />
-    <p class="w-20">{{ debt.category }}</p>
-    <p class="w-20 ml-[13vh] mr-[16vh]">{{ debt.deadline }}</p>
-    <p class="w-20">{{ nominal }}</p>
+    <p class="w-20">{{ debt.type == "credit" ? "Piutang" : "Hutang" }}</p>
+    <p class="w-20 ml-[13vh] mr-[16vh]">{{ parseToDueDate(dueDate) }}</p>
+    <p class="w-20">{{ parseNominal(debt.amount) }}</p>
     <img src="/src/assets/icons/more.png" class="w-6 h-6 ml-3" />
   </div>
 </template>
@@ -31,5 +41,8 @@ const { themeClasses } = useThemeStore();
   -o-appearance: none;
   border: 1px solid var(--bocchi);
   border-radius: 2px;
+}
+.select:checked {
+  background-color: var(--bocchi);
 }
 </style>

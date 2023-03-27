@@ -1,57 +1,25 @@
 <script setup lang="ts">
 import SelectionBar from "../../selection/SelectionBar.vue";
 import SectionItemContainer from "../section/SectionItemContainer.vue";
-import { ref } from "vue";
 
-const data = [
-  {
-    time: "Hari ini",
-    catatan: [
-      {
-        category: "Makanan",
-        description: "Cash",
-        nominal: 10000,
-      },
-      {
-        category: "Makanan Ringan",
-        description: "Cash",
-        nominal: 10000,
-      },
-      {
-        category: "Minuman",
-        description: "Cash",
-        nominal: 10000,
-      },
-    ],
-  },
-  {
-    time: "Kemarin",
-    catatan: [
-      {
-        category: "Makanan",
-        description: "Cash",
-        nominal: 10000,
-      },
-      {
-        category: "Minuman",
-        description: "Cash",
-        nominal: 10000,
-      },
-    ],
-  },
-];
+import { ref, watch } from "vue";
 
-const notes = ref();
-const type = ref();
-const count = countData();
+import type { TransactionData } from "@/types.vue";
+
+const props = defineProps<{
+  transactionData: TransactionData;
+  fetchData: () => void;
+}>();
+
+const transactions = ref([] as TransactionData);
+
 const emit = defineEmits(["trigger-tambahkan"]);
 
-notes.value = data.slice(0, count - 1);
-type.value = "catatan";
+const type = ref();
 
-function countData() {
-  return Math.floor((window.screen.height - 200) / 80);
-}
+watch(props, () => {
+  transactions.value = props.transactionData;
+});
 
 function addCatatan(arg: boolean) {
   emit("trigger-tambahkan", arg);
@@ -60,5 +28,8 @@ function addCatatan(arg: boolean) {
 
 <template>
   <SelectionBar @trigger-tambahkan="addCatatan" v-bind:type="type" />
-  <SectionItemContainer v-for="note in notes" v-bind:note="note" />
+  <SectionItemContainer 
+    v-for="(transaction, idx) in transactions" 
+    v-bind:transaction="transaction" 
+    v-bind:key="idx" />
 </template>
