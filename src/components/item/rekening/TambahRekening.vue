@@ -78,6 +78,7 @@ const tambahkanRekening = async () => {
         class="mx-16"
         :class="themeClass.textMain"
         variant="outlined"
+        type="number"
       >
         <template v-slot:prepend-inner>
           <img class="mr-6" src="/src/assets/icons/credit_card.png" />
