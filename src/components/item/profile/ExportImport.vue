@@ -13,7 +13,7 @@ import {
   getPengeluaran,
   getPiutang,
   getRekening,
-} from "@/utils/databaseExportImport";
+} from "@/utils/databaseRepository";
 
 const { theme, themeClasses } = useThemeStore();
 
@@ -44,8 +44,6 @@ async function exportFileRekening() {
 async function exportFileHutang() {
   let hutang = await getHutang();
   let piutang = await getPiutang();
-  console.log(hutang);
-  console.log(piutang);
   let hasil = hutangObjectToCSV(hutang, piutang);
   download("hutang.csv", "text/plain", hasil[0]);
   download("piutang.csv", "text/plain", hasil[1]);
@@ -56,11 +54,17 @@ function catatanObjectToCSV(pemasukan: object, pengeluaran: object): Array<strin
   let dataPengeluaran = pemasukan["data"];
   let finalPemasukan = "";
   let finalPengeluaran = "";
-  finalPemasukan += "pemasukan,type,category,createdAt\n";
-  finalPengeluaran += "pengeluaran,type,category,createdAt\n";
+  finalPemasukan += "pemasukan,type,category,accountId,description,createdAt\n";
+  finalPengeluaran += "pengeluaran,type,category,accountId,description,createdAt\n";
   for (let i = 0; i < Object.keys(dataPemasukan).length; i++) {
-    finalPemasukan += `${dataPemasukan[i]["amount"]},${dataPemasukan[i]["type"]},${dataPemasukan[i]["category"]},${dataPemasukan[i]["createdAt"]}\n`;
-    finalPengeluaran += `${dataPengeluaran[i]["amount"]},${dataPengeluaran[i]["type"]},${dataPengeluaran[i]["category"]},${dataPengeluaran[i]["createdAt"]}\n`;
+    let datePemasukan = dataPemasukan[i]["createdAt"];
+    let datePengeluaran = dataPengeluaran[i]["createdAt"];
+    for (let j =0; j<Object.keys(dataPemasukan[i]["notes"]).length; j++){
+      let notesPemasukan = dataPemasukan[i]["notes"][j];
+      let notesPengeluaran = dataPengeluaran[i]["notes"][j];
+      finalPemasukan += `${notesPemasukan["amount"]},${notesPemasukan["type"]},${notesPemasukan["category"]},${notesPemasukan["accountId"]},${notesPemasukan["description"]},${datePemasukan}\n`;
+      finalPengeluaran +=  `${notesPengeluaran["amount"]},${notesPengeluaran["type"]},${notesPengeluaran["category"]},${notesPengeluaran["accountId"]},${notesPengeluaran["description"]},${datePengeluaran}\n`;
+    }
   }
   return [finalPemasukan, finalPengeluaran];
 }
@@ -80,10 +84,9 @@ function hutangObjectToCSV(hutang: object, piutang: object): Array<string> {
 function rekeningObjectToCSV(rekening: object): string {
   let data = rekening["data"];
   let finalData = "";
-  finalData += "rekening,accounrDecsription,nominal\n";
+  finalData += "rekening,accountNumber,accountDescription\n";
   for (let i = 0; i < Object.keys(data).length; i++) {
-    finalData += `${data[i]["accountName"]},${data[i]["accounrDecsription"]},${data[i]["nominal"]}`;
-    finalData += "\n";
+    finalData += `${data[i]["accountName"]},${data[i]["accountNumber"]},${data[i]["accountDescription"]}\n`;
   }
   return finalData;
 }
@@ -97,7 +100,6 @@ function importFile(e: any) {
     reader.onload = (e) => {
       data = (<string>reader.result).split("\n");
       prosesData(data, i+1);
-      console.log(data);
     };
     reader.readAsText(file);
   });
@@ -111,7 +113,7 @@ function catatanCSVToObject(data: Array<string>) {
     let currentline = data[i].split(",");
     obj[headers[1]] = currentline[1];
     obj["amount"] = parseInt(currentline[0]);
-    for (let j=2;j < 3; j++) {
+    for (let j=2;j < headers.length; j++) {
       obj[headers[j]] = currentline[j];
     }
     listObj.push(obj);
@@ -131,7 +133,7 @@ function hutangCSVToObject(data: Array<string>) {
     let currentline = data[i].split(",");
     obj[headers[1]] = currentline[1];
     obj["amount"] =parseInt(currentline[0]);
-    for (let j=2;j < 6; j++) {
+    for (let j=2;j < headers.length; j++) {
       obj[headers[j]] = currentline[j];
     }
     listObj.push(obj);
@@ -144,19 +146,18 @@ function hutangCSVToObject(data: Array<string>) {
   }
 }
 function rekeningCSVToObject(data: Array<string>) {
+
   let listObj = [];
   let headers = data[0].split(",");
   for (let i = 1; i < data.length - 1; i++) {
     let obj = {};
     let currentline = data[i].split(",");
-    for (let j=0;j < 3; j++) {
-      obj[headers[j]] = currentline[j];
-      if (j==2) {
-        obj[headers[j]] = parseInt(currentline[j]);
-      }
-    }
+    obj["accountName"] = currentline[0];
+    obj[headers[1]] = parseInt(currentline[0]);
+    obj[headers[2]] = currentline[2];
     listObj.push(obj);
   }
+  console.log(listObj);
   tambahkanRekening(listObj);
 }
 
@@ -168,7 +169,6 @@ function prosesData(object: Array<string>, urutan: string) {
   let headers = object[0].split(",");
   let type = headers[0];
   if (type === "hutang") {
-    console.log("masuk")
     hutangCSVToObject(object);
   } else if (type === "piutang") {
     hutangCSVToObject(object);

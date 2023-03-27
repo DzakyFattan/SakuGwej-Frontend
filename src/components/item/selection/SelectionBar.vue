@@ -24,7 +24,7 @@ const { themeClasses } = useThemeStore();
 const isCheck = ref(false);
 const checkboxAll = ref(false);
 
-const testlocalapi = "http://localhost:3001/api/v1";
+const testlocalapi = "http://be-sakugwejdev.ddns.net/api/v1";
 // const api = "http://be-sakugwejdev.ddns.net/api/v1"; 
 
 const selectAll = () => {
