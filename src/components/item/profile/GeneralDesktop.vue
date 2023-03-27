@@ -11,6 +11,7 @@ const props = defineProps<{
   fetchData: () => void;
 }>();
 
+
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
 const isEditingName = ref(false);
@@ -29,7 +30,9 @@ const isSubmitting = ref(false);
 
 watch(props, () => {
   newUsername.value = props.profileData.username;
-  newBirthDate.value = props.profileData.birthDate.slice(0, 10);
+  if (props.profileData.birthDate)
+    newBirthDate.value = props.profileData.birthDate.slice(0, 10);
+  else newBirthDate.value = "";
   newGender.value = props.profileData.gender;
   newEmail.value = props.profileData.email;
   newPhoneNumber.value = props.profileData.phoneNumber;
@@ -166,7 +169,7 @@ const handleSaveButton = async (field: String) => {
           <div class="flex flex-row">
             <p class="text-base w-40">Tanggal lahir</p>
             <p class="text-base" v-if="!isEditingBirthdate">
-              : {{ props.profileData.birthDate.slice(0, 10) }}
+              : {{ props.profileData.birthDate ? props.profileData.birthDate.slice(0, 10) : "" }}
             </p>
             <input type="date" v-model="newBirthDate" v-else />
             <button
