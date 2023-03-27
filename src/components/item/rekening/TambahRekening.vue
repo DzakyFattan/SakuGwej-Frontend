@@ -6,6 +6,7 @@ const { themeClasses } = useThemeStore();
 const themeClass = themeClasses;
 
 const namaRekening = ref("");
+const nomorRekening = ref("");
 const nominalAwal = ref("");
 const listGambar = ref(["gambar1", "gambar2", "gambar3"]);
 const gambar = ref("");
@@ -39,6 +40,7 @@ const tambahkanRekening = async () => {
         account_name: namaRekening.value,
         nominal: parseInt(nominalAwal.value),
         // gambar: gambar.value,
+        // nomorRekening: nomorRekening.value,
         account_description: deskripsi.value,
       }),
     });
@@ -68,6 +70,17 @@ const tambahkanRekening = async () => {
       >
         <template v-slot:prepend-inner>
           <img class="mr-6" src="/src/assets/icons/wallet_alt_fill_black.png" />
+        </template>
+      </v-text-field>
+      <v-text-field
+        v-model="nomorRekening"
+        label="Nomor Rekening (Opsional)"
+        class="mx-16"
+        :class="themeClass.textMain"
+        variant="outlined"
+      >
+        <template v-slot:prepend-inner>
+          <img class="mr-6" src="/src/assets/icons/credit_card.png" />
         </template>
       </v-text-field>
       <v-text-field
