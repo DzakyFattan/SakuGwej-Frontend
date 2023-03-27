@@ -1,19 +1,51 @@
 <script setup lang="ts">
 import { useThemeStore } from "@/stores/theme";
 import { ref } from "vue";
-const emit = defineEmits(["trigger-tambahkan", "trigger-delete"]);
+import { parseIntervalDate } from "@/utils/parse";
 
-const selected = "30 Hari Teakhir";
-const intervals = [
-  "30 Hari Teakhir",
-  "21 Hari Teakhir",
-  "14 Hari Teakhir",
-  " 7 Hari Teakhir",
-];
-const sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
+const emit = defineEmits(["trigger-tambahkan", "trigger-delete", "trigger-change-page", "trigger-change-sort", "trigger-change-interval"]);
 
-const props = defineProps(["type"]);
-const type = props.type;
+let selected: string;
+let intervals: string[];
+let sort: string[];
+
+// const selected = ref("30 Hari Teakhir")
+// const intervals = ref([
+//   "30 Hari Teakhir",
+//   "21 Hari Teakhir",
+//   "14 Hari Teakhir",
+//   " 7 Hari Teakhir",
+// ]);
+// const sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
+
+const props = defineProps({
+  type: String
+});
+const type = ref("")
+
+type.value = props.type as string
+
+if (type.value === "transactions") {
+  selected = "30 Hari Teakhir"
+  intervals = [
+    "30 Hari Teakhir",
+    "21 Hari Teakhir",
+    "14 Hari Teakhir",
+    " 1 Hari Teakhir",
+  ];
+  sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
+} else if (type.value === "debts") {
+  selected = "30 Hari Mendatang"
+  intervals = [
+    "30 Hari Mendatang",
+    "21 Hari Mendatang",
+    "14 Hari Mendatang",
+    " 1 Hari Mendatang",
+    " Terlewat",
+  ];
+  sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
+}
+
 
 const onAddClicked = () => {
   emit("trigger-tambahkan", true);
@@ -71,6 +103,24 @@ const deleteSelected = async () => {
   });
 }
 
+const next = () => {
+  emit("trigger-change-page", 1);
+}
+
+const back = () => {
+  emit("trigger-change-page", -1);
+}
+
+const interval = (e: string) => { 
+  let interval = parseInt(e); 
+  if (e.endsWith("Mendatang")) {
+    interval = -interval;
+  }
+  const date = parseIntervalDate(interval);
+
+  emit("trigger-change-interval", date);
+}
+
 defineExpose({
   checkSelected
 })
@@ -88,7 +138,7 @@ defineExpose({
           />
         </v-btn>
 
-        <v-btn icon variant="flat" size="x-small" class="arrow ml-[9rem]">
+        <v-btn icon variant="flat" size="x-small" class="arrow ml-[9rem]" @click="back">
           <img
             :class="themeClasses.icon"
             src="/src/assets/icons/arrow-left.png"
@@ -101,11 +151,13 @@ defineExpose({
           hide-details
           variant="filled"
           bg-color="white"
+          return-object
           :class="themeClasses.borderMain"
           class="interval w-[22vh] h-12 rounded-md"
+          @update:model-value="interval"
         >
         </v-select>
-        <v-btn icon variant="flat" size="x-small" class="arrow mr-[9rem]">
+        <v-btn icon variant="flat" size="x-small" class="arrow mr-[9rem]" @click="next">
           <img
             :class="themeClasses.icon"
             src="/src/assets/icons/arrow-right.png"

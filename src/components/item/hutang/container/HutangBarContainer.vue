@@ -17,9 +17,9 @@ const debts = ref(
 
 const selectionBar = ref<InstanceType<typeof SelectionBar>>()
 
-const emit = defineEmits(["trigger-tambahkan", "trigger-delete"]);
+const emit = defineEmits(["trigger-tambahkan", "trigger-delete", "trigger-change-page", "trigger-change-interval"]);
 
-const type = ref();
+const type = "debts";
 
 watch(props, () => {
   debts.value = props.debtData;
@@ -35,12 +35,20 @@ const selectDebt = () => {
 const deleteDebt = () => {
   emit("trigger-delete")
 }
+const changePage = (page: number) => {
+  emit("trigger-change-page", page)
+}
+const changeInterval = (interval: string) => {
+  emit("trigger-change-interval", interval)
+}
 </script>
 
 <template>
   <SelectionBar 
     @trigger-tambahkan="addHutangPiutang" 
     @trigger-delete="deleteDebt"
+    @trigger-change-page="changePage"
+    @trigger-change-interval="changeInterval"
     ref="selectionBar"  
     v-bind:type="type" />
   <HutangBar 

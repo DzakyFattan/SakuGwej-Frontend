@@ -70,7 +70,26 @@ const parseToToday = (createdAt: Date) => {
       }
     }
   }
-  
 }
 
-export { parseNominal, parseToDueDate, parseToToday };
+const parseIntervalDate = (interval: number) => {
+  const diff = interval * 24 * 60 * 60 * 1000;
+  const utc = new Date()
+        .toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "Asia/Jakarta",
+        }).split("/");
+  const localTime = `${utc[2]}-${utc[0]}-${utc[1]}`;
+  const date = new Date(new Date(localTime).getTime() - diff)
+        .toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "Asia/Jakarta",
+        }).split("/");
+  return `${date[2]}-${date[0]}-${date[1]}`;
+}
+
+export { parseNominal, parseToDueDate, parseToToday, parseIntervalDate };

@@ -25,7 +25,8 @@ const notes = ref(
 const createdAt = ref<Date>();
 
 watch(props, () => {
-  fetchData();
+  createdAt.value = props.transaction.createdAt;
+  notes.value = props.transaction.notes;
 });
 
 transaction.value = props.transaction;

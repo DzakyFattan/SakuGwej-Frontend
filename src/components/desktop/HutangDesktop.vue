@@ -3,7 +3,7 @@ import HutangBarContainer from "../item/hutang/container/HutangBarContainer.vue"
 
 import type { DebtData } from "@/types.vue";
 
-const emit = defineEmits(["trigger-tambahkan", "trigger-delete"]);
+const emit = defineEmits(["trigger-tambahkan", "trigger-delete", "trigger-change-page", "trigger-change-interval"]);
 
 const props = defineProps<{
   debtData: DebtData;
@@ -16,6 +16,12 @@ const addHutangPiutang = (arg: boolean) => {
 const deleteDebt = () => {
   emit("trigger-delete")
 }
+const changePage = (page: number) => {
+  emit("trigger-change-page", page)
+}
+const changeInterval = (interval: string) => {
+  emit("trigger-change-interval", interval)
+}
 </script>
 
 <template>
@@ -24,6 +30,8 @@ const deleteDebt = () => {
     <HutangBarContainer 
       @trigger-tambahkan="addHutangPiutang"
       @trigger-delete="deleteDebt"
+      @trigger-change-page="changePage"
+      @trigger-change-interval="changeInterval"
       v-bind:debt-data="props.debtData"
       :fetch-data="props.fetchData" />
   </div>

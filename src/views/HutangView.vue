@@ -10,10 +10,9 @@ import { onMounted, nextTick, ref } from "vue";
 import type { DebtData } from "../types.vue";
 
 const windowWidth = ref(window.innerWidth);
-
 const tambahHutangPiutang = ref<InstanceType<typeof TambahHutangPiutang>>();
-
 const debtData = ref<DebtData>([]);
+const page = ref(0);
 
 // const testlocalapi = "http://localhost:3001/api/v1";
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
@@ -34,27 +33,38 @@ const deactivatedDialog = (_insert: boolean) => {
   if (_insert) fetchData();
 };
 
-const fetchData = async () => {
+const fetchData = async (_until: string = "") => {
   try {
+    console.log(_until);
     const limit = countData();
-    const res = await fetch(`${api}/debts?limit=${limit}`, {
+    const res = await fetch(`${api}/debts?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     method: "GET",
     });
     const data = await res.json();
+    if (debtData.value.length !== 0 && data.data.length === 0) {
+      page.value -= 1;
+      return;
+    }
     debtData.value = data.data;
   } catch (error: any) {
     console.log(error.message);
   }
 };
 
-fetchData();
-
-function countData() {
-  return Math.floor((window.screen.height - 200) / 80);
+const changePage = (_page: number) => {
+  if (page.value + _page < 0) return;
+  page.value += _page;
+  fetchData();
 }
+
+const countData = () => {
+  return Math.floor((window.screen.height - 200) / 80) - 3;
+}
+
+fetchData();
 </script>
 
 <template>
@@ -69,6 +79,8 @@ function countData() {
       <HutangDesktop 
       @trigger-tambahkan="activatedDialog" 
       @trigger-delete="fetchData"
+      @trigger-change-page="changePage"
+      @trigger-change-interval="fetchData"
       v-bind:debt-data="debtData"
       :fetch-data="fetchData" />
     </div>
