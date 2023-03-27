@@ -36,14 +36,17 @@ const deactivatedDialog = (_insert: boolean) => {
 
 const fetchData = async () => {
   try {
-    const res = await fetch(`${api}/transactions`, {
+    const limit = countData();
+    console.log(limit);
+    const res = await fetch(`${api}/transactions?limit=${limit}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+      method: "GET",
     });
     const data = await res.json();
     transactionData.value = data.data;
-    transactionData.value = transactionData.value.slice(0, 2);
+    console.log(data.data);
   } catch (error: any) {
     console.log(error.message);
   }
@@ -51,9 +54,9 @@ const fetchData = async () => {
 
 fetchData();
 
-// function countData() {
-//   return Math.floor((window.screen.height - 200) / 80);
-// }
+function countData() {
+  return Math.floor((window.screen.height - 200) / 80) - 3;
+}
 </script>
 
 <template>
@@ -67,6 +70,7 @@ fetchData();
       <NavigationBar currentPage="catatan" />
       <CatatanDesktop 
         @trigger-tambahkan="activatedDialog"
+        @trigger-delete="fetchData"
         v-bind:transaction-data="transactionData"
         :fetch-data="fetchData" />
     </div>

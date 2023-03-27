@@ -15,7 +15,7 @@ const tambahHutangPiutang = ref<InstanceType<typeof TambahHutangPiutang>>();
 
 const debtData = ref<DebtData>([]);
 
-const testlocalapi = "http://localhost:3001/api/v1";
+// const testlocalapi = "http://localhost:3001/api/v1";
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
 onMounted(() => {
@@ -36,10 +36,12 @@ const deactivatedDialog = (_insert: boolean) => {
 
 const fetchData = async () => {
   try {
-      const res = await fetch(`${api}/debts`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+    const limit = countData();
+    const res = await fetch(`${api}/debts?limit=${limit}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    method: "GET",
     });
     const data = await res.json();
     debtData.value = data.data;
@@ -50,9 +52,9 @@ const fetchData = async () => {
 
 fetchData();
 
-// function countData() {
-//   return Math.floor((window.screen.height - 200) / 80);
-// }
+function countData() {
+  return Math.floor((window.screen.height - 200) / 80);
+}
 </script>
 
 <template>
@@ -66,6 +68,7 @@ fetchData();
       <NavigationBar currentPage="hutang" />
       <HutangDesktop 
       @trigger-tambahkan="activatedDialog" 
+      @trigger-delete="fetchData"
       v-bind:debt-data="debtData"
       :fetch-data="fetchData" />
     </div>

@@ -13,7 +13,9 @@ const props = defineProps<{
 
 const transactions = ref([] as TransactionData);
 
-const emit = defineEmits(["trigger-tambahkan"]);
+const selectionBar = ref<InstanceType<typeof SelectionBar>>()
+
+const emit = defineEmits(["trigger-tambahkan", "trigger-delete"]);
 
 const type = ref();
 
@@ -21,15 +23,23 @@ watch(props, () => {
   transactions.value = props.transactionData;
 });
 
-function addCatatan(arg: boolean) {
+const addCatatan = (arg: boolean) => {
   emit("trigger-tambahkan", arg);
+}
+const selectTransaction = () => {
+  selectionBar.value?.checkSelected()
+}
+const deleteTransaction = () => {
+  emit("trigger-delete")
 }
 </script>
 
 <template>
-  <SelectionBar @trigger-tambahkan="addCatatan" v-bind:type="type" />
+  <SelectionBar @trigger-tambahkan="addCatatan" @trigger-delete="deleteTransaction" v-bind:type="type" ref="selectionBar" />
   <SectionItemContainer 
     v-for="(transaction, idx) in transactions" 
     v-bind:transaction="transaction" 
-    v-bind:key="idx" />
+    v-bind:key="idx"
+    @trigger-select="selectTransaction" 
+    :fetch-data="props.fetchData"/>
 </template>

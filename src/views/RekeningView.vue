@@ -42,10 +42,11 @@ const deactivatedDialog = (_insert: boolean) => {
 
 const fetchData = async () => {
   try {
-      const res = await fetch(`${api}/accounts`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+    const limit = countData();
+    const res = await fetch(`${api}/accounts?limit${limit}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
     });
     const data = await res.json();
     console.log(data.data);
@@ -59,9 +60,9 @@ const fetchData = async () => {
 fetchData();
 
 // for limit fecth data
-// function countData() {
-//   return Math.floor((window.screen.height - 200) / 80);
-// }
+function countData() {
+  return Math.floor((window.screen.height - 200) / 80);
+}
 </script>
 
 <template>

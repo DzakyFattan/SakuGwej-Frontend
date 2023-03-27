@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SectionItemBar from "./SectionItemBar.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { parseToToday } from "@/utils/parse";
 
 import type { Transaction } from "@/types.vue";
@@ -11,30 +11,46 @@ const props = defineProps<
       createdAt: Date,
       notes: Transaction[];
     };
+    fetchData: () => void;
   }
 >();
 
-const transactions = ref({} as {
+const transaction = ref({} as {
   createdAt: Date,
   notes: Transaction[];
 });
-
 const notes = ref(
   [] as Transaction[]
 );
+const createdAt = ref<Date>();
 
-console.log(props.transaction);
+watch(props, () => {
+  fetchData();
+});
 
-transactions.value = props.transaction;
+transaction.value = props.transaction;
+createdAt.value = transaction.value.createdAt;
+notes.value = transaction.value.notes;
 
-const createdAt = transactions.value.createdAt;
+const emit = defineEmits(["trigger-select"]);
 
+const selectTransaction = () => {
+  emit("trigger-select");
+}
+
+const fetchData = () => {
+  props.fetchData();
+  createdAt.value = props.transaction.createdAt;
+  notes.value = props.transaction.notes;
+}
 </script>
 
 <template>
-  <p class="w-[75vh] h-fit self-center mt-4 mb-2 px-7">{{ parseToToday(createdAt) }}</p>
+  <p class="w-[75vh] h-fit self-center mt-4 mb-2 px-7" :fetch-data="fetchData">{{ parseToToday(createdAt as Date) }}</p>
   <SectionItemBar 
-    v-for="(note, idx) in transactions.notes" 
+    v-for="(note, idx) in notes" 
     v-bind:note="note"
-    v-bind:key="idx" />
+    v-bind:key="idx"
+    @trigger-select="selectTransaction"
+    :fetch-data="fetchData" />
 </template>
