@@ -19,10 +19,12 @@ export type NewProfileData = {
 export type Account = {
   _id: string
   userId: string
-  accountName: string
-  accountNumber: string
-  accountDescription: string
-  nominal: number
+  name: string
+  number: string
+  amount: number
+  description: string
+  image: string
+  priority: number
 }
 
 export type AccountData = Account[]
@@ -45,7 +47,10 @@ export type Transaction = {
   userId: string
   type: string
   amount: number
-  category: string
+  category: {
+    name: string
+    image: string
+  }
   accountId: string
   description: string
 }

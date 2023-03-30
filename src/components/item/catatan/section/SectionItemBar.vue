@@ -13,8 +13,13 @@ const props = defineProps<{
 const emit = defineEmits(["trigger-select"]);
 
 const note = ref({} as Transaction);
+const desc = ref("");
+const nominal = ref("");
 
 note.value = props.note;
+
+desc.value = note.value.description.slice(0, 24) + "...";
+nominal.value = parseNominal(note.value.amount).slice(0, 12) + "...";
 
 const { themeClasses } = useThemeStore();
 
@@ -30,23 +35,13 @@ const selectOne = () => {
   >
     <input type="checkbox" class="select mr-4 w-6 h-6" :id="note._id" name="transactions" @change="selectOne"/>
     <img
-      v-if="note.category === 'Makanan'"
-      src="/src/assets/icons/food.png"
+      :src="note.category.image"
       class="w-12 h-12 mr-6"
+      :class="themeClasses.icon"
     />
-    <img
-      v-if="note.category === 'Minuman'"
-      src="/src/assets/icons/drink.png"
-      class="w-12 h-12 mr-6"
-    />
-    <img
-      v-if="note.category === 'Makanan Ringan'"
-      src="/src/assets/icons/snack.png"
-      class="w-12 h-12 mr-6"
-    />
-    <p class="w-20">{{ note.category }}</p>
-    <p class="w-20 ml-[10rem] mr-[10rem]">{{ note.description }}</p>
-    <p class="w-20">{{ parseNominal(note.amount) }}</p>
+    <p class="w-20">{{ note.category.name }}</p>
+    <p class="w-52 ml-[5rem] mr-[5rem]">{{ desc }}</p>
+    <p class="w-24">{{ parseNominal(note.amount) }}</p>
     <img src="/src/assets/icons/more.png" class="w-6 h-6 ml-3" />
   </div>
 </template>

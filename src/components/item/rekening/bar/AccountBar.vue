@@ -13,6 +13,9 @@ const props = defineProps<{
 }>();
 
 const account = ref({} as Account)
+const nominal = ref("")
+
+nominal.value = parseNominal(props.account.amount).slice(0, 12) + "...";
 
 account.value = props.account;
 </script>
@@ -24,15 +27,16 @@ account.value = props.account;
     :href="'/rekening/' + account._id + '/detail-rekening/'"
   >
     <img
-      src="/src/assets/icons/cart.png"
-      alt="cart"
+      :src="account.image"
+      :class="themeClass.icon"
+      alt="img"
       class="w-12 h-12 mr-8"
     />
     <div>
-      <p class="w-16 mr-[23vh]">{{ account.accountName }}</p>
-      <p class="w-16 mr-[23vh]">{{ account.accountNumber }}</p>
+      <p class="w-16 mr-[23vh]">{{ account.name }}</p>
+      <p class="w-16 mr-[23vh]">{{ account.number }}</p>
     </div>
-    <p class="w-16 ml-[23vh]">{{ parseNominal(account.nominal) }}</p>
+    <p class="w-24 ml-[18vh]">{{ parseNominal(account.amount) }}</p>
     <img src="/src/assets/icons/more.png" class="w-6 h-6 ml-3" />
   </a>
 </template>

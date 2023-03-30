@@ -35,15 +35,20 @@ const deactivatedDialog = (_insert: boolean) => {
 
 const fetchData = async (_until: string = "") => {
   try {
-    console.log(_until);
     const limit = countData();
-    const res = await fetch(`${api}/debts?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
+    const response = await fetch(`${api}/debts?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     method: "GET",
     });
-    const data = await res.json();
+    const data = await response.json();
+    if (debtData.value.length !== 0 && data.data.length === 0) {
+      page.value -= 1;
+      return;
+    }
+    if (response.status !== 200) throw new Error(data.message);
+
     if (debtData.value.length !== 0 && data.data.length === 0) {
       page.value -= 1;
       return;

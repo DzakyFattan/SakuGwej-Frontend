@@ -35,10 +35,14 @@ defineExpose({
   <v-dialog v-model="dialog" persistent width="512">
     <v-card :class="themeClass.bgSecondary" class="rounded-lg">
       <div class="mb-4" v-if="isTambahHutang">
-        <TambahHutang @close="deactivatedDialog" @pilihan-tambah="changePage" />
+        <TambahHutang 
+          @close="deactivatedDialog" 
+          @pilihan-tambah="changePage" />
       </div>
       <div class="mb-4" v-else>
-        <TambahPiutang @close="deactivatedDialog" @pilihan-tambah="changePage" />
+        <TambahPiutang 
+          @close="deactivatedDialog" 
+          @pilihan-tambah="changePage" />
       </div>
     </v-card>
   </v-dialog>
