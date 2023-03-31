@@ -4,7 +4,7 @@ const username = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-const emptyInput = ref("");
+const err = ref("");
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 
@@ -27,10 +27,8 @@ const checkEmpty = () => {
     password.value === "" ||
     confirmPassword.value === ""
   ) {
-    emptyInput.value = "Semua input harus diisi";
+    err.value = "Semua input harus diisi";
     throw new Error("Semua input harus diisi");
-  } else {
-    emptyInput.value = "";
   }
 };
 
@@ -39,6 +37,7 @@ const login = () => {
 };
 
 const register = async () => {
+  err.value = "";
   try {
     checkEmpty();
     checkPassword();
@@ -56,17 +55,14 @@ const register = async () => {
       }),
     });
     if (response.status !== 201) {
-      throw new Error("Username atau Password salah");
+      const data = await response.json();
+      throw new Error(data.userMessage);
     } else {
       clearInput();
       login();
     }
   } catch (error: any) {
-    if (error.message === "Password tidak sama") {
-      alert(error.message);
-    } else {
-      console.error(error.message);
-    }
+    err.value = error.message;
   }
 };
 
@@ -107,11 +103,11 @@ const clearInput = () => {
         type="password"
         placeholder="Confirm Password"
       />
-      <p class="text-center mb-24">
+      <p class="text-center mb-4">
         Sudah punya Akun? <a href="/login">Login</a> di sini!
       </p>
+      <p v-if="err" class="mb-4 text-rose-500">{{ err }}</p>
       <button class="mx-auto auth-button" @click="register">Register</button>
-      <p class="input-check">{{ emptyInput }}</p>
     </div>
   </div>
 </template>

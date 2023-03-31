@@ -6,7 +6,10 @@ const password = ref("");
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
 // const localapitest = "http://localhost:3001";
 
+const err = ref("");
+
 const login = async () => {
+  err.value = "";
   try {
     const response = await fetch(`${api}/user/login`, {
       method: "POST",
@@ -29,6 +32,7 @@ const login = async () => {
     }
   } catch (error: any) {
     console.error(error.message);
+    err.value = error.message;
   }
 };
 
@@ -53,9 +57,10 @@ const clearInput = () => {
         v-model="password"
         placeholder="Password"
       />
-      <p class="text-center mb-24">
+      <p class="text-center mb-4">
         Belum punya Akun? <a href="/register">Register</a> di sini!
       </p>
+      <p v-if="err" class="mb-4 text-rose-500">{{ err }}</p>
       <button class="mx-auto auth-button" @click="login">Login</button>
     </div>
   </div>
