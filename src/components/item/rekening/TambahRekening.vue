@@ -8,13 +8,53 @@ const themeClass = themeClasses;
 const namaRekening = ref("");
 const nomorRekening = ref("");
 const nominalAwal = ref("");
-const listGambar = ref(["gambar1", "gambar2", "gambar3"]);
-const gambar = ref("");
+const listGambar = [
+    {
+      name: "Uang Tunai",
+      image: "/src/assets/icons/pay.png",
+    },
+    {
+      name: "Valuta Asing",
+      image: "/src/assets/icons/paid.png",
+    },
+    {
+      name: "Uang Belanja",
+      image: "/src/assets/icons/shopping.png",
+    },
+    {
+      name: "Kartu Kredit/ Debit",
+      image: "/src/assets/icons/card.png",
+    },
+    {
+      name: "ATM",
+      image: "/src/assets/icons/local_atm.png",
+    },
+    {
+      name: "Tabungan",
+      image: "/src/assets/icons/savings.png",
+    },
+    {
+      name: "Dompet",
+      image: "/src/assets/icons/wallet.png",
+    },
+
+    {
+      name: "Kopun",
+      image: "/src/assets/icons/redeem.png",
+    },
+  ];
+
+const gambar = ref(
+  {
+  name: "Uang Tunai",
+  image: "/src/assets/icons/pay.png",
+});
 const deskripsi = ref("");
 
 const emit = defineEmits(["close"]);
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
+// const testlocalapi = "http://localhost:3001/api/v1";
 
 const cancelClick = () => {
   emit("close", false);
@@ -25,11 +65,10 @@ const tambahkanRekening = async () => {
     if (
       namaRekening.value === "" ||
       nominalAwal.value === "" ||
-      // gambar.value === "" ||
+      gambar.value.image === "" ||
       deskripsi.value === ""
     )
       throw new Error("Semua field harus diisi");
-
     const response = await fetch(`${api}/accounts`, {
       method: "POST",
       headers: {
@@ -37,11 +76,11 @@ const tambahkanRekening = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        account_name: namaRekening.value,
-        nominal: parseInt(nominalAwal.value),
-        // gambar: gambar.value,
-        // nomorRekening: nomorRekening.value,
-        account_description: deskripsi.value,
+        name: namaRekening.value,
+        number: nomorRekening.value,
+        amount: nominalAwal.value,
+        image: gambar.value.image,
+        description: deskripsi.value,
       }),
     });
     const data = await response.json();
@@ -51,6 +90,7 @@ const tambahkanRekening = async () => {
     emit("close", true);
   } catch (error: any) {
     console.log(error.message);
+
   }
 };
 </script>
@@ -58,9 +98,9 @@ const tambahkanRekening = async () => {
 <template>
   <h3 class="text-center">Tambah Rekening</h3>
   <div
-    class="bg-color-white p-4 mx-4 rounded-lg flex flex-row align-center justify-between"
+    class="bg-color-white px-4 mx-4 rounded-lg flex flex-row align-center justify-between"
   >
-    <v-container class="mt-8 color-icon">
+    <v-container class="mt-6 color-icon">
       <v-text-field
         v-model="namaRekening"
         label="Nama Rekening"
@@ -107,6 +147,18 @@ const tambahkanRekening = async () => {
         <template v-slot:prepend-inner>
           <img class="mr-6" src="/src/assets/icons/image.png" />
         </template>
+        <template v-slot:selection="{ item }">
+          <img :src="item.value.image" class="mr-2 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+        </template>
+        <template v-slot:item="{ item, props }">
+          <v-list-item v-bind="props" :title="props.title.name" :value="props.value.name">
+            <template #title>
+              <div class="flex flex-row">
+                <img :src="item.value.image" class="mr-2 ml-6 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+              </div>
+            </template>
+          </v-list-item>
+        </template> 
       </v-select>
       <v-textarea
         v-model="deskripsi"
@@ -114,6 +166,7 @@ const tambahkanRekening = async () => {
         class="mx-16"
         :class="themeClass.textMain"
         auto-grow
+        rows="3"
         variant="outlined"
       >
         <template v-slot:prepend-inner>
@@ -129,12 +182,14 @@ const tambahkanRekening = async () => {
         :class="themeClass.bgMain"
         @click="cancelClick"
         class="text-xs mr-2"
+        variant="flat"
         >Batal</v-btn
       >
       <v-btn
         @click="tambahkanRekening"
         class="text-xs mr-8"
         :class="themeClass.bgMain"
+        variant="flat"
         >Tambahkan</v-btn
       ></v-row
     >

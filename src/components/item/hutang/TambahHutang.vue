@@ -13,6 +13,7 @@ const calendar = ref("");
 const emit = defineEmits(["close", "pilihan-tambah", "trigger-tambahkan"]);
 
 const api = "http://be-sakugwejdev.ddns.net/api/v1";
+// const localapi = "http://localhost:3001/api/v1";
 
 const pilihPiutang = () => {
   emit("pilihan-tambah", false);
@@ -73,21 +74,27 @@ const tambahkanHutang = async () => {
 <template>
   <v-container>
     <v-row class="justify-center mt-4">
-      <v-btn :class="themeClass.bgMain" class="text-xs">Hutang</v-btn>
+      <v-btn 
+      :class="themeClass.bgMain" 
+      class="text-xs"
+      variant="flat"
+      rounded="0"
+      >Hutang</v-btn>
       <v-btn
-        variant="outlined"
         @click="pilihPiutang"
         class="text-xs"
         :class="themeClass.textMain"
+        variant="outlined"
+        rounded="0"
         >Piutang</v-btn
       >
     </v-row>
   </v-container>
   <h3 class="text-center">Tambah Hutang</h3>
   <div
-    class="bg-color-white p-4 mx-4 rounded-lg flex flex-row align-center justify-between"
+    class="bg-color-white px-4 mx-4 rounded-lg flex flex-row align-center justify-between"
   >
-    <v-container class="mt-8 color-icon">
+    <v-container class="mt-6 color-icon">
       <v-text-field
         label="Jumlah Hutang"
         class="mx-16"
@@ -120,6 +127,7 @@ const tambahkanHutang = async () => {
         class="mx-16"
         :class="themeClass.textMain"
         auto-grow
+        rows="3"
         variant="outlined"
         v-model="deskripsi"
       >
@@ -131,6 +139,20 @@ const tambahkanHutang = async () => {
           />
         </template>
       </v-textarea>
+      <v-text-field
+        variant="outlined"
+        class="mx-16"
+        :class="themeClass.textMain"
+        type="date"
+        label="Tanggal Mulai Hutang"
+        v-model="calendar"
+        ><template v-slot:prepend-inner>
+          <img
+            class="mr-6"
+            src="/src/assets/icons/date_range_fill.png"
+            alt="book"
+          /> </template
+      ></v-text-field>
       <v-text-field
         variant="outlined"
         class="mx-16"
@@ -154,12 +176,14 @@ const tambahkanHutang = async () => {
         :class="themeClass.bgMain"
         @click="cancelClick"
         class="text-xs mr-2"
+        variant="flat"
         >Batal</v-btn
       >
       <v-btn
         @click="tambahkanHutang"
         class="text-xs mr-8"
         :class="themeClass.bgMain"
+        variant="flat"
         >Tambahkan</v-btn
       ></v-row
     >

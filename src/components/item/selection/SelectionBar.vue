@@ -56,8 +56,8 @@ const { themeClasses } = useThemeStore();
 const isCheck = ref(false);
 const checkboxAll = ref(false);
 
-const testlocalapi = "http://be-sakugwejdev.ddns.net/api/v1";
-// const api = "http://be-sakugwejdev.ddns.net/api/v1"; 
+// const testlocalapi = "http://localhost:3001/api/v1";
+const api = "http://be-sakugwejdev.ddns.net/api/v1"; 
 
 const selectAll = () => {
   checkboxAll.value = !checkboxAll.value;
@@ -79,28 +79,47 @@ const checkSelected = () => {
 
 const deleteSelected = async () => {
   const selected = document.querySelectorAll(".select:checked");
-  selected.forEach(async (el) => {
-    (el as HTMLInputElement).checked = false;
+  if (checkboxAll.value) {
     try {
-      const id = (el as HTMLInputElement).id;
-      const name = (el as HTMLInputElement).name
-      console.log(name);
-      console.log(id);
-      const res = await fetch(`${testlocalapi}/${name}/${id}`, {
+      const response = await fetch(`${api}/${type.value}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         method: "DELETE",
       });
-      if (res.status === 200) {
-        const data = await res.json();
-        emit("trigger-delete");
-        console.log(data);
-      }
+      if (response.status !== 200) throw new Error("Gagal menghapus data");
+
+      const data = await response.json();
+    
+    } catch (err: any) {
+      console.log(err.message);
+    }
+    selectAll();
+    return;
+  }
+
+  selected.forEach(async (el) => {
+    (el as HTMLInputElement).checked = false;
+    try {
+      const id = (el as HTMLInputElement).id;
+      const name = (el as HTMLInputElement).name
+
+      const response = await fetch(`${api}/${name}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        method: "DELETE",
+      });
+      if (response.status !== 200) throw new Error("Gagal menghapus data");
+
+      const data = await response.json();
+      
+      // console.log(data);
     } catch (err: any) {
       console.log(err.message);
     }
   });
+  selectAll();
 }
 
 const next = () => {
@@ -111,7 +130,7 @@ const back = () => {
   emit("trigger-change-page", -1);
 }
 
-const interval = (e: string) => { 
+const changeInterval = (e: string) => { 
   let interval = parseInt(e); 
   if (e.endsWith("Mendatang")) {
     interval = -interval;
@@ -154,7 +173,7 @@ defineExpose({
           return-object
           :class="themeClasses.borderMain"
           class="interval w-[22vh] h-12 rounded-md"
-          @update:model-value="interval"
+          @update:model-value="changeInterval"
         >
         </v-select>
         <v-btn icon variant="flat" size="x-small" class="arrow mr-[9rem]" @click="next">

@@ -49,9 +49,10 @@ const changeInterval = (interval: string) => {
     v-bind:type="type"
     ref="selectionBar" />
   <SectionItemContainer 
-    v-for="(transaction, idx) in transactions" 
+    v-for="(transaction, idx) in transactions"
+    @trigger-select="selectTransaction"  
     v-bind:transaction="transaction" 
     v-bind:key="idx"
-    @trigger-select="selectTransaction" 
-    :fetch-data="props.fetchData"/>
+    :fetch-data="props.fetchData"
+    />
 </template>

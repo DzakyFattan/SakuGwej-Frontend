@@ -7,11 +7,12 @@ import TambahCatatan from "../components/item/catatan/TambahCatatan.vue";
 
 import { onMounted, nextTick, ref } from "vue";
 
-import type { TransactionData, Transaction } from "../types.vue";
+import type { TransactionData, AccountData } from "../types.vue";
 
 const windowWidth = ref(window.innerWidth)
 const tambahCatatan = ref<InstanceType<typeof TambahCatatan>>()
 const transactionData = ref<TransactionData>([]);
+const accountData = ref<AccountData>([]);
 const page = ref(0);
 
 onMounted(() => {
@@ -36,15 +37,16 @@ const deactivatedDialog = (_insert: boolean) => {
 
 const fetchData = async (_until: string = "") => {
   try {
-    console.log(_until);
     const limit = countData();
-    const res = await fetch(`${api}/transactions/daily?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
+    const response = await fetch(`${api}/transactions/daily?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       method: "GET",
     });
-    const data = await res.json();
+    const data = await response.json();
+    if (response.status !== 200) throw new Error(data.message);
+
     if (transactionData.value.length !== 0 && data.data.length === 0) {
       page.value -= 1;
       return;
@@ -55,6 +57,24 @@ const fetchData = async (_until: string = "") => {
     console.log(error.message);
   }
 };
+
+const fetchAccount = async () => {
+  try { 
+    const response = await fetch(`${api}/accounts`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      method: "GET",
+    });
+    const data = await response.json();
+    if (response.status !== 200) throw new Error(data.message);
+
+    accountData.value = data.data;
+
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}
 
 const changePage = (_page: number) => {
   console.log(page.value + _page);
@@ -68,11 +88,16 @@ const countData = () => {
 }
 
 fetchData();
+fetchAccount();
 </script>
 
 <template>
   <main>
-    <TambahCatatan ref="tambahCatatan" @close="deactivatedDialog" />
+    <TambahCatatan 
+      ref="tambahCatatan" 
+      @close="deactivatedDialog"
+      v-bind:account-data="accountData"
+      :fetch-data="fetchAccount" />
     <div v-if="windowWidth < 1024">
       <HeaderMobile> Catatan </HeaderMobile>
       <Catatan @trigger-tambahkan="activatedDialog" />

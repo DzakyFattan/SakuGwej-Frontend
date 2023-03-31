@@ -74,20 +74,26 @@ const tambahkanPiutang = async () => {
   <v-container>
     <v-row class="justify-center mt-4">
       <v-btn
-        variant="outlined"
         @click="pilihHutang"
         class="text-xs"
         :class="themeClass.textMain"
+        variant="outlined"
+        rounded="0"
         >Hutang</v-btn
       >
-      <v-btn :class="themeClass.bgMain" class="text-xs">Piutang</v-btn>
+      <v-btn 
+      :class="themeClass.bgMain" 
+      class="text-xs"
+      variant="flat"
+      rounded="0"
+      >Piutang</v-btn>
     </v-row>
   </v-container>
   <h3 class="text-center">Tambah Piutang</h3>
   <div
-    class="bg-color-white p-4 mx-4 rounded-lg flex flex-row align-center justify-between"
+    class="bg-color-white px-4 mx-4 rounded-lg flex flex-row align-center justify-between"
   >
-    <v-container class="mt-8 color-icon">
+    <v-container class="mt-6 color-icon">
       <v-text-field
         label="Jumlah Piutang"
         class="mx-16"
@@ -120,6 +126,7 @@ const tambahkanPiutang = async () => {
         class="mx-16"
         :class="themeClass.textMain"
         auto-grow
+        rows="3"
         variant="outlined"
         v-model="deskripsi"
       >
@@ -131,6 +138,20 @@ const tambahkanPiutang = async () => {
           />
         </template>
       </v-textarea>
+      <v-text-field
+        variant="outlined"
+        class="mx-16"
+        :class="themeClass.textMain"
+        type="date"
+        label="Tanggal Mulai Piutang"
+        v-model="calendar"
+        ><template v-slot:prepend-inner>
+          <img
+            class="mr-6"
+            src="/src/assets/icons/date_range_fill.png"
+            alt="book"
+          /> </template
+      ></v-text-field>
       <v-text-field
         variant="outlined"
         class="mx-16"
@@ -154,6 +175,7 @@ const tambahkanPiutang = async () => {
         @click="cancelClick"
         class="text-xs mr-2"
         :class="themeClass.bgMain"
+        variant="flat"
         >Batal</v-btn
       >
 
@@ -161,10 +183,13 @@ const tambahkanPiutang = async () => {
         @click="tambahkanPiutang"
         class="text-xs mr-8"
         :class="themeClass.bgMain"
+        variant="flat"
         >Tambahkan</v-btn
       ></v-row
     >
   </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
