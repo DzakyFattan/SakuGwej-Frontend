@@ -1,4 +1,3 @@
 <script lang="ts">
-export const backendUrl = "http://be-sakugwej.noxira.cc";
-
+export const backendUrl = "https://be-sakugwej.noxira.cc/api/v1";
 </script>
