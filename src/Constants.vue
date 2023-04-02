@@ -1,4 +1,4 @@
 <script lang="ts">
-export const backendUrl = "http://35.212.185.157:3001/api/v1";
+export const backendUrl = "be-sakugwej.noxira.cc";
 
 </script>
