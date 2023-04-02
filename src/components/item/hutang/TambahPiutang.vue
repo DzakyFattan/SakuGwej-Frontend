@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useThemeStore } from "@/stores/theme";
 import { ref } from "vue";
+import { backendUrl } from "@/Constants.vue";
 
 const { themeClasses } = useThemeStore();
 const themeClass = themeClasses;
@@ -12,7 +13,8 @@ const calendar = ref("");
 
 const emit = defineEmits(["close", "pilihan-tambah", "trigger-tambahkan"]);
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 
 const pilihHutang = () => {
   emit("pilihan-tambah", true);
@@ -81,12 +83,13 @@ const tambahkanPiutang = async () => {
         rounded="0"
         >Hutang</v-btn
       >
-      <v-btn 
-      :class="themeClass.bgMain" 
-      class="text-xs"
-      variant="flat"
-      rounded="0"
-      >Piutang</v-btn>
+      <v-btn
+        :class="themeClass.bgMain"
+        class="text-xs"
+        variant="flat"
+        rounded="0"
+        >Piutang</v-btn
+      >
     </v-row>
   </v-container>
   <h3 class="text-center">Tambah Piutang</h3>
@@ -190,6 +193,4 @@ const tambahkanPiutang = async () => {
   </v-container>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

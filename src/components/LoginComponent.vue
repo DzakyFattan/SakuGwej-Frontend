@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { backendUrl } from "@/Constants.vue";
 import { ref } from "vue";
 const email = ref("");
 const password = ref("");
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+const api = backendUrl;
 // const localapitest = "http://localhost:3001";
 
 const err = ref("");

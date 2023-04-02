@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { backend } from "@/Constants.vue";
 import { useThemeStore } from "@/stores/theme";
 import { ref, computed, watch, getCurrentInstance } from "vue";
 import type { ProfileData } from "../../../types.vue";
@@ -12,7 +13,7 @@ const props = defineProps<{
 }>();
 
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+const api = backend;
 
 const isEditingName = ref(false);
 const isEditingBirthdate = ref(false);

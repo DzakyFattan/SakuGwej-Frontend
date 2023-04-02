@@ -1,4 +1,6 @@
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+import { backendUrl } from "@/Constants.vue";
+
+const api = backendUrl;
 
 async function tambahkanRekening(listObj: Array<object>) {
   try {

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { backendUrl } from "@/Constants.vue";
 const username = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const err = ref("");
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 
 const checkEmail = () => {
   const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;

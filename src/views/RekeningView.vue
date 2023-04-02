@@ -4,12 +4,12 @@ import NavigationBar from "@/components/item/navigation/NavigationBar.vue";
 import Rekening from "@/components/item/rekening/Rekening.vue";
 import RekeningDesktop from "@/components/desktop/RekeningDesktop.vue";
 import TambahRekening from "@/components/item/rekening/TambahRekening.vue";
+import { backendUrl } from "@/Constants.vue";
 
 import { onMounted, ref, nextTick } from "vue";
 import { useThemeStore } from "@/stores/theme";
 
 import type { AccountData, Account } from "@/types.vue";
-
 
 const { theme, themeClasses } = useThemeStore();
 const themeClass = themeClasses;
@@ -20,7 +20,8 @@ const windowWidth = ref(window.innerWidth);
 
 const dialog = ref(false);
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 // const testlocalapi = "http://localhost:3001/api/v1";
 
 onMounted(() => {
@@ -44,9 +45,9 @@ const fetchData = async () => {
   try {
     const limit = countData();
     const response = await fetch(`${api}/accounts?limit${limit}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     const data = await response.json();
 
@@ -71,9 +72,7 @@ function countData() {
     <v-dialog v-model="dialog" persistent width="512">
       <v-card :class="themeClass.bgSecondary" class="rounded-lg">
         <div class="mb-4">
-          <TambahRekening
-            @close="deactivatedDialog"
-          />
+          <TambahRekening @close="deactivatedDialog" />
         </div>
       </v-card>
     </v-dialog>
@@ -83,10 +82,11 @@ function countData() {
     </div>
     <div v-else class="app-container">
       <NavigationBar currentPage="rekening" />
-      <RekeningDesktop 
-        @trigger-tambahkan="activatedDialog" 
-        v-bind:account-data="accountData" 
-        :fetch-data="fetchData"/>
+      <RekeningDesktop
+        @trigger-tambahkan="activatedDialog"
+        v-bind:account-data="accountData"
+        :fetch-data="fetchData"
+      />
     </div>
   </main>
 </template>

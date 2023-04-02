@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useThemeStore } from "@/stores/theme";
 import { ref } from "vue";
+import { backendUrl } from "@/Constants.vue";
 
 import type { AccountData } from "@/types.vue";
 
@@ -69,8 +70,8 @@ const listJenisPengeluaran = ref([
   {
     name: "Lainnya",
     image: "/src/assets/icons/more_horiz.png",
-  }
-])
+  },
+]);
 const account = ref(props.accountData[0]);
 const listAccount = ref(props.accountData);
 const description = ref("");
@@ -78,7 +79,8 @@ const calendar = ref("");
 
 const emit = defineEmits(["close", "pilihan-tambah"]);
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 // const testlocalapi = "http://localhost:3001/api/v1";
 
 const pilihPemasukan = () => {
@@ -135,7 +137,7 @@ const tambahkanPengeluaran = async () => {
 </script>
 
 <template>
-  <v-container >
+  <v-container>
     <v-row class="justify-center mt-4">
       <v-btn
         class="text-xs"
@@ -145,12 +147,13 @@ const tambahkanPengeluaran = async () => {
         @click="pilihPemasukan"
         >Pemasukan</v-btn
       >
-      <v-btn 
-      :class="themeClass.bgMain" 
-      class="text-xs"
-      variant="flat"
-      rounded="0"
-      >Pengeluaran</v-btn>
+      <v-btn
+        :class="themeClass.bgMain"
+        class="text-xs"
+        variant="flat"
+        rounded="0"
+        >Pengeluaran</v-btn
+      >
     </v-row>
   </v-container>
   <h3 class="text-center">Tambah Pengeluaran</h3>
@@ -186,16 +189,30 @@ const tambahkanPengeluaran = async () => {
           />
         </template>
         <template v-slot:selection="{ item }">
-          <img :src="item.value.image" class="mr-2 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+          <img
+            :src="item.value.image"
+            class="mr-2 h-6 w-6"
+            :class="themeClass.icon"
+          />
+          {{ item.value.name }}
         </template>
         <template v-slot:item="{ item, props }">
-            <v-list-item v-bind:="props" :title="props.value.name" :value="props.value.name" >
-              <template #title>
+          <v-list-item
+            v-bind:="props"
+            :title="props.value.name"
+            :value="props.value.name"
+          >
+            <template #title>
               <div class="flex flex-row">
-                <img :src="item.value.image" class="mr-2 ml-6 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+                <img
+                  :src="item.value.image"
+                  class="mr-2 ml-6 h-6 w-6"
+                  :class="themeClass.icon"
+                />
+                {{ item.value.name }}
               </div>
             </template>
-            </v-list-item>
+          </v-list-item>
         </template>
       </v-select>
       <v-select
@@ -214,16 +231,30 @@ const tambahkanPengeluaran = async () => {
           />
         </template>
         <template v-slot:selection="{ item }">
-          <img :src="item.value.image" class="mr-2 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+          <img
+            :src="item.value.image"
+            class="mr-2 h-6 w-6"
+            :class="themeClass.icon"
+          />
+          {{ item.value.name }}
         </template>
         <template v-slot:item="{ item, props }">
-            <v-list-item v-bind:="props" :title="props.value._id" :value="props.value._id" >
-              <template #title>
+          <v-list-item
+            v-bind:="props"
+            :title="props.value._id"
+            :value="props.value._id"
+          >
+            <template #title>
               <div class="flex flex-row">
-                <img :src="item.value.image" class="mr-2 ml-6 h-6 w-6" :class="themeClass.icon"> {{ item.value.name }}
+                <img
+                  :src="item.value.image"
+                  class="mr-2 ml-6 h-6 w-6"
+                  :class="themeClass.icon"
+                />
+                {{ item.value.name }}
               </div>
             </template>
-            </v-list-item>
+          </v-list-item>
         </template>
       </v-select>
       <v-textarea

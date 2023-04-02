@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useThemeStore } from "@/stores/theme";
 import { ref } from "vue";
+import { backendUrl } from "@/Constants.vue";
 
 const { themeClasses } = useThemeStore();
 const themeClass = themeClasses;
@@ -53,7 +54,8 @@ const deskripsi = ref("");
 
 const emit = defineEmits(["close"]);
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;;
 // const testlocalapi = "http://localhost:3001/api/v1";
 
 const cancelClick = () => {

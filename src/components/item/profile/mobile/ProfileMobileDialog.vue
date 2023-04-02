@@ -2,13 +2,15 @@
 import { useThemeStore } from "@/stores/theme";
 import { ref, watch } from "vue";
 import type { ProfileData, NewProfileData } from "../../../../types.vue";
+import { backendUrl } from "@/Constants.vue";
 
 const props = defineProps<{
   profileData: ProfileData;
   fetchData: () => void;
 }>();
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 
 const dialog = ref(false);
 const newUsername = ref(props.profileData.username);

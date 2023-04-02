@@ -6,6 +6,7 @@ import ProfileMobile from "../components/item/profile/mobile/ProfileMobile.vue";
 
 import { onMounted, ref, nextTick, watch } from "vue";
 import type { ProfileData } from "../types.vue";
+import { backendUrl } from "@/Constants.vue";
 
 const windowWidth = ref(window.innerWidth);
 
@@ -17,7 +18,8 @@ onMounted(() => {
   });
 });
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 
 const profileData = ref<ProfileData>({
   username: "",

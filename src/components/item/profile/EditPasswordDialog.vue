@@ -2,7 +2,9 @@
 import { useThemeStore } from "@/stores/theme";
 import { ref, computed } from "vue";
 
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+import { backendUrl } from "@/Constants.vue";
+
+const api = backendUrl;
 
 const dialog = ref(false);
 const newPassword = ref("");

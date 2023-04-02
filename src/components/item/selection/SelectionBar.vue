@@ -2,8 +2,15 @@
 import { useThemeStore } from "@/stores/theme";
 import { ref } from "vue";
 import { parseIntervalDate } from "@/utils/parse";
+import { backendUrl } from "@/Constants.vue";
 
-const emit = defineEmits(["trigger-tambahkan", "trigger-delete", "trigger-change-page", "trigger-change-sort", "trigger-change-interval"]);
+const emit = defineEmits([
+  "trigger-tambahkan",
+  "trigger-delete",
+  "trigger-change-page",
+  "trigger-change-sort",
+  "trigger-change-interval",
+]);
 
 let selected: string;
 let intervals: string[];
@@ -19,14 +26,14 @@ let sort: string[];
 // const sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
 
 const props = defineProps({
-  type: String
+  type: String,
 });
-const type = ref("")
+const type = ref("");
 
-type.value = props.type as string
+type.value = props.type as string;
 
 if (type.value === "transactions") {
-  selected = "30 Hari Teakhir"
+  selected = "30 Hari Teakhir";
   intervals = [
     "30 Hari Teakhir",
     "21 Hari Teakhir",
@@ -35,7 +42,7 @@ if (type.value === "transactions") {
   ];
   sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
 } else if (type.value === "debts") {
-  selected = "30 Hari Mendatang"
+  selected = "30 Hari Mendatang";
   intervals = [
     "30 Hari Mendatang",
     "21 Hari Mendatang",
@@ -45,7 +52,6 @@ if (type.value === "transactions") {
   ];
   sort = ["A-Z", "Z-A", "Saldo Terendah", "Saldo Tetinggi"];
 }
-
 
 const onAddClicked = () => {
   emit("trigger-tambahkan", true);
@@ -57,7 +63,8 @@ const isCheck = ref(false);
 const checkboxAll = ref(false);
 
 // const testlocalapi = "http://localhost:3001/api/v1";
-const api = "http://be-sakugwejdev.ddns.net/api/v1"; 
+
+const api = backendUrl;
 
 const selectAll = () => {
   checkboxAll.value = !checkboxAll.value;
@@ -65,7 +72,7 @@ const selectAll = () => {
   document.querySelectorAll(".select").forEach((el) => {
     (el as HTMLInputElement).checked = checkboxAll.value;
   });
-}
+};
 
 const checkSelected = () => {
   const selected = document.querySelectorAll(".select:checked");
@@ -75,7 +82,7 @@ const checkSelected = () => {
   } else {
     isCheck.value = false;
   }
-}
+};
 
 const deleteSelected = async () => {
   const selected = document.querySelectorAll(".select:checked");
@@ -90,7 +97,6 @@ const deleteSelected = async () => {
       if (response.status !== 200) throw new Error("Gagal menghapus data");
 
       const data = await response.json();
-    
     } catch (err: any) {
       console.log(err.message);
     }
@@ -102,7 +108,7 @@ const deleteSelected = async () => {
     (el as HTMLInputElement).checked = false;
     try {
       const id = (el as HTMLInputElement).id;
-      const name = (el as HTMLInputElement).name
+      const name = (el as HTMLInputElement).name;
 
       const response = await fetch(`${api}/${name}/${id}`, {
         headers: {
@@ -113,42 +119,42 @@ const deleteSelected = async () => {
       if (response.status !== 200) throw new Error("Gagal menghapus data");
 
       const data = await response.json();
-      
+
       // console.log(data);
     } catch (err: any) {
       console.log(err.message);
     }
   });
   selectAll();
-}
+};
 
 const next = () => {
   emit("trigger-change-page", 1);
-}
+};
 
 const back = () => {
   emit("trigger-change-page", -1);
-}
+};
 
-const changeInterval = (e: string) => { 
-  let interval = parseInt(e); 
+const changeInterval = (e: string) => {
+  let interval = parseInt(e);
   if (e.endsWith("Mendatang")) {
     interval = -interval;
   }
   const date = parseIntervalDate(interval);
 
   emit("trigger-change-interval", date);
-}
+};
 
 defineExpose({
-  checkSelected
-})
+  checkSelected,
+});
 </script>
 
 <template>
   <v-container class="h-fit w-[50rem]">
     <v-row class="justify-center items-center">
-    <div class="flex flex-row items-center w-fit mt-4 mb-2">
+      <div class="flex flex-row items-center w-fit mt-4 mb-2">
         <v-btn icon variant="flat" size="x-small" @click="onAddClicked">
           <img
             :class="themeClasses.icon"
@@ -157,7 +163,13 @@ defineExpose({
           />
         </v-btn>
 
-        <v-btn icon variant="flat" size="x-small" class="arrow ml-[9rem]" @click="back">
+        <v-btn
+          icon
+          variant="flat"
+          size="x-small"
+          class="arrow ml-[9rem]"
+          @click="back"
+        >
           <img
             :class="themeClasses.icon"
             src="/src/assets/icons/arrow-left.png"
@@ -176,7 +188,13 @@ defineExpose({
           @update:model-value="changeInterval"
         >
         </v-select>
-        <v-btn icon variant="flat" size="x-small" class="arrow mr-[9rem]" @click="next">
+        <v-btn
+          icon
+          variant="flat"
+          size="x-small"
+          class="arrow mr-[9rem]"
+          @click="next"
+        >
           <img
             :class="themeClasses.icon"
             src="/src/assets/icons/arrow-right.png"
@@ -205,11 +223,13 @@ defineExpose({
           v-model="checkboxAll"
           @click="selectAll"
         /><label>Pilih Semua</label>
-          <v-btn 
-            v-if="isCheck" 
-            icon variant="flat" 
-            class="ml-[34rem]" 
-            @click="deleteSelected">
+        <v-btn
+          v-if="isCheck"
+          icon
+          variant="flat"
+          class="ml-[34rem]"
+          @click="deleteSelected"
+        >
           <img
             :class="themeClasses.icon"
             src="/src/assets/icons/delete.png"
@@ -223,7 +243,7 @@ defineExpose({
             alt="edit"
           />
         </v-btn> -->
-    </div>
+      </div>
     </v-row>
   </v-container>
 </template>

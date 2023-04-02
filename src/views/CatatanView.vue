@@ -4,13 +4,14 @@ import Catatan from "../components/item/catatan/Catatan.vue";
 import NavigationBar from "../components/item/navigation/NavigationBar.vue";
 import CatatanDesktop from "../components/desktop/CatatanDesktop.vue";
 import TambahCatatan from "../components/item/catatan/TambahCatatan.vue";
+import { backendUrl } from "@/Constants.vue";
 
 import { onMounted, nextTick, ref } from "vue";
 
 import type { TransactionData, AccountData } from "../types.vue";
 
-const windowWidth = ref(window.innerWidth)
-const tambahCatatan = ref<InstanceType<typeof TambahCatatan>>()
+const windowWidth = ref(window.innerWidth);
+const tambahCatatan = ref<InstanceType<typeof TambahCatatan>>();
 const transactionData = ref<TransactionData>([]);
 const accountData = ref<AccountData>([]);
 const page = ref(0);
@@ -21,11 +22,11 @@ onMounted(() => {
       windowWidth.value = window.innerWidth;
     });
   });
-
 });
 
 // const testlocalapi = "http://localhost:3001/api/v1";
-const api = "http://be-sakugwejdev.ddns.net/api/v1";
+
+const api = backendUrl;
 
 const activatedDialog = (_dialog: boolean) => {
   tambahCatatan.value?.activatedDialog(_dialog);
@@ -38,12 +39,17 @@ const deactivatedDialog = (_insert: boolean) => {
 const fetchData = async (_until: string = "") => {
   try {
     const limit = countData();
-    const response = await fetch(`${api}/transactions/daily?limit=${limit}&skip=${limit*page.value}&until=${_until}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      method: "GET",
-    });
+    const response = await fetch(
+      `${api}/transactions/daily?limit=${limit}&skip=${
+        limit * page.value
+      }&until=${_until}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        method: "GET",
+      }
+    );
     const data = await response.json();
     if (response.status !== 200) throw new Error(data.message);
 
@@ -52,14 +58,13 @@ const fetchData = async (_until: string = "") => {
       return;
     }
     transactionData.value = data.data;
-
   } catch (error: any) {
     console.log(error.message);
   }
 };
 
 const fetchAccount = async () => {
-  try { 
+  try {
     const response = await fetch(`${api}/accounts`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,22 +75,21 @@ const fetchAccount = async () => {
     if (response.status !== 200) throw new Error(data.message);
 
     accountData.value = data.data;
-
   } catch (error: any) {
     console.log(error.message);
   }
-}
+};
 
 const changePage = (_page: number) => {
   console.log(page.value + _page);
   if (page.value + _page < 0) return;
   page.value += _page;
   fetchData();
-}
+};
 
 const countData = () => {
   return Math.floor((window.screen.height - 200) / 80) - 4;
-}
+};
 
 fetchData();
 fetchAccount();
@@ -93,24 +97,26 @@ fetchAccount();
 
 <template>
   <main>
-    <TambahCatatan 
-      ref="tambahCatatan" 
+    <TambahCatatan
+      ref="tambahCatatan"
       @close="deactivatedDialog"
       v-bind:account-data="accountData"
-      :fetch-data="fetchAccount" />
+      :fetch-data="fetchAccount"
+    />
     <div v-if="windowWidth < 1024">
       <HeaderMobile> Catatan </HeaderMobile>
       <Catatan @trigger-tambahkan="activatedDialog" />
     </div>
     <div v-else class="app-container">
       <NavigationBar currentPage="catatan" />
-      <CatatanDesktop 
+      <CatatanDesktop
         @trigger-tambahkan="activatedDialog"
         @trigger-delete="fetchData"
         @trigger-change-page="changePage"
         @trigger-change-interval="fetchData"
         v-bind:transaction-data="transactionData"
-        :fetch-data="fetchData" />
+        :fetch-data="fetchData"
+      />
     </div>
   </main>
 </template>
